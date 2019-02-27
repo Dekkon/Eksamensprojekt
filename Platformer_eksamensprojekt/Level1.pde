@@ -1,7 +1,8 @@
 class Level1 extends Level {
 
   MathQuestions mq;
-  boolean plz = false;
+  boolean gothekey = false;
+  boolean gateopen = false;
 
   Level1() {
     spawnlocation = new PVector(30, 600);
@@ -42,6 +43,9 @@ class Level1 extends Level {
     rwall2s = new PVector(600, 350);
     rwall2e = new PVector(600, 300);
 
+    gate1s = new PVector(600, 500);
+    gate1e = new PVector(600, 350);
+
     lwall1s = new PVector(0, height); // left wall 1 starting point
     lwall1e = new PVector(0, 0);      // left wall 1 ending point
 
@@ -54,7 +58,8 @@ class Level1 extends Level {
 
     p.update();
     collision();
-    p.display();
+
+
 
     mq.display();
     if (p.location.x > 0 && p.location.x < 150 && p.location.y < 400) {
@@ -62,29 +67,56 @@ class Level1 extends Level {
       mq.question();
     }
 
-    collectkey();
 
+    collectkey();
+    gates();
 
     stage();
     respawn();
     playermovement();
+
+    p.display();
   }
 
 
   void collectkey() {
 
 
-    if (mq.guesscheck == 1 && !plz) {
+    if (mq.guesscheck == 1 && !gothekey) {
       if (mq.keylocation.y + radius < p.location.y) {
         mq.keylocation.y += 2;
       }
-      if (mq.keylocation.y + radius > p.location.y) plz = true;
+      if (mq.keylocation.y + radius > p.location.y) gothekey = true;
     }
-    println(plz);
+    // println(gothekey);
 
-    if (plz) {
+    if (gothekey && !gateopen) {
       mq.keylocation.y = p.location.y - radius;
       mq.keylocation.x = p.location.x + radius;
+    }
+  }
+
+
+  void gates() {
+
+    // draw the gate
+    stroke(0, 0, 255);
+    line(gate1s.x, gate1s.y, gate1e.x, gate1e.y);
+
+    // unit colission with gate
+    if (p.location.x > gate1s.x-radius && p.location.x < gate1s.x-radius+30 && p.location.y > gate1e.y && p.location.y < gate1s.y) p.location.x = gate1s.x - radius;
+
+    // key to gate
+
+    if (mq.keylocation.x > gate1s.x - 50 && mq.keylocation.x <= gate1s.x && mq.keylocation.y > gate1e.y && mq.keylocation.y < gate1s.y) gateopen = true;
+
+
+    if (gateopen && gate1s.y > gate1e.y && mq.keytogate) {
+      gate1s.y -= 2;
+    }
+
+    if (gateopen) {
+      mq.seekKeyhole(gate1e);
     }
   }
 }

@@ -3,9 +3,11 @@ class MathQuestions {
   String guess = "";
   int testguess;
   int answer;
+  
+  boolean keytogate = false;
 
   int nodoublepress;
-  
+
   PVector keylocation;
 
   int guesscheck = 0;
@@ -32,6 +34,19 @@ class MathQuestions {
 
     //the key
     ellipse(keylocation.x, keylocation.y, 10, 10);
+  }
+
+  void seekKeyhole(PVector target) {
+    PVector distance = PVector.sub(target, keylocation);
+    PVector desired = PVector.sub(target, keylocation);
+
+
+    desired.setMag(1);
+
+    if (distance.mag() > 3) {
+      keylocation.add(desired);
+    }
+    if (distance.mag() < 3) keytogate = true;
   }
 
 
@@ -67,8 +82,5 @@ class MathQuestions {
     if (testguess != 0 && testguess != answer) {
       guesscheck = 2;
     }
-
-
   }
-
 }

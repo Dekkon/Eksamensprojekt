@@ -35,6 +35,9 @@ class Level extends Game {
 
   PVector rwall2s = new PVector(0, 0);
   PVector rwall2e = new PVector(0, 0);
+  
+  PVector gate1s = new PVector(0, 0);
+  PVector gate1e = new PVector(0, 0);
 
   PVector lwall1s = new PVector(0, 0); // left wall 1 starting point
   PVector lwall1e = new PVector(0, 0);      // left wall 1 ending point
