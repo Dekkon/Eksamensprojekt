@@ -17,6 +17,8 @@ void draw() {
   background(25);
   
  println("X: " + mouseX + " Y: " + mouseY); 
+ 
+ if (key == ' ' && g.level == 2) g = new Level2();
   
   g.run();
   

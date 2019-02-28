@@ -1,6 +1,8 @@
 class Level extends Game {
   Player p;
   PVector spawnlocation;
+  
+  //int level = 0;
 
   PVector floor1s = new PVector(0, 0); //floor 1 starting point
   PVector floor1e = new PVector(0, 0); // floor 1 ending point
@@ -36,6 +38,9 @@ class Level extends Game {
   PVector rwall2s = new PVector(0, 0);
   PVector rwall2e = new PVector(0, 0);
   
+  PVector rwall3s = new PVector(0, 0);
+  PVector rwall3e = new PVector(0, 0);
+  
   PVector gate1s = new PVector(0, 0);
   PVector gate1e = new PVector(0, 0);
 
@@ -54,6 +59,7 @@ class Level extends Game {
 
   void stage() {
     stroke(0, 240, 0);
+    strokeWeight(2);
 
     // floors
     line(floor1s.x, floor1s.y, floor1e.x, floor1e.y);
@@ -72,6 +78,7 @@ class Level extends Game {
     //walls to the right of the player
     line(rwall1s.x, rwall1s.y, rwall1e.x, rwall1e.y);
     line(rwall2s.x, rwall2s.y, rwall2e.x, rwall2e.y);
+    line(rwall3s.x, rwall3s.y, rwall3e.x, rwall3e.y);
 
     //waslls to the left of the player
     line(lwall1s.x, lwall1s.y, lwall1e.x, lwall1e.y);
@@ -134,6 +141,7 @@ class Level extends Game {
     // walls to the right of the player
     if (p.location.x > rwall1s.x-radius && p.location.x < rwall1s.x-radius+30 && p.location.y > rwall1e.y && p.location.y < rwall1s.y) p.location.x = rwall1s.x - radius;
     if (p.location.x > rwall2s.x-radius && p.location.x < rwall2s.x-radius+30 && p.location.y > rwall2e.y && p.location.y < rwall2s.y) p.location.x = rwall2s.x - radius;
+    if (p.location.x > rwall3s.x-radius && p.location.x < rwall3s.x-radius+30 && p.location.y > rwall3e.y && p.location.y < rwall3s.y) p.location.x = rwall3s.x - radius;
 
 
     // walls to the left of the player
