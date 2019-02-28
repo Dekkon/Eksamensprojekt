@@ -1,7 +1,9 @@
 class Level extends Game {
   Player p;
   PVector spawnlocation;
-  
+  int klassetrin = 5;
+
+
   //int level = 0;
 
   PVector floor1s = new PVector(0, 0); //floor 1 starting point
@@ -21,7 +23,7 @@ class Level extends Game {
 
   PVector floor6s = new PVector(0, 0);
   PVector floor6e = new PVector(0, 0);
-  
+
   PVector tline1s = new PVector(0, 0);
   PVector tline1e = new PVector(0, 0);
   float tangle1;
@@ -37,10 +39,10 @@ class Level extends Game {
 
   PVector rwall2s = new PVector(0, 0);
   PVector rwall2e = new PVector(0, 0);
-  
+
   PVector rwall3s = new PVector(0, 0);
   PVector rwall3e = new PVector(0, 0);
-  
+
   PVector gate1s = new PVector(0, 0);
   PVector gate1e = new PVector(0, 0);
 
@@ -70,7 +72,7 @@ class Level extends Game {
     line(floor6s.x, floor6s.y, floor6e.x, floor6e.y);
 
     line(tline1s.x, tline1s.y, tline1e.x, tline1e.y);
-    
+
     //roofs 
     line(roof1s.x, roof1s.y, roof1e.x, roof1e.y);
     line(roof2s.x, roof2s.y, roof2e.x, roof2e.y);
@@ -84,7 +86,7 @@ class Level extends Game {
     line(lwall1s.x, lwall1s.y, lwall1e.x, lwall1e.y);
     line(lwall2s.x, lwall2s.y, lwall2e.x, lwall2e.y);
   }
-  
+
 
 
   void collision() {
@@ -114,15 +116,15 @@ class Level extends Game {
       p.location.y = floor6s.y-radius;
       onPlatform = true;
     }
-    
-   // tilted lines
-   if (p.location.x > tline1s.x  - radius+1 && p.location.x < tline1e.x + radius-1 && p.location.y >= 500 - radius + (p.location.x-tline1s.x) * tangle1 && p.location.y <= 15 + 500 - radius + (p.location.x-tline1s.x) * tangle1) {
-     p.location.y = 500 - radius + (p.location.x-tline1s.x) * tangle1;
-     onPlatform = true;
-     p.speed.x +=1;
-   }
-    
-    
+
+    // tilted lines
+    if (p.location.x > tline1s.x  - radius+1 && p.location.x < tline1e.x + radius-1 && p.location.y >= 500 - radius + (p.location.x-tline1s.x) * tangle1 && p.location.y <= 15 + 500 - radius + (p.location.x-tline1s.x) * tangle1) {
+      p.location.y = 500 - radius + (p.location.x-tline1s.x) * tangle1;
+      onPlatform = true;
+      p.speed.x +=1;
+    }
+
+
     if (onPlatform) p.speed.y = 0;
 
     // collision with roofs -- makes it so you can't jump through roofs
@@ -175,5 +177,50 @@ class Level extends Game {
       p.location.y = spawnlocation.y;
       p.speed.y = 0;
     }
+  }
+
+  void level1lines() {
+    floor1s = new PVector(0, 600); //floor 1 starting point
+    floor1e = new PVector(300, 600); // floor 1 ending point
+
+    floor2s = new PVector(300, 500);
+    floor2e = new PVector(600, 500);
+
+    floor3s = new PVector(0, 400);
+    floor3e = new PVector(150, 400);
+
+    floor4s = new PVector(600, 550);
+    floor4e = new PVector(750, 550);
+
+    floor5s = new PVector(200, 440);
+    floor5e = new PVector(230, 440);
+
+    floor6s = new PVector(750, 500);
+    floor6e = new PVector(850, 500);
+
+    tline1s = new PVector(850, 500);
+    tline1e = new PVector(1280, 622.856);
+    tangle1 = 0.2857;
+
+    roof1s = new PVector(0, 430); // roof 1 starting point
+    roof1e = new PVector(150, 430); // roof 1 ending point
+
+    rwall1s = new PVector(300, 600); // right wall 1 starting point
+    rwall1e = new PVector(300, 500); // right wall 1 ending point
+
+    rwall2s = new PVector(600, 350);
+    rwall2e = new PVector(600, 300);
+
+    rwall3s = new PVector(1279, 520);
+    rwall3e = new PVector(1279, 0);
+
+    gate1s = new PVector(600, 500);
+    gate1e = new PVector(600, 350);
+
+    lwall1s = new PVector(0, height); // left wall 1 starting point
+    lwall1e = new PVector(0, 0);      // left wall 1 ending point
+
+    lwall2s = new PVector(150, 430);
+    lwall2e = new PVector(150, 400);
   }
 }
