@@ -4,6 +4,8 @@ class Level1 extends Level {
   boolean gothekey = false;
   boolean gateopen = false;
   int numberofwrongguesses;
+  
+  boolean levelisComplete = false;
 
 
   Level1() {
@@ -36,11 +38,11 @@ class Level1 extends Level {
 
     p.display();
     
-    if (level == 2)levelComplete();
+    if (levelisComplete)levelComplete();
   }
 
   void level1specific() {
-    if (p.location.x > width) level = 2;
+    if (p.location.x > width) levelisComplete = true;
 
     fill(0, 0, 255);
     stroke(0, 0, 255);
@@ -122,6 +124,10 @@ class Level1 extends Level {
     
     textSize(35);
     text("Press space to continue", width/2, height/2+50);
+    
+    if (key == ' ') level = 2;
+    
+    levelsCompleted = 1;
     
   }
 }

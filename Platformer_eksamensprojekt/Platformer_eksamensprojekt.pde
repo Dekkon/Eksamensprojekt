@@ -7,7 +7,7 @@ void setup() {
   
   size(1280, 720);
   
-  g = new Level1();
+  g = new Level2();
   
 }
 
@@ -18,13 +18,15 @@ void draw() {
   
  println("X: " + mouseX + " Y: " + mouseY); 
  
- if (key == ' ' && g.level == 2) g = new Level2();
+ if (g.level == 1) g = new Level1();
+ if (g.level == 2) g = new Level2();
+ if (g.menu == 2) g = new LevelSelect();
   
   g.run();
   
 }
 
-void keyPressed() {
+ void keyPressed() {
   if (key == 'a' || key == 'A' || keyCode == LEFT)  keys[0] = true;
   if (key == 'd' || key == 'D' || keyCode == RIGHT)  keys[1] = true;
   if (key == 'w' || key == 'W' || keyCode == UP || key == ' ')  keys[2] = true;

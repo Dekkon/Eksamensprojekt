@@ -24,6 +24,18 @@ class Level extends Game {
   PVector floor6s = new PVector(0, 0);
   PVector floor6e = new PVector(0, 0);
 
+  PVector mvfloor1s = new PVector(0, 0);
+  PVector mvfloor1e = new PVector(0, 0);
+  float mvf1speed = 0;
+
+  PVector mvfloor2s = new PVector(0, 0);
+  PVector mvfloor2e = new PVector(0, 0);
+  float mvf2speed = 0;
+
+  PVector mvfloor3s = new PVector(0, 0);
+  PVector mvfloor3e = new PVector(0, 0);
+  float mvf3speed = 0;
+
   PVector tline1s = new PVector(0, 0);
   PVector tline1e = new PVector(0, 0);
   float tangle1;
@@ -45,6 +57,11 @@ class Level extends Game {
 
   PVector gate1s = new PVector(0, 0);
   PVector gate1e = new PVector(0, 0);
+
+  PVector elevator1s = new PVector(0, 0);
+  PVector elevator1e = new PVector(0, 0);
+  int el1speed = 0;
+
 
   PVector lwall1s = new PVector(0, 0); // left wall 1 starting point
   PVector lwall1e = new PVector(0, 0);      // left wall 1 ending point
@@ -70,6 +87,18 @@ class Level extends Game {
     line(floor4s.x, floor4s.y, floor4e.x, floor4e.y);
     line(floor5s.x, floor5s.y, floor5e.x, floor5e.y);
     line(floor6s.x, floor6s.y, floor6e.x, floor6e.y);
+
+    line(mvfloor1s.x, mvfloor1s.y, mvfloor1e.x, mvfloor1e.y);    
+    mvfloor1s.x += mvf1speed;
+    mvfloor1e.x += mvf1speed;
+
+    line(mvfloor2s.x, mvfloor2s.y, mvfloor2e.x, mvfloor2e.y);    
+    mvfloor2s.x += mvf2speed;
+    mvfloor2e.x += mvf2speed;
+
+    line(mvfloor3s.x, mvfloor3s.y, mvfloor3e.x, mvfloor3e.y);    
+    mvfloor3s.x += mvf3speed;
+    mvfloor3e.x += mvf3speed;
 
     line(tline1s.x, tline1s.y, tline1e.x, tline1e.y);
 
@@ -115,6 +144,23 @@ class Level extends Game {
     if (p.location.x > floor6s.x  - radius+1 && p.location.x < floor6e.x + radius-1 && p.location.y >= floor6s.y-radius && p.location.y <= floor6s.y-radius+30 && p.speed.y > 0) {
       p.location.y = floor6s.y-radius;
       onPlatform = true;
+    }
+
+    // moving floors
+    if (p.location.x > mvfloor1s.x  - radius+1 && p.location.x < mvfloor1e.x + radius-1 && p.location.y >= mvfloor1s.y-radius && p.location.y <= mvfloor1s.y-radius+30 && p.speed.y > 0) {
+      p.location.y = mvfloor1s.y-radius;
+      onPlatform = true;
+      p.location.x += mvf1speed;
+    }
+    if (p.location.x > mvfloor2s.x  - radius+1 && p.location.x < mvfloor2e.x + radius-1 && p.location.y >= mvfloor2s.y-radius && p.location.y <= mvfloor2s.y-radius+30 && p.speed.y > 0) {
+      p.location.y = mvfloor2s.y-radius;
+      onPlatform = true;
+      p.location.x += mvf2speed;
+    }
+    if (p.location.x > mvfloor3s.x  - radius+1 && p.location.x < mvfloor3e.x + radius-1 && p.location.y >= mvfloor3s.y-radius && p.location.y <= mvfloor3s.y-radius+30 && p.speed.y > 0) {
+      p.location.y = mvfloor3s.y-radius;
+      onPlatform = true;
+      p.location.x += mvf3speed;
     }
 
     // tilted lines
