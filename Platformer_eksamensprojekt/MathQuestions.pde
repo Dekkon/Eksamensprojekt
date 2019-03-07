@@ -17,6 +17,9 @@ class MathQuestions {
   int kl1tal1 = int(random(2, 9));
   int kl1tal2 = int(random(2, 9));
 
+  int kl1tal3 = int(random(2, 9));
+  int kl1tal4 = int(random(2, 9));
+
   int kl5tal1 = int(random(3, 9));
   int kl5tal2 = int(random(10, 19));
 
@@ -97,6 +100,32 @@ class MathQuestions {
       answer = (kl9tal3-(kl9tal1*kl9tal2))/kl9tal1;
     }
 
+
+    if (testguess == -234) guesscheck = 0;
+    if (testguess != -234 && testguess == answer) {
+      guesscheck = 1;
+    }
+    if (testguess != -234 && testguess != answer) {
+      guesscheck = 2;
+      guess = guess.substring(0, 0);
+    }
+  }
+  void level2Question(int klasse) {
+
+    klassetrin = klasse;
+
+    // 1. klasse
+    if (klassetrin == 1) {
+      answer = kl1tal3 - kl1tal4;
+    }
+    // 5. klasse
+    if (klassetrin == 5) {
+      answer = kl5tal1 * kl5tal2;
+    }
+    // 9. klasse
+    if (klassetrin == 9) {
+      answer = (kl9tal3-(kl9tal1*kl9tal2))/kl9tal1;
+    }
 
     if (testguess == -234) guesscheck = 0;
     if (testguess != -234 && testguess == answer) {

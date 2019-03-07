@@ -4,7 +4,7 @@ class Level1 extends Level {
   boolean gothekey = false;
   boolean gateopen = false;
   int numberofwrongguesses;
-  
+
   boolean levelisComplete = false;
 
 
@@ -23,10 +23,8 @@ class Level1 extends Level {
     collision();
     mq.display();
 
-    if (p.location.x > 0 && p.location.x < 150 && p.location.y < 400) {
-      mq.typeanswer();
-    }
-    level1specific();
+    if (p.location.x > 0 && p.location.x < 150 && p.location.y < 400) mq.typeanswer();
+    mathQuestion();
     mq.level1Question(klassetrin);
 
     collectkey();
@@ -37,12 +35,12 @@ class Level1 extends Level {
     playermovement();
 
     p.display();
-    
+
+    if (p.location.x > width) levelisComplete = true;
     if (levelisComplete)levelComplete();
   }
 
-  void level1specific() {
-    if (p.location.x > width) levelisComplete = true;
+  void mathQuestion() {
 
     fill(0, 0, 255);
     stroke(0, 0, 255);
@@ -115,19 +113,18 @@ class Level1 extends Level {
 
   void levelComplete() {
     background(0, 255, 0);
-    
+
     textSize(50);
     textAlign(CENTER, CENTER);
     fill(25);
-    
+
     text("Level 1 Complete", width/2, height/2);
-    
+
     textSize(35);
     text("Press space to continue", width/2, height/2+50);
-    
+
     if (key == ' ') level = 2;
-    
+
     levelsCompleted = 1;
-    
   }
 }

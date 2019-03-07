@@ -61,6 +61,10 @@ class Level extends Game {
   PVector elevator1s = new PVector(0, 0);
   PVector elevator1e = new PVector(0, 0);
   int el1speed = 0;
+  
+  PVector elevator2s = new PVector(0, 0);
+  PVector elevator2e = new PVector(0, 0);
+  int el2speed = 0;
 
 
   PVector lwall1s = new PVector(0, 0); // left wall 1 starting point
