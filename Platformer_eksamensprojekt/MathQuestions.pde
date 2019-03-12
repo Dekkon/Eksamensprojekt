@@ -1,8 +1,9 @@
 class MathQuestions {
 
-  String guess = "";
+  String guess1 = "";
+  String guess2 = "";
   int testguess = -234;
-  int answer;
+  int answer[] = new int [2];
   int redbox = 0;
 
 
@@ -12,21 +13,16 @@ class MathQuestions {
 
   PVector keylocation;
 
-  int guesscheck;
+  int[] guesscheck = {0, 0};
 
-  int kl1tal1 = int(random(2, 9));
-  int kl1tal2 = int(random(2, 9));
 
-  int kl1tal3 = int(random(2, 9));
-  int kl1tal4 = int(random(2, 9));
+  int kl1tal[] = {int(random(2, 9)), int(random(2, 9)), int(random(10, 25)), int(random(10, 30))};
 
-  int kl5tal1 = int(random(3, 9));
-  int kl5tal2 = int(random(10, 19));
+  int kl5tal[] = {int(random(3, 9)), int(random(10, 19))};
 
   float whichnumber = random(1);
-  int kl9tal1 =  whichnumber>0.5 ? 8 : 5 ;
-  int kl9tal2 = whichnumber>0.5 ? 2 : 4;
-  int kl9tal3 = whichnumber>0.5 ? 40 : 10;
+  int kl9tal[] = {whichnumber>0.5 ? 8 : 5, whichnumber>0.5 ? 2 : 4, whichnumber>0.5 ? 40 : 10};
+
 
   int klassetrin;
 
@@ -61,14 +57,14 @@ class MathQuestions {
 
     nodoublepress --;
 
-    if (guesscheck != 1) {
+    if (guesscheck[0] != 1) {
       if (keyPressed && nodoublepress < 0) {
         if (key == '1' || key == '2' || key == '3' || key == '4' || key == '5' || key == '6' || key == '7' || key == '8' || key == '9' || key == '0' || key == '-') {
-          guess = guess + key;
+          guess1 = guess1 + key;
         } 
         nodoublepress = 13; 
-        if (keys[3] && guess.length() > 0) {
-          guess = guess.substring(0, guess.length()-1);
+        if (keys[3] && guess1.length() > 0) {
+          guess1 = guess1.substring(0, guess1.length()-1);
         }
       }
     }
@@ -76,10 +72,12 @@ class MathQuestions {
     try {
       // Code here
       if (keyCode == ENTER) {
-        testguess = Integer.parseInt(guess);
+        testguess = Integer.parseInt(guess1);
       }
     } 
     catch (Exception e) { // so the game doesn't crash if a non integer is written. i.e. '2-2'
+      guesscheck[0] = 2;
+      guess1 = guess1.substring(0, 0);
     }
   }
 
@@ -89,51 +87,73 @@ class MathQuestions {
 
     // 1. klasse
     if (klassetrin == 1) {
-      answer = kl1tal1 + kl1tal2;
+      answer[0] = kl1tal[0] + kl1tal[1];
     }
     // 5. klasse
     if (klassetrin == 5) {
-      answer = kl5tal1 * kl5tal2;
+      answer[0] = kl5tal[0] * kl5tal[1];
     }
     // 9. klasse
     if (klassetrin == 9) {
-      answer = (kl9tal3-(kl9tal1*kl9tal2))/kl9tal1;
+      answer[0] = (kl9tal[2]-(kl9tal[0]*kl9tal[1]))/kl9tal[0];
     }
 
 
-    if (testguess == -234) guesscheck = 0;
-    if (testguess != -234 && testguess == answer) {
-      guesscheck = 1;
+    if (testguess == -234) guesscheck[0] = 0;
+    if (testguess != -234 && testguess == answer[0]) {
+      guesscheck[0] = 1;
     }
-    if (testguess != -234 && testguess != answer) {
-      guesscheck = 2;
-      guess = guess.substring(0, 0);
+    if (testguess != -234 && testguess != answer[0]) {
+      guesscheck[0] = 2;
+      guess1 = guess1.substring(0, 0);
     }
   }
   void level2Question(int klasse) {
 
     klassetrin = klasse;
-
     // 1. klasse
     if (klassetrin == 1) {
-      answer = kl1tal3 - kl1tal4;
+      answer[0] = kl1tal[0] - kl1tal[1];
     }
     // 5. klasse
     if (klassetrin == 5) {
-      answer = kl5tal1 * kl5tal2;
+      answer[0] = kl5tal[0] * kl5tal[1];
     }
     // 9. klasse
     if (klassetrin == 9) {
-      answer = (kl9tal3-(kl9tal1*kl9tal2))/kl9tal1;
+      answer[0] = 0;
     }
 
-    if (testguess == -234) guesscheck = 0;
-    if (testguess != -234 && testguess == answer) {
-      guesscheck = 1;
+    if (testguess == -234) guesscheck[0] = 0;
+    if (testguess != -234 && testguess == answer[0]) {
+      guesscheck[0] = 1;
     }
-    if (testguess != -234 && testguess != answer) {
-      guesscheck = 2;
-      guess = guess.substring(0, 0);
+    if (testguess != -234 && testguess != answer[0]) {
+      guesscheck[0] = 2;
+      guess1 = guess1.substring(0, 0);
     }
-  }
+
+
+    /// question 2 
+    if (klassetrin == 1) {
+      answer[1] = kl1tal[2] + kl1tal[3];
+    }
+    // 5. klasse
+    if (klassetrin == 5) {
+      answer[1] = kl5tal[0] * kl5tal[1];
+    }
+    // 9. klasse
+    if (klassetrin == 9) {
+      answer[1] = (kl9tal[2]-(kl9tal[0]*kl9tal[1]))/kl9tal[0];
+    }
+
+  /*  if (testguess == -234) guesscheck[1] = 0;
+    if (testguess != -234 && testguess == answer[1]) {
+      guesscheck[1] = 1;
+    }
+    if (testguess != -234 && testguess != answer[1]) {
+      guesscheck[1] = 2;
+     guess2 = guess2.substring(0, 0);
+    } */ 
+  } 
 }

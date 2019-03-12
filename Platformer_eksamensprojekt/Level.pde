@@ -1,7 +1,7 @@
 class Level extends Game {
   Player p;
   PVector spawnlocation;
-  int klassetrin = 5;
+  int klassetrin = 1;
 
 
   //int level = 0;
@@ -54,6 +54,15 @@ class Level extends Game {
 
   PVector rwall3s = new PVector(0, 0);
   PVector rwall3e = new PVector(0, 0);
+  
+  PVector lwall1s = new PVector(0, 0); // left wall 1 starting point
+  PVector lwall1e = new PVector(0, 0);      // left wall 1 ending point
+
+  PVector lwall2s = new PVector(0, 0);
+  PVector lwall2e = new PVector(0, 0);
+
+  PVector lwall3s = new PVector(0, 0);
+  PVector lwall3e = new PVector(0, 0);
 
   PVector gate1s = new PVector(0, 0);
   PVector gate1e = new PVector(0, 0);
@@ -61,17 +70,11 @@ class Level extends Game {
   PVector elevator1s = new PVector(0, 0);
   PVector elevator1e = new PVector(0, 0);
   int el1speed = 0;
-  
+
   PVector elevator2s = new PVector(0, 0);
   PVector elevator2e = new PVector(0, 0);
   int el2speed = 0;
 
-
-  PVector lwall1s = new PVector(0, 0); // left wall 1 starting point
-  PVector lwall1e = new PVector(0, 0);      // left wall 1 ending point
-
-  PVector lwall2s = new PVector(0, 0);
-  PVector lwall2e = new PVector(0, 0);
 
   float radius = 17.5;
 
@@ -118,6 +121,7 @@ class Level extends Game {
     //waslls to the left of the player
     line(lwall1s.x, lwall1s.y, lwall1e.x, lwall1e.y);
     line(lwall2s.x, lwall2s.y, lwall2e.x, lwall2e.y);
+    line(lwall3s.x, lwall3s.y, lwall3e.x, lwall3e.y);
   }
 
 
@@ -199,6 +203,7 @@ class Level extends Game {
     // walls to the left of the player
     if (p.location.x < lwall1s.x + radius && p.location.x > lwall1s.x + radius - 30 && p.location.y > lwall1e.y && p.location.y < lwall1s.y) p.location.x = lwall1s.x + radius;
     if (p.location.x < lwall2s.x + radius && p.location.x > lwall2s.x + radius - 30 && p.location.y > lwall2e.y && p.location.y < lwall2s.y) p.location.x = lwall2s.x + radius;
+    if (p.location.x < lwall3s.x + radius && p.location.x > lwall3s.x + radius - 30 && p.location.y > lwall3e.y && p.location.y < lwall3s.y) p.location.x = lwall3s.x + radius;
   }
 
   void playermovement() {

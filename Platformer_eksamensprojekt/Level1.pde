@@ -50,20 +50,20 @@ class Level1 extends Level {
     textSize(20);
     textAlign(CENTER);
     fill(255);
-    if (klassetrin == 1) text(mq.kl1tal1 + " + " + mq.kl1tal2, 100, 50);
-    if (klassetrin == 5) text(mq.kl5tal1 + " * " + mq.kl5tal2, 100, 50);
-    if (klassetrin == 9) text(mq.kl9tal1 + "(x + " + mq.kl9tal2 + ") = " + mq.kl9tal3, 100, 50);
+    if (klassetrin == 1) text(mq.kl1tal[0] + " + " + mq.kl1tal[1], 100, 50);
+    if (klassetrin == 5) text(mq.kl5tal[0] + " * " + mq.kl5tal[1], 100, 50);
+    if (klassetrin == 9) text(mq.kl9tal[0] + "(x + " + mq.kl9tal[1] + ") = " + mq.kl9tal[2], 100, 50);
 
-    if (mq.guesscheck == 1) fill(0, 255, 0);
-    if (klassetrin == 1 || klassetrin == 5) text("= " +mq.guess, 100, 95);
-    if (klassetrin == 9) text("x = " +mq.guess, 100, 95);
+    if (mq.guesscheck[0] == 1) fill(0, 255, 0);
+    if (klassetrin == 1 || klassetrin == 5) text("= " +mq.guess1, 100, 95);
+    if (klassetrin == 9) text("x = " +mq.guess1, 100, 95);
 
 
     mq.redbox--;
-    if (mq.guesscheck == 2) {
+    if (mq.guesscheck[0] == 2) {
       numberofwrongguesses ++;
       mq.testguess = -234;
-      mq.guesscheck = 0;
+      mq.guesscheck[0] = 0;
 
       mq.redbox = 30;
     }
@@ -78,7 +78,7 @@ class Level1 extends Level {
   void collectkey() {
 
 
-    if (mq.guesscheck == 1 && !gothekey) {
+    if (mq.guesscheck[0] == 1 && !gothekey) {
       if (mq.keylocation.y + radius < p.location.y) {
         mq.keylocation.y += 2;
       }
