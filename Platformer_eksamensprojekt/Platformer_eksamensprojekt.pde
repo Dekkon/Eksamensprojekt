@@ -7,7 +7,7 @@ void setup() {
   
   size(1280, 720);
   
-  g = new Level2();
+  g = new Level1();
   
 }
 

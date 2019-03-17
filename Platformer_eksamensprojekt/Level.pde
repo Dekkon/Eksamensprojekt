@@ -3,6 +3,9 @@ class Level extends Game {
   PVector spawnlocation;
   int klassetrin = 1;
 
+  int currentlevel;
+
+  boolean levelisComplete = false;
 
   //int level = 0;
 
@@ -23,6 +26,9 @@ class Level extends Game {
 
   PVector floor6s = new PVector(0, 0);
   PVector floor6e = new PVector(0, 0);
+
+  PVector floor7s = new PVector(0, 0);
+  PVector floor7e = new PVector(0, 0);
 
   PVector mvfloor1s = new PVector(0, 0);
   PVector mvfloor1e = new PVector(0, 0);
@@ -54,7 +60,7 @@ class Level extends Game {
 
   PVector rwall3s = new PVector(0, 0);
   PVector rwall3e = new PVector(0, 0);
-  
+
   PVector lwall1s = new PVector(0, 0); // left wall 1 starting point
   PVector lwall1e = new PVector(0, 0);      // left wall 1 ending point
 
@@ -94,6 +100,8 @@ class Level extends Game {
     line(floor4s.x, floor4s.y, floor4e.x, floor4e.y);
     line(floor5s.x, floor5s.y, floor5e.x, floor5e.y);
     line(floor6s.x, floor6s.y, floor6e.x, floor6e.y);
+    line(floor7s.x, floor7s.y, floor7e.x, floor7e.y);
+
 
     line(mvfloor1s.x, mvfloor1s.y, mvfloor1e.x, mvfloor1e.y);    
     mvfloor1s.x += mvf1speed;
@@ -151,6 +159,10 @@ class Level extends Game {
     }
     if (p.location.x > floor6s.x  - radius+1 && p.location.x < floor6e.x + radius-1 && p.location.y >= floor6s.y-radius && p.location.y <= floor6s.y-radius+30 && p.speed.y > 0) {
       p.location.y = floor6s.y-radius;
+      onPlatform = true;
+    }
+    if (p.location.x > floor7s.x  - radius+1 && p.location.x < floor7e.x + radius-1 && p.location.y >= floor7s.y-radius && p.location.y <= floor7s.y-radius+30 && p.speed.y > 0) {
+      p.location.y = floor7s.y-radius;
       onPlatform = true;
     }
 
@@ -224,6 +236,22 @@ class Level extends Game {
     onPlatform = false;
   }
 
+  void levelComplete() {
+    background(0, 255, 0);
+
+    textSize(50);
+    textAlign(CENTER, CENTER);
+    fill(25);
+
+    text("Level " + currentlevel + " Complete", width/2, height/2);
+
+    textSize(35);
+    text("Press space to continue", width/2, height/2+50);
+
+    if (key == ' ') level = currentlevel + 1;
+
+    levelsCompleted = currentlevel;
+  }
 
   void respawn() {
 
@@ -234,48 +262,5 @@ class Level extends Game {
     }
   }
 
-  void level1lines() {
-    floor1s = new PVector(0, 600); //floor 1 starting point
-    floor1e = new PVector(300, 600); // floor 1 ending point
 
-    floor2s = new PVector(300, 500);
-    floor2e = new PVector(600, 500);
-
-    floor3s = new PVector(0, 400);
-    floor3e = new PVector(150, 400);
-
-    floor4s = new PVector(600, 550);
-    floor4e = new PVector(750, 550);
-
-    floor5s = new PVector(200, 440);
-    floor5e = new PVector(230, 440);
-
-    floor6s = new PVector(750, 500);
-    floor6e = new PVector(850, 500);
-
-    tline1s = new PVector(850, 500);
-    tline1e = new PVector(1280, 622.856);
-    tangle1 = 0.2857;
-
-    roof1s = new PVector(0, 430); // roof 1 starting point
-    roof1e = new PVector(150, 430); // roof 1 ending point
-
-    rwall1s = new PVector(300, 600); // right wall 1 starting point
-    rwall1e = new PVector(300, 500); // right wall 1 ending point
-
-    rwall2s = new PVector(600, 350);
-    rwall2e = new PVector(600, 300);
-
-    rwall3s = new PVector(1279, 520);
-    rwall3e = new PVector(1279, 0);
-
-    gate1s = new PVector(600, 500);
-    gate1e = new PVector(600, 350);
-
-    lwall1s = new PVector(0, height); // left wall 1 starting point
-    lwall1e = new PVector(0, 0);      // left wall 1 ending point
-
-    lwall2s = new PVector(150, 430);
-    lwall2e = new PVector(150, 400);
-  }
 }

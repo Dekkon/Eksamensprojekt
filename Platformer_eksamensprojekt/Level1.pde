@@ -5,16 +5,15 @@ class Level1 extends Level {
   boolean gateopen = false;
   int numberofwrongguesses;
 
-  boolean levelisComplete = false;
-
 
   Level1() {
+    currentlevel = 1;
     spawnlocation = new PVector(30, 600);
     mq = new MathQuestions();
     p = new Player(spawnlocation.x, spawnlocation.y, radius);
     mq.keylocation = new PVector(40, 80);
 
-    level1lines();
+    lines();
   }
 
 
@@ -23,7 +22,7 @@ class Level1 extends Level {
     collision();
     mq.display();
 
-    if (p.location.x > 0 && p.location.x < 150 && p.location.y < 400) mq.typeanswer();
+    if (p.location.x > 0 && p.location.x < 150 && p.location.y < 400) mq.typeanswer(1);
     mathQuestion();
     mq.level1Question(klassetrin);
 
@@ -62,7 +61,7 @@ class Level1 extends Level {
     mq.redbox--;
     if (mq.guesscheck[0] == 2) {
       numberofwrongguesses ++;
-      mq.testguess = -234;
+      mq.testguess[0] = -234;
       mq.guesscheck[0] = 0;
 
       mq.redbox = 30;
@@ -110,21 +109,48 @@ class Level1 extends Level {
       mq.seekKeyhole(gate1e);
     }
   }
+  void lines() {
+    floor1s = new PVector(0, 600); //floor 1 starting point
+    floor1e = new PVector(300, 600); // floor 1 ending point
 
-  void levelComplete() {
-    background(0, 255, 0);
+    floor2s = new PVector(300, 500);
+    floor2e = new PVector(600, 500);
 
-    textSize(50);
-    textAlign(CENTER, CENTER);
-    fill(25);
+    floor3s = new PVector(0, 400);
+    floor3e = new PVector(150, 400);
 
-    text("Level 1 Complete", width/2, height/2);
+    floor4s = new PVector(600, 550);
+    floor4e = new PVector(750, 550);
 
-    textSize(35);
-    text("Press space to continue", width/2, height/2+50);
+    floor5s = new PVector(200, 440);
+    floor5e = new PVector(230, 440);
 
-    if (key == ' ') level = 2;
+    floor6s = new PVector(750, 500);
+    floor6e = new PVector(850, 500);
 
-    levelsCompleted = 1;
+    tline1s = new PVector(850, 500);
+    tline1e = new PVector(1280, 622.856);
+    tangle1 = 0.2857;
+
+    roof1s = new PVector(0, 430); // roof 1 starting point
+    roof1e = new PVector(150, 430); // roof 1 ending point
+
+    rwall1s = new PVector(300, 600); // right wall 1 starting point
+    rwall1e = new PVector(300, 500); // right wall 1 ending point
+
+    rwall2s = new PVector(600, 350);
+    rwall2e = new PVector(600, 300);
+
+    rwall3s = new PVector(1279, 520);
+    rwall3e = new PVector(1279, 0);
+
+    gate1s = new PVector(600, 500);
+    gate1e = new PVector(600, 350);
+
+    lwall1s = new PVector(0, height); // left wall 1 starting point
+    lwall1e = new PVector(0, 0);      // left wall 1 ending point
+
+    lwall2s = new PVector(150, 430);
+    lwall2e = new PVector(150, 400);
   }
 }

@@ -2,7 +2,7 @@ class MathQuestions {
 
   String guess1 = "";
   String guess2 = "";
-  int testguess = -234;
+  int testguess[] = {-234, -234};
   int answer[] = new int [2];
   int redbox = 0;
 
@@ -53,26 +53,28 @@ class MathQuestions {
   }
 
 
-  void typeanswer() {
+  void typeanswer(int wq) {
 
     nodoublepress --;
 
-    if (guesscheck[0] != 1) {
-      if (keyPressed && nodoublepress < 0) {
-        if (key == '1' || key == '2' || key == '3' || key == '4' || key == '5' || key == '6' || key == '7' || key == '8' || key == '9' || key == '0' || key == '-') {
-          guess1 = guess1 + key;
-        } 
-        nodoublepress = 13; 
-        if (keys[3] && guess1.length() > 0) {
-          guess1 = guess1.substring(0, guess1.length()-1);
-        }
+
+    if (keyPressed && nodoublepress < 0) {
+      if (key == '1' || key == '2' || key == '3' || key == '4' || key == '5' || key == '6' || key == '7' || key == '8' || key == '9' || key == '0' || key == '-') {
+        if (wq == 1 && guesscheck[0] != 1) guess1 = guess1 + key;
+        if (wq == 2 && guesscheck[1] != 1) guess2 = guess2 + key;
+      } 
+      nodoublepress = 13; 
+      if (keys[3]) {
+        if (guess1.length() > 0 && wq == 1 && guesscheck[0] != 1) guess1 = guess1.substring(0, guess1.length()-1);
+        if (guess2.length() > 0 && wq == 2 && guesscheck[1] != 1) guess2 = guess2.substring(0, guess2.length()-1);
       }
     }
 
+
     try {
-      // Code here
       if (keyCode == ENTER) {
-        testguess = Integer.parseInt(guess1);
+        if (wq == 1) testguess[0] = Integer.parseInt(guess1);
+        if (wq == 2) testguess[1] = Integer.parseInt(guess2);
       }
     } 
     catch (Exception e) { // so the game doesn't crash if a non integer is written. i.e. '2-2'
@@ -99,11 +101,11 @@ class MathQuestions {
     }
 
 
-    if (testguess == -234) guesscheck[0] = 0;
-    if (testguess != -234 && testguess == answer[0]) {
+    if (testguess[0] == -234) guesscheck[0] = 0;
+    if (testguess[0] != -234 && testguess[0] == answer[0]) {
       guesscheck[0] = 1;
     }
-    if (testguess != -234 && testguess != answer[0]) {
+    if (testguess[0] != -234 && testguess[0] != answer[0]) {
       guesscheck[0] = 2;
       guess1 = guess1.substring(0, 0);
     }
@@ -124,11 +126,11 @@ class MathQuestions {
       answer[0] = 0;
     }
 
-    if (testguess == -234) guesscheck[0] = 0;
-    if (testguess != -234 && testguess == answer[0]) {
+    if (testguess[0] == -234) guesscheck[0] = 0;
+    if (testguess[0] != -234 && testguess[0] == answer[0]) {
       guesscheck[0] = 1;
     }
-    if (testguess != -234 && testguess != answer[0]) {
+    if (testguess[0] != -234 && testguess[0] != answer[0]) {
       guesscheck[0] = 2;
       guess1 = guess1.substring(0, 0);
     }
@@ -147,13 +149,13 @@ class MathQuestions {
       answer[1] = (kl9tal[2]-(kl9tal[0]*kl9tal[1]))/kl9tal[0];
     }
 
-  /*  if (testguess == -234) guesscheck[1] = 0;
-    if (testguess != -234 && testguess == answer[1]) {
-      guesscheck[1] = 1;
-    }
-    if (testguess != -234 && testguess != answer[1]) {
-      guesscheck[1] = 2;
+     if (testguess[1] == -234) guesscheck[1] = 0;
+     if (testguess[1] != -234 && testguess[1] == answer[1]) {
+     guesscheck[1] = 1;
+     }
+     if (testguess[1] != -234 && testguess[1] != answer[1]) {
+     guesscheck[1] = 2;
      guess2 = guess2.substring(0, 0);
-    } */ 
-  } 
+     } 
+  }
 }
