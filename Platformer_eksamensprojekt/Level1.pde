@@ -5,6 +5,8 @@ class Level1 extends Level {
   boolean gateopen = false;
   int numberofwrongguesses;
 
+  PImage keyhole;
+
 
   Level1() {
     currentlevel = 1;
@@ -12,6 +14,9 @@ class Level1 extends Level {
     mq = new MathQuestions();
     p = new Player(spawnlocation.x, spawnlocation.y, radius);
     mq.keylocation = new PVector(40, 80);
+
+    keyhole = loadImage("keyhole.png");
+    keyhole.resize(10, 30);
 
     lines();
   }
@@ -22,24 +27,29 @@ class Level1 extends Level {
     collision();
     mq.display();
 
+    stage();
+    collectkey();
+    gates();
     if (p.location.x > 0 && p.location.x < 150 && p.location.y < 400) mq.typeanswer(1);
     mathQuestion();
     mq.level1Question(klassetrin);
 
-    collectkey();
-    gates();
-
-    stage();
     respawn();
     playermovement();
-
     p.display();
+    
+    pauseGame();
+    if (pause) inGameMenu();
 
     if (p.location.x > width) levelisComplete = true;
     if (levelisComplete)levelComplete();
   }
 
   void mathQuestion() {
+
+    imageMode(CENTER);
+    tint(0, 0, 255);
+    image(keyhole, gate1e.x, gate1e.y);
 
     fill(0, 0, 255);
     stroke(0, 0, 255);
@@ -50,7 +60,7 @@ class Level1 extends Level {
     textAlign(CENTER);
     fill(255);
     if (klassetrin == 1) text(mq.kl1tal[0] + " + " + mq.kl1tal[1], 100, 50);
-    if (klassetrin == 5) text(mq.kl5tal[0] + " * " + mq.kl5tal[1], 100, 50);
+    if (klassetrin == 5) text(mq.kl5lvl1tal[0] + " * " + mq.kl5lvl1tal[1], 100, 50);
     if (klassetrin == 9) text(mq.kl9tal[0] + "(x + " + mq.kl9tal[1] + ") = " + mq.kl9tal[2], 100, 50);
 
     if (mq.guesscheck[0] == 1) fill(0, 255, 0);

@@ -5,7 +5,7 @@ class LevelSelect extends Menu {
   }
 
   void run() {
-
+    println(levelsCompleted);
     buttons();
   }
 
@@ -30,5 +30,20 @@ class LevelSelect extends Menu {
     fill(255);
     text("2", 330, 120); 
     if (levelsCompleted >= 1 && mousePressed && mouseX > 280 && mouseX < 380 && mouseY < 170 && mouseY > 70) level = 2;
+    
+    
+    
+    //return to menu button
+    rectMode(CENTER);
+    textAlign(CENTER, CENTER);
+    
+    fill(150);
+    if (mouseX > 980 && mouseX < 1220 && mouseY < 145 && mouseY > 55) fill(150, 150);
+    rect(1100, 100, 240, 90);
+    fill(255);
+    text("Menu", 1100, 95);
+    if (mousePressed && mouseX > 980 && mouseX < 1220 && mouseY < 145 && mouseY > 55) menu = 1;
+    
+    
   }
 }

@@ -3,7 +3,7 @@ class Game {
   int level;
   int menu;
   
-  int levelsCompleted;
+  //int levelsCompleted;
   
   Game() {
   }

@@ -1,12 +1,11 @@
 class Level extends Game {
   Player p;
   PVector spawnlocation;
-  int klassetrin = 1;
 
   int currentlevel;
 
   boolean levelisComplete = false;
-
+  boolean pause = false;
   //int level = 0;
 
   PVector floor1s = new PVector(0, 0); //floor 1 starting point
@@ -250,7 +249,8 @@ class Level extends Game {
 
     if (key == ' ') level = currentlevel + 1;
 
-    levelsCompleted = currentlevel;
+    if(currentlevel > levelsCompleted) levelsCompleted = currentlevel;
+    println(levelsCompleted);
   }
 
   void respawn() {
@@ -262,5 +262,40 @@ class Level extends Game {
     }
   }
 
+  void pauseGame() {
 
+    if (keyPressed && key == 'p' || key == 'P') pause = true;
+  }
+
+  void inGameMenu() {
+
+    rectMode(CENTER);
+    fill(0, 230);
+    noStroke();
+    rect(width/2, height/2, 300, 380);
+
+    stroke(0);
+    fill(150);
+    if (mouseX > width/2-100 && mouseX < width/2+100 && mouseY < 280 && mouseY > 210) fill(150, 150);
+    rect(width/2, 245, 200, 70);
+    if (mousePressed && mouseX > width/2-100 && mouseX < width/2+100 && mouseY < 280 && mouseY > 210) pause = false;
+
+
+    fill(150);
+    if (mouseX > width/2-100 && mouseX < width/2+100 && mouseY < 400 && mouseY > 330) fill(150, 150);
+    rect(width/2, 365, 200, 70);
+
+    fill(150);
+    if (mouseX > width/2-100 && mouseX < width/2+100 && mouseY < 520 && mouseY > 450) fill(150, 150);
+    rect(width/2, 485, 200, 70);
+    if (mousePressed && mouseX > width/2-100 && mouseX < width/2+100 && mouseY < 520 && mouseY > 450) menu = 1;
+
+      textSize(40);
+    textAlign(CENTER, CENTER);
+    fill(255, 255, 0); 
+
+    text("resume", width/2, 240);
+    text("settings", width/2, 360);
+    text("exit", width/2, 480);
+  }
 }

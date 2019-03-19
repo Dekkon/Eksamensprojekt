@@ -8,17 +8,19 @@ class MathQuestions {
 
 
   boolean keytogate = false;
+  PVector keylocation;
+  PImage keyimage;
+
 
   int nodoublepress;
-
-  PVector keylocation;
 
   int[] guesscheck = {0, 0};
 
 
   int kl1tal[] = {int(random(2, 9)), int(random(2, 9)), int(random(10, 25)), int(random(10, 30))};
 
-  int kl5tal[] = {int(random(3, 9)), int(random(10, 19))};
+  int kl5lvl1tal[] = {int(random(3, 9)), int(random(10, 19))};
+  int kl5lvl2tal[] = {int(random(111, 999)), int(random(111, 999)), int(random(2, 7)), int(random(5, 9)), int(random(2, 9))};
 
   float whichnumber = random(1);
   int kl9tal[] = {whichnumber>0.5 ? 8 : 5, whichnumber>0.5 ? 2 : 4, whichnumber>0.5 ? 40 : 10};
@@ -27,6 +29,8 @@ class MathQuestions {
   int klassetrin;
 
   MathQuestions() {
+    keyimage = loadImage("key.png");
+    keyimage.resize(30, 15);
   }
 
 
@@ -36,7 +40,10 @@ class MathQuestions {
     //the key
     noStroke();
     fill(255);
-    ellipse(keylocation.x, keylocation.y, 10, 10);
+    imageMode(CENTER);
+    noTint();
+    image(keyimage, keylocation.x, keylocation.y);
+    //ellipse(keylocation.x, keylocation.y, 10, 10);
   }
 
   void seekKeyhole(PVector target) {
@@ -93,7 +100,7 @@ class MathQuestions {
     }
     // 5. klasse
     if (klassetrin == 5) {
-      answer[0] = kl5tal[0] * kl5tal[1];
+      answer[0] = kl5lvl1tal[0] * kl5lvl1tal[1];
     }
     // 9. klasse
     if (klassetrin == 9) {
@@ -119,7 +126,7 @@ class MathQuestions {
     }
     // 5. klasse
     if (klassetrin == 5) {
-      answer[0] = kl5tal[0] * kl5tal[1];
+      answer[0] = kl5lvl2tal[0] + kl5lvl2tal[1];
     }
     // 9. klasse
     if (klassetrin == 9) {
@@ -142,20 +149,20 @@ class MathQuestions {
     }
     // 5. klasse
     if (klassetrin == 5) {
-      answer[1] = kl5tal[0] * kl5tal[1];
+      answer[1] = kl5lvl2tal[2] + kl5lvl2tal[3] * kl5lvl2tal[4];
     }
     // 9. klasse
     if (klassetrin == 9) {
       answer[1] = (kl9tal[2]-(kl9tal[0]*kl9tal[1]))/kl9tal[0];
     }
 
-     if (testguess[1] == -234) guesscheck[1] = 0;
-     if (testguess[1] != -234 && testguess[1] == answer[1]) {
-     guesscheck[1] = 1;
-     }
-     if (testguess[1] != -234 && testguess[1] != answer[1]) {
-     guesscheck[1] = 2;
-     guess2 = guess2.substring(0, 0);
-     } 
+    if (testguess[1] == -234) guesscheck[1] = 0;
+    if (testguess[1] != -234 && testguess[1] == answer[1]) {
+      guesscheck[1] = 1;
+    }
+    if (testguess[1] != -234 && testguess[1] != answer[1]) {
+      guesscheck[1] = 2;
+      guess2 = guess2.substring(0, 0);
+    }
   }
 }

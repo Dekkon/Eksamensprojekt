@@ -31,6 +31,9 @@ class Level2 extends Level {
 
     p.display();
 
+    pauseGame();
+    if (pause) inGameMenu();
+    
     if (p.location.x > width) levelisComplete = true;
     if (levelisComplete)levelComplete();
   }
@@ -47,12 +50,12 @@ class Level2 extends Level {
     textAlign(CENTER);
     fill(255);
     if (klassetrin == 1) text(mq.kl1tal[0] + " - " + mq.kl1tal[1], 1210, 390);
-    if (klassetrin == 5) text(mq.kl5tal[0] + " * " + mq.kl5tal[1], 100, 50);
+    if (klassetrin == 5) text(mq.kl5lvl2tal[0] + " + " + mq.kl5lvl2tal[1], 1210, 390);
     if (klassetrin == 9) text(mq.kl9tal[0] + "(x + " + mq.kl9tal[1] + ") = " + mq.kl9tal[2], 100, 50);
 
     if (mq.guesscheck[0] == 1) fill(0, 255, 0);
     if (klassetrin == 1 || klassetrin == 5) text("= " +mq.guess1, 1210, 435);
-    if (klassetrin == 9) text("x = " +mq.guess1, 100, 95);
+    if (klassetrin == 9) text("x = " +mq.guess1, 1210, 435);
 
     mq.redbox--;
     if (mq.guesscheck[0] == 2) {
@@ -78,7 +81,7 @@ class Level2 extends Level {
     textAlign(CENTER);
     fill(255);
     if (klassetrin == 1) text(mq.kl1tal[2] + " + " + mq.kl1tal[3], 72, 230);
-    if (klassetrin == 5) text(mq.kl5tal[0] + " * " + mq.kl5tal[1], 72, 230);
+    if (klassetrin == 5) text(mq.kl5lvl2tal[2] + " + " + mq.kl5lvl2tal[3] + " * " + mq.kl5lvl2tal[4], 72, 230);
     if (klassetrin == 9) text(mq.kl9tal[0] + "(x + " + mq.kl9tal[1] + ") = " + mq.kl9tal[2], 72, 230);
 
     if (mq.guesscheck[1] == 1) fill(0, 255, 0);
@@ -152,7 +155,7 @@ class Level2 extends Level {
       elevator2e.y += el2speed;
     }
   }
-  
+
   void lines() {
     floor1s = new PVector(0, 630); //floor 1 starting point
     floor1e = new PVector(200, 630); // floor 1 ending point
@@ -217,9 +220,4 @@ class Level2 extends Level {
     lwall3s = new PVector(200, 380);
     lwall3e = new PVector(200, 270);
   }
-  
-  
-  
-  
-  
 }
