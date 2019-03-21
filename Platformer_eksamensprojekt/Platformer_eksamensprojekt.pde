@@ -1,7 +1,7 @@
 
 Game g;
 int levelsCompleted;
-int klassetrin = 5;
+int klassetrin = 9;
 
 
 boolean keys[] = new boolean [4];
@@ -10,7 +10,7 @@ void setup() {
 
   size(1280, 720);
 
-  g = new Level2();
+  g = new Level3();
 }
 
 
@@ -23,6 +23,8 @@ void draw() {
 
   if (g.menu == 1) g = new MainMenu();
   if (g.menu == 2) g = new LevelSelect();
+  if (g.menu == 3) g = new Settings();
+
 
   g.run();
 }

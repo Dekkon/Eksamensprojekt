@@ -2,10 +2,14 @@ class Level extends Game {
   Player p;
   PVector spawnlocation;
 
+  PImage pausebutton; //pauseknappen billede
+  PImage startbutton; //startknappens billede
+
   int currentlevel;
 
   boolean levelisComplete = false;
   boolean pause = false;
+  boolean dead = false;
   //int level = 0;
 
   PVector floor1s = new PVector(0, 0); //floor 1 starting point
@@ -86,6 +90,8 @@ class Level extends Game {
   boolean onPlatform = false; //boolean to check whether or not player is currently on a platform
 
   Level() {
+    pausebutton = loadImage("pauseButton.png");
+    startbutton = loadImage("startButton.png");
   }
 
   void stage() {
@@ -136,7 +142,7 @@ class Level extends Game {
   void collision() {
 
     // collision with floors -- makes it so you don't fall through floors
-    if (p.location.x > floor1s.x && p.location.x < floor1e.x && p.location.y >= floor1s.y-radius && p.location.y <= floor1s.y-radius+30 && p.speed.y > 0) { 
+    if (p.location.x > floor1s.x - radius+1 && p.location.x < floor1e.x + radius && p.location.y >= floor1s.y-radius && p.location.y <= floor1s.y-radius+30 && p.speed.y > 0) { 
       p.location.y = floor1s.y-radius;
       onPlatform = true;
     }
@@ -249,25 +255,45 @@ class Level extends Game {
 
     if (key == ' ') level = currentlevel + 1;
 
-    if(currentlevel > levelsCompleted) levelsCompleted = currentlevel;
+    if (currentlevel > levelsCompleted) levelsCompleted = currentlevel;
     println(levelsCompleted);
   }
 
   void respawn() {
 
-    if (p.location.y > height) {
+    if (dead) {
       p.location.x = spawnlocation.x;
       p.location.y = spawnlocation.y;
       p.speed.y = 0;
+      dead = false;
+    }
+
+    if (p.location.y > height) {
+      dead = true;
     }
   }
 
   void pauseGame() {
 
     if (keyPressed && key == 'p' || key == 'P') pause = true;
+
+    if (mouseX < 1220 + 24 && mouseX > 1220 - 24 && mouseY < 70 + 39 && mouseY > 70 - 39) {
+      ellipse(1220, 70, 35, 35);
+    }
+    wait --;
+    if (mousePressed && mouseX < 1220 + 24 && mouseX > 1220 - 24 && mouseY < 70 + 39 && mouseY > 70 - 39 && wait < 0) {
+      pause = !pause;
+      wait = 15;
+    }
+
+    imageMode(CENTER);
+    if (!pause) image(pausebutton, 1220, 70);
+
+    if (pause) image(startbutton, 1220, 70);
   }
 
   void inGameMenu() {
+
 
     rectMode(CENTER);
     fill(0, 230);
@@ -290,7 +316,7 @@ class Level extends Game {
     rect(width/2, 485, 200, 70);
     if (mousePressed && mouseX > width/2-100 && mouseX < width/2+100 && mouseY < 520 && mouseY > 450) menu = 1;
 
-      textSize(40);
+    textSize(40);
     textAlign(CENTER, CENTER);
     fill(255, 255, 0); 
 

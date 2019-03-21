@@ -61,7 +61,7 @@ class Level1 extends Level {
     fill(255);
     if (klassetrin == 1) text(mq.kl1tal[0] + " + " + mq.kl1tal[1], 100, 50);
     if (klassetrin == 5) text(mq.kl5lvl1tal[0] + " * " + mq.kl5lvl1tal[1], 100, 50);
-    if (klassetrin == 9) text(mq.kl9tal[0] + "(x + " + mq.kl9tal[1] + ") = " + mq.kl9tal[2], 100, 50);
+    if (klassetrin == 9) text(mq.kl9lvl1tal[0] + "(x + " + mq.kl9lvl1tal[1] + ") = " + mq.kl9lvl1tal[2], 100, 50);
 
     if (mq.guesscheck[0] == 1) fill(0, 255, 0);
     if (klassetrin == 1 || klassetrin == 5) text("= " +mq.guess1, 100, 95);

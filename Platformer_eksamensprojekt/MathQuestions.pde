@@ -23,8 +23,8 @@ class MathQuestions {
   int kl5lvl2tal[] = {int(random(111, 999)), int(random(111, 999)), int(random(2, 7)), int(random(5, 9)), int(random(2, 9))};
 
   float whichnumber = random(1);
-  int kl9tal[] = {whichnumber>0.5 ? 8 : 5, whichnumber>0.5 ? 2 : 4, whichnumber>0.5 ? 40 : 10};
-
+  int kl9lvl1tal[] = {whichnumber>0.5 ? 8 : 5, whichnumber>0.5 ? 2 : 4, whichnumber>0.5 ? 40 : 10};
+  int kl9lvl2tal[] = {int(random(1,10)), int(random(1, 60)), random(1)>0.5 ? 4 : 16, random(1)>0.5 ? 9 : 25 };
 
   int klassetrin;
 
@@ -104,7 +104,7 @@ class MathQuestions {
     }
     // 9. klasse
     if (klassetrin == 9) {
-      answer[0] = (kl9tal[2]-(kl9tal[0]*kl9tal[1]))/kl9tal[0];
+      answer[0] = (kl9lvl1tal[2]-(kl9lvl1tal[0]*kl9lvl1tal[1]))/kl9lvl1tal[0];
     }
 
 
@@ -130,7 +130,7 @@ class MathQuestions {
     }
     // 9. klasse
     if (klassetrin == 9) {
-      answer[0] = 0;
+      answer[0] = kl9lvl2tal[0]*60 + kl9lvl2tal[1];
     }
 
     if (testguess[0] == -234) guesscheck[0] = 0;
@@ -153,7 +153,7 @@ class MathQuestions {
     }
     // 9. klasse
     if (klassetrin == 9) {
-      answer[1] = (kl9tal[2]-(kl9tal[0]*kl9tal[1]))/kl9tal[0];
+      answer[1] = int(sqrt(kl9lvl2tal[2])) + int(sqrt(kl9lvl2tal[3])) ;
     }
 
     if (testguess[1] == -234) guesscheck[1] = 0;
