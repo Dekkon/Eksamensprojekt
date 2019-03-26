@@ -10,7 +10,7 @@ class Level3 extends Level {
     spawnlocation = new PVector(30, 120);
     mq = new MathQuestions();
     p = new Player(spawnlocation.x, spawnlocation.y, radius);
-    
+
     stickman = loadImage("Stickman.png");
     stickman.resize(50, 50);
 
@@ -49,13 +49,16 @@ class Level3 extends Level {
       shots.add(new Shot(700, 155));
       shotfq = 0;
     }
-    
+
     image(stickman, 720, 170);
 
-    for (Shot s : shots) {
+    for (int i = shots.size()-1; i >= 0; i--) {
+      Shot s = shots.get(i);
       if (PVector.dist(p.location, s.location) < radius+2) {
         dead = true;
       }
+
+      if (s.lifespan <= 0) shots.remove(i);
     }
   }
 

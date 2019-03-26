@@ -20,6 +20,7 @@ void draw() {
   println("X: " + mouseX + " Y: " + mouseY); 
   if (g.level == 1) g = new Level1();
   if (g.level == 2) g = new Level2();
+  if (g.level == 3) g = new Level3();
 
   if (g.menu == 1) g = new MainMenu();
   if (g.menu == 2) g = new LevelSelect();
