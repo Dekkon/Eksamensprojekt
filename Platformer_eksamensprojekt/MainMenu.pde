@@ -13,6 +13,7 @@ class MainMenu extends Menu {
   void buttons() {
 
     rectMode(CENTER);
+    noStroke();
     textAlign(CENTER, CENTER);
     textSize(90);
 

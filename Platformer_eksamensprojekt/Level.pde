@@ -95,6 +95,14 @@ class Level extends Game {
   }
 
   void stage() {
+    
+    // draw the elevator
+    stroke(255);
+    strokeWeight(2);
+    if (currentlevel == 2) stroke(0, 0, 255);
+    line(elevator1s.x, elevator1s.y, elevator1e.x, elevator1e.y);
+    line(elevator2s.x, elevator2s.y, elevator2e.x, elevator2e.y);
+    
     stroke(0, 240, 0);
     strokeWeight(2);
 
@@ -121,8 +129,9 @@ class Level extends Game {
     mvfloor3e.x += mvf3speed;
 
     line(tline1s.x, tline1s.y, tline1e.x, tline1e.y);
-
-    //roofs 
+    
+        
+  //roofs 
     line(roof1s.x, roof1s.y, roof1e.x, roof1e.y);
     line(roof2s.x, roof2s.y, roof2e.x, roof2e.y);
 
@@ -187,6 +196,22 @@ class Level extends Game {
       onPlatform = true;
       p.location.x += mvf3speed;
     }
+    
+
+    // unit collision with the elevators
+    if (p.location.x > elevator1s.x  - radius+1 && p.location.x < elevator1e.x + radius-1 && p.location.y >= elevator1s.y-radius && p.location.y <= elevator1s.y-radius+30 && p.speed.y > 0) {
+      p.location.y = elevator1s.y-radius;
+      onPlatform = true;
+      p.speed.y = 0;
+    }
+    if (p.location.x > elevator2s.x  - radius+1 && p.location.x < elevator2e.x + radius-1 && p.location.y >= elevator2s.y-radius && p.location.y <= elevator2s.y-radius+30 && p.speed.y > 0) {
+      p.location.y = elevator2s.y-radius;
+      onPlatform = true;
+      p.speed.y = 0;
+    }
+
+
+    
 
     // tilted lines
     if (p.location.x > tline1s.x  - radius+1 && p.location.x < tline1e.x + radius-1 && p.location.y >= 500 - radius + (p.location.x-tline1s.x) * tangle1 && p.location.y <= 15 + 500 - radius + (p.location.x-tline1s.x) * tangle1) {

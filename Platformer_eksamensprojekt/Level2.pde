@@ -13,7 +13,7 @@ class Level2 extends Level {
 
   void run() {
 
-
+    
 
     movingFloors();
 
@@ -121,23 +121,6 @@ class Level2 extends Level {
   }
 
   void elevator() {
-    // draw the elevator
-    stroke(0, 0, 255);
-    line(elevator1s.x, elevator1s.y, elevator1e.x, elevator1e.y);
-    line(elevator2s.x, elevator2s.y, elevator2e.x, elevator2e.y);
-
-
-    // unit collision with the elevators
-    if (p.location.x > elevator1s.x  - radius+1 && p.location.x < elevator1e.x + radius-1 && p.location.y >= elevator1s.y-radius && p.location.y <= elevator1s.y-radius+30 && p.speed.y > 0) {
-      p.location.y = elevator1s.y-radius;
-      onPlatform = true;
-      p.speed.y = 0;
-    }
-    if (p.location.x > elevator2s.x  - radius+1 && p.location.x < elevator2e.x + radius-1 && p.location.y >= elevator2s.y-radius && p.location.y <= elevator2s.y-radius+30 && p.speed.y > 0) {
-      p.location.y = elevator2s.y-radius;
-      onPlatform = true;
-      p.speed.y = 0;
-    }
 
     // elevator movement
     if (elevator1s.y > 630 && el1speed > 0) el1speed *= -1;

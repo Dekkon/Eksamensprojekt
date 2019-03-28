@@ -28,6 +28,7 @@ class Player {
     rotate(angle);
     ellipse(0, 0, radius*2, radius*2);
     stroke(255);
+    strokeWeight(2);
     line(0, 0, 0, radius);
 
     popMatrix();
