@@ -17,7 +17,9 @@ class MathQuestions {
   int[] guesscheck = {0, 0};
 
 
-  int kl1tal[] = {int(random(2, 9)), int(random(2, 9)), int(random(10, 25)), int(random(10, 30))};
+  int kl1lvl1tal[] = {int(random(2, 9)), int(random(2, 9)), int(random(10, 25)), int(random(10, 30))};
+  
+  int kl1lvl3tal[] = {int(random(2, 3)), int(random(2, 9)), int(random(40, 70)), int(random(1,6))};
 
   int kl5lvl1tal[] = {int(random(3, 9)), int(random(10, 19))};
   int kl5lvl2tal[] = {int(random(111, 999)), int(random(111, 999)), int(random(2, 7)), int(random(5, 9)), int(random(2, 9))};
@@ -96,7 +98,7 @@ class MathQuestions {
 
     // 1. klasse
     if (klassetrin == 1) {
-      answer[0] = kl1tal[0] + kl1tal[1];
+      answer[0] = kl1lvl1tal[0] + kl1lvl1tal[1];
     }
     // 5. klasse
     if (klassetrin == 5) {
@@ -122,7 +124,7 @@ class MathQuestions {
     klassetrin = klasse;
     // 1. klasse
     if (klassetrin == 1) {
-      answer[0] = kl1tal[0] - kl1tal[1];
+      answer[0] = kl1lvl1tal[0] - kl1lvl1tal[1];
     }
     // 5. klasse
     if (klassetrin == 5) {
@@ -145,7 +147,7 @@ class MathQuestions {
 
     /// question 2 
     if (klassetrin == 1) {
-      answer[1] = kl1tal[2] + kl1tal[3];
+      answer[1] = kl1lvl1tal[2] + kl1lvl1tal[3];
     }
     // 5. klasse
     if (klassetrin == 5) {
@@ -165,4 +167,57 @@ class MathQuestions {
       guess2 = guess2.substring(0, 0);
     }
   }
+  
+  void level3Question(int klasse) {
+    
+    klassetrin = klasse;
+    
+    // 1. klasse
+    if (klassetrin == 1) {
+      answer[0] = kl1lvl3tal[0] * kl1lvl3tal[1];
+    }
+    // 5. klasse
+    if (klassetrin == 5) {
+      answer[0] = kl5lvl2tal[0] + kl5lvl2tal[1];
+    }
+    // 9. klasse
+    if (klassetrin == 9) {
+      answer[0] = kl9lvl2tal[0]*60 + kl9lvl2tal[1];
+    }
+
+    if (testguess[0] == -234) guesscheck[0] = 0;
+    if (testguess[0] != -234 && testguess[0] == answer[0]) {
+      guesscheck[0] = 1;
+    }
+    if (testguess[0] != -234 && testguess[0] != answer[0]) {
+      guesscheck[0] = 2;
+      guess1 = guess1.substring(0, 0);
+    }
+
+
+    /// question 2 
+    if (klassetrin == 1) {
+      answer[1] = kl1lvl3tal[2] + kl1lvl3tal[3];
+    }
+    // 5. klasse
+    if (klassetrin == 5) {
+      answer[1] = kl5lvl2tal[2] + kl5lvl2tal[3] * kl5lvl2tal[4];
+    }
+    // 9. klasse
+    if (klassetrin == 9) {
+      answer[1] = int(sqrt(kl9lvl2tal[2])) + int(sqrt(kl9lvl2tal[3])) ;
+    }
+
+    if (testguess[1] == -234) guesscheck[1] = 0;
+    if (testguess[1] != -234 && testguess[1] == answer[1]) {
+      guesscheck[1] = 1;
+    }
+    if (testguess[1] != -234 && testguess[1] != answer[1]) {
+      guesscheck[1] = 2;
+      guess2 = guess2.substring(0, 0);
+    }
+    
+  }
+  
+  
 }

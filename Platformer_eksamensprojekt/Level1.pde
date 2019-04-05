@@ -27,9 +27,10 @@ class Level1 extends Level {
     collision();
     mq.display();
 
-    stage();
+    
     collectkey();
     gates();
+    
     if (p.location.x > 0 && p.location.x < 150 && p.location.y < 400) mq.typeanswer(1);
     mathQuestion();
     mq.level1Question(klassetrin);
@@ -37,6 +38,8 @@ class Level1 extends Level {
     respawn();
     playermovement();
     p.display();
+    
+    stage();
     
     pauseGame();
     if (pause) inGameMenu();
@@ -59,7 +62,7 @@ class Level1 extends Level {
     textSize(20);
     textAlign(CENTER);
     fill(255);
-    if (klassetrin == 1) text(mq.kl1tal[0] + " + " + mq.kl1tal[1], 100, 50);
+    if (klassetrin == 1) text(mq.kl1lvl1tal[0] + " + " + mq.kl1lvl1tal[1], 100, 50);
     if (klassetrin == 5) text(mq.kl5lvl1tal[0] + " * " + mq.kl5lvl1tal[1], 100, 50);
     if (klassetrin == 9) text(mq.kl9lvl1tal[0] + "(x + " + mq.kl9lvl1tal[1] + ") = " + mq.kl9lvl1tal[2], 100, 50);
 
@@ -120,47 +123,34 @@ class Level1 extends Level {
     }
   }
   void lines() {
-    floor1s = new PVector(0, 600); //floor 1 starting point
-    floor1e = new PVector(300, 600); // floor 1 ending point
-
-    floor2s = new PVector(300, 500);
-    floor2e = new PVector(600, 500);
-
-    floor3s = new PVector(0, 400);
-    floor3e = new PVector(150, 400);
-
-    floor4s = new PVector(600, 550);
-    floor4e = new PVector(750, 550);
-
-    floor5s = new PVector(200, 440);
-    floor5e = new PVector(230, 440);
-
-    floor6s = new PVector(750, 500);
-    floor6e = new PVector(850, 500);
+    
+    //floors
+    lines.add(new Line(0, 600, 300, 600, "floor"));
+    lines.add(new Line(300, 500, 600, 500, "floor"));
+    lines.add(new Line(0, 400, 150, 400, "floor"));
+    lines.add(new Line(600, 550, 750, 550, "floor"));
+    lines.add(new Line(200, 440, 230, 440, "floor"));
+    lines.add(new Line(750, 500, 850, 500, "floor"));
+    
+    //roofs 
+    lines.add(new Line(0, 430, 150, 430, "roof"));
+    
+    //walls to the left of the player
+    lines.add(new Line(0, height, 0, 0, "leftwall"));
+    lines.add(new Line(150, 430, 150, 400, "leftwall"));
+    
+    //walls to the right for the player
+    lines.add(new Line(300, 600, 300, 500, "rightwall"));
+    lines.add(new Line(600, 350, 600, 300, "rightwall"));
+    lines.add(new Line(1279, 520, 1279, 0, "rightwall"));
 
     tline1s = new PVector(850, 500);
     tline1e = new PVector(1280, 622.856);
     tangle1 = 0.2857;
 
-    roof1s = new PVector(0, 430); // roof 1 starting point
-    roof1e = new PVector(150, 430); // roof 1 ending point
-
-    rwall1s = new PVector(300, 600); // right wall 1 starting point
-    rwall1e = new PVector(300, 500); // right wall 1 ending point
-
-    rwall2s = new PVector(600, 350);
-    rwall2e = new PVector(600, 300);
-
-    rwall3s = new PVector(1279, 520);
-    rwall3e = new PVector(1279, 0);
-
     gate1s = new PVector(600, 500);
     gate1e = new PVector(600, 350);
 
-    lwall1s = new PVector(0, height); // left wall 1 starting point
-    lwall1e = new PVector(0, 0);      // left wall 1 ending point
-
-    lwall2s = new PVector(150, 430);
-    lwall2e = new PVector(150, 400);
+    
   }
 }

@@ -13,7 +13,7 @@ class Level2 extends Level {
 
   void run() {
 
-    
+
 
     movingFloors();
 
@@ -33,7 +33,7 @@ class Level2 extends Level {
 
     pauseGame();
     if (pause) inGameMenu();
-    
+
     if (p.location.x > width) levelisComplete = true;
     if (levelisComplete)levelComplete();
   }
@@ -49,13 +49,13 @@ class Level2 extends Level {
     textSize(20);
     textAlign(CENTER);
     fill(255);
-    if (klassetrin == 1) text(mq.kl1tal[0] + " - " + mq.kl1tal[1], 1210, 390);
+    if (klassetrin == 1) text(mq.kl1lvl1tal[0] + " - " + mq.kl1lvl1tal[1], 1210, 390);
     if (klassetrin == 5) text(mq.kl5lvl2tal[0] + " + " + mq.kl5lvl2tal[1], 1210, 390);
     if (klassetrin == 9) text(mq.kl9lvl2tal[0] + "min, " + mq.kl9lvl2tal[1] + " sek.", 1210, 390);
 
     if (mq.guesscheck[0] == 1) fill(0, 255, 0);
     if (klassetrin == 1 || klassetrin == 5) text("= " +mq.guess1, 1210, 435);
-    if (klassetrin == 9) text("= " + mq.guess1 + "  sek." , 1210, 435);
+    if (klassetrin == 9) text("= " + mq.guess1 + "  sek.", 1210, 435);
 
     mq.redbox--;
     if (mq.guesscheck[0] == 2) {
@@ -80,7 +80,7 @@ class Level2 extends Level {
     textSize(20);
     textAlign(CENTER);
     fill(255);
-    if (klassetrin == 1) text(mq.kl1tal[2] + " + " + mq.kl1tal[3], 72, 230);
+    if (klassetrin == 1) text(mq.kl1lvl1tal[2] + " + " + mq.kl1lvl1tal[3], 72, 230);
     if (klassetrin == 5) text(mq.kl5lvl2tal[2] + " + " + mq.kl5lvl2tal[3] + " * " + mq.kl5lvl2tal[4], 72, 230);
     if (klassetrin == 9) text("√" + mq.kl9lvl2tal[2] + " + √" + mq.kl9lvl2tal[3], 72, 230);
 
@@ -105,102 +105,86 @@ class Level2 extends Level {
   }
 
   void movingFloors() {
-    if (mvfloor1s.x < 260 && mvf1speed < 0 ) {
-      mvf1speed *= -1;
-    } 
-    if (mvfloor1s.x > 380 && mvf1speed > 0) {
-      mvf1speed *= -1;
-    } 
 
-    if (mvfloor2s.x < 560 && mvf2speed < 0 ) {
-      mvf2speed *= -1;
-    } 
-    if (mvfloor2s.x > 680 && mvf2speed > 0) {
-      mvf2speed *= -1;
+    for (Line l : lines) {
+      if (l.wallType == "movingfloor") {
+
+        if (l.x1 > 250 && l.x1 < 390) {
+          if (l.x1 < 260 && l.mfspeed < 0) l.mfspeed *= -1;
+          if (l.x1 > 380 && l.mfspeed > 0) l.mfspeed *= -1;
+        }
+        if (l.x1 > 550 && l.x1 < 690) {
+          if (l.x1 < 560 && l.mfspeed < 0) l.mfspeed *= -1;
+          if (l.x1 > 680 && l.mfspeed > 0) l.mfspeed *= -1;
+        }
+
+        l.x1 += l.mfspeed;
+        l.x2 += l.mfspeed;
+      }
     }
   }
 
+
   void elevator() {
 
-    // elevator movement
-    if (elevator1s.y > 630 && el1speed > 0) el1speed *= -1;
-    if (elevator1s.y < 450 && el1speed < 0) el1speed *= -1;
+    for (Line l : lines) {
+      if (l.wallType == "elevator") {
 
-    if (elevator2s.y > 450 && el2speed > 0) el2speed *= -1;
-    if (elevator2s.y < 270 && el2speed < 0) el2speed *= -1;
+        if (l.x1 == 1100) {
+          if (l.y1 > 630 && l.elespeed > 0) l.elespeed *= -1;
+          if (l.y1 < 450 && l.elespeed < 0) l.elespeed *= -1;
 
-    if (mq.guesscheck[0] == 1) {
-      elevator1s.y += el1speed;
-      elevator1e.y += el1speed;
-    }
-    if (mq.guesscheck[1] == 1) {
-      elevator2s.y += el2speed;
-      elevator2e.y += el2speed;
+          if (mq.guesscheck[0] == 1) {
+            l.y1 += l.elespeed;
+            l.y2 += l.elespeed;
+          }
+        }
+        if (l.x1 == 0) {
+          if (l.y1 > 450 && l.elespeed > 0) l.elespeed *= -1;
+          if (l.y1 < 270 && l.elespeed < 0) l.elespeed *= -1;
+          
+          if (mq.guesscheck[1] == 1) {
+            l.y1 += l.elespeed;
+            l.y2 += l.elespeed;
+          }
+        }
+      }
     }
   }
 
   void lines() {
-    floor1s = new PVector(0, 630); //floor 1 starting point
-    floor1e = new PVector(200, 630); // floor 1 ending point
 
-    floor2s = new PVector(900, 630);
-    floor2e = new PVector(1100, 630);
+    //floors
+    lines.add(new Line(0, 630, 200, 630, "floor"));
+    lines.add(new Line(900, 630, 1100, 630, "floor"));
+    lines.add(new Line(900, 450, 1100, 450, "floor"));
+    lines.add(new Line(600, 450, 800, 450, "floor"));
+    lines.add(new Line(300, 450, 500, 450, "floor"));
+    lines.add(new Line(200, 450, 250, 450, "floor"));
+    lines.add(new Line(200, 270, width, 270, "floor"));
 
-    floor3s = new PVector(900, 450);
-    floor3e = new PVector(1100, 450);
+    //walls to the left of the player
+    lines.add(new Line(0, height, 0, 0, "leftwall"));
+    lines.add(new Line(1100, 560, 1100, 450, "leftwall"));
+    lines.add(new Line(200, 380, 200, 270, "leftwall"));
 
-    floor4s = new PVector(600, 450);
-    floor4e = new PVector(800, 450);
+    //walls to the right of the player
+    lines.add(new Line(1100, 560, 1100, 450, "rightwall"));
+    lines.add(new Line(width, height, width, 270, "rightwall"));
+    lines.add(new Line(200, 380, 200, 270, "rightwall"));
 
-    floor5s = new PVector(300, 450);
-    floor5e = new PVector(500, 450);
+    //moving floors
+    lines.add(new Line(380, 600, 480, 600, "movingfloor"));
+    lines.add(new Line(560, 600, 660, 600, "movingfloor"));
 
-    floor6s = new PVector(200, 450);
-    floor6e = new PVector(250, 450);
+    //elevators
+    lines.add(new Line(1100, 630, width, 630, "elevator"));
+    lines.add(new Line(0, 450, 200, 450, "elevator"));
 
-    floor7s = new PVector(200, 270);
-    floor7e = new PVector(width, 270);
-
-    elevator1s = new PVector(1100, 630);
-    elevator1e = new PVector(width, 630);
-    el1speed = -1;
-
-    elevator2s = new PVector(0, 450);
-    elevator2e = new PVector(200, 450);
-    el2speed = -1;
-
-    mvfloor1s = new PVector(380, 600); // moving floor 1 starting point
-    mvfloor1e = new PVector(480, 600); // moving floor 1 ending point
-    mvf1speed = 2;                     // moving floor 1 speed
-
-    mvfloor2s = new PVector(560, 600);
-    mvfloor2e = new PVector(660, 600);
-    mvf2speed = 2;
 
 
     tline1s = new PVector(0, 0);
     tline1e = new PVector(0, 0);
     tangle1 = 0.2857;
-
-    roof1s = new PVector(0, 0); // roof 1 starting point
-    roof1e = new PVector(0, 0); // roof 1 ending point
-
-    rwall1s = new PVector(1100, 560); // right wall 1 starting point
-    rwall1e = new PVector(1100, 450); // right wall 1 ending point
-
-    rwall2s = new PVector(width, height);
-    rwall2e = new PVector(width, 270);
-
-    rwall3s = new PVector(200, 380);
-    rwall3e = new PVector(200, 270);
-
-    lwall1s = new PVector(0, height); // left wall 1 starting point
-    lwall1e = new PVector(0, 0);      // left wall 1 ending point
-
-    lwall2s = new PVector(1100, 560);
-    lwall2e = new PVector(1100, 450);
-
-    lwall3s = new PVector(200, 380);
-    lwall3e = new PVector(200, 270);
   }
 }
