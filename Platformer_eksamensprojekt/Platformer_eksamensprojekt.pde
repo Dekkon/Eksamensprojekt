@@ -10,14 +10,14 @@ void setup() {
 
   size(1280, 720);
 
-  g = new Level2();
+  g = new Level3();
 }
 
 
 void draw() {
   background(25);
 
-  println("X: " + mouseX + " Y: " + mouseY); 
+  //println("X: " + mouseX + " Y: " + mouseY); 
   if (g.level == 1) g = new Level1();
   if (g.level == 2) g = new Level2();
   if (g.level == 3) g = new Level3();

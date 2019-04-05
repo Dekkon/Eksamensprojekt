@@ -206,6 +206,7 @@ class Level3 extends Level {
     lines.add(new Line(750, 190, 750, 140, "rightwall"));
     lines.add(new Line(width-1, 600, width-1, 0, "rightwall"));
     lines.add(new Line(800, 500, 800, 350, "rightwall"));
+    lines.add(new Line(250, 500, 250, 350, "rightwall"));
 
     // moving floors
     lines.add(new Line(280, 330, 480, 330, "movingfloor"));

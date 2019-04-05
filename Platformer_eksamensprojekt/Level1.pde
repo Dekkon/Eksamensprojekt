@@ -27,10 +27,10 @@ class Level1 extends Level {
     collision();
     mq.display();
 
-    
+
     collectkey();
     gates();
-    
+
     if (p.location.x > 0 && p.location.x < 150 && p.location.y < 400) mq.typeanswer(1);
     mathQuestion();
     mq.level1Question(klassetrin);
@@ -38,9 +38,9 @@ class Level1 extends Level {
     respawn();
     playermovement();
     p.display();
-    
+
     stage();
-    
+
     pauseGame();
     if (pause) inGameMenu();
 
@@ -50,9 +50,7 @@ class Level1 extends Level {
 
   void mathQuestion() {
 
-    imageMode(CENTER);
-    tint(0, 0, 255);
-    image(keyhole, gate1e.x, gate1e.y);
+
 
     fill(0, 0, 255);
     stroke(0, 0, 255);
@@ -106,24 +104,26 @@ class Level1 extends Level {
 
   void gates() {
 
-    // draw the gate
-    stroke(0, 0, 255);
-    line(gate1s.x, gate1s.y, gate1e.x, gate1e.y);
+    for (Line l : lines) {
+      if (l.wallType == "gate") {
+        imageMode(CENTER);
+        tint(0, 0, 255);
+        image(keyhole, l.x2, l.y2);
 
-    // unit colission with gate
-    if (p.location.x > gate1s.x-radius && p.location.x < gate1s.x-radius+30 && p.location.y > gate1e.y && p.location.y < gate1s.y) p.location.x = gate1s.x - radius;
-
-    // key to gate
-    if (mq.keylocation.x > gate1s.x - 50 && mq.keylocation.x <= gate1s.x && mq.keylocation.y > gate1e.y && mq.keylocation.y < gate1s.y) gateopen = true;
-    if (gateopen && gate1s.y > gate1e.y && mq.keytogate) {
-      gate1s.y -= 2;
-    }
-    if (gateopen) {
-      mq.seekKeyhole(gate1e);
+        // key to gate
+        if (mq.keylocation.x > l.x1 - 50 && mq.keylocation.x <= l.x1 && mq.keylocation.y > l.y2 && mq.keylocation.y < l.y1) gateopen = true;
+        if (gateopen && l.y1 > l.y2 && mq.keytogate) {
+          l.y1 -= 2;
+        }
+        if (gateopen) {
+          PVector keyholelocation = new PVector(l.x2, l.y2);
+          mq.seekKeyhole(keyholelocation);
+        }
+      }
     }
   }
   void lines() {
-    
+
     //floors
     lines.add(new Line(0, 600, 300, 600, "floor"));
     lines.add(new Line(300, 500, 600, 500, "floor"));
@@ -131,26 +131,23 @@ class Level1 extends Level {
     lines.add(new Line(600, 550, 750, 550, "floor"));
     lines.add(new Line(200, 440, 230, 440, "floor"));
     lines.add(new Line(750, 500, 850, 500, "floor"));
-    
+
     //roofs 
     lines.add(new Line(0, 430, 150, 430, "roof"));
-    
+
     //walls to the left of the player
     lines.add(new Line(0, height, 0, 0, "leftwall"));
     lines.add(new Line(150, 430, 150, 400, "leftwall"));
-    
+
     //walls to the right for the player
     lines.add(new Line(300, 600, 300, 500, "rightwall"));
     lines.add(new Line(600, 350, 600, 300, "rightwall"));
     lines.add(new Line(1279, 520, 1279, 0, "rightwall"));
 
-    tline1s = new PVector(850, 500);
-    tline1e = new PVector(1280, 622.856);
-    tangle1 = 0.2857;
+    // tilted line
+    lines.add(new Line(850, 500, 1280, 623, "tline"));
 
-    gate1s = new PVector(600, 500);
-    gate1e = new PVector(600, 350);
-
-    
+    // gate
+    lines.add(new Line(600, 500, 600, 350, "gate"));
   }
 }

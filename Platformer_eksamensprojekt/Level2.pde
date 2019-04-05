@@ -180,11 +180,5 @@ class Level2 extends Level {
     //elevators
     lines.add(new Line(1100, 630, width, 630, "elevator"));
     lines.add(new Line(0, 450, 200, 450, "elevator"));
-
-
-
-    tline1s = new PVector(0, 0);
-    tline1e = new PVector(0, 0);
-    tangle1 = 0.2857;
   }
 }

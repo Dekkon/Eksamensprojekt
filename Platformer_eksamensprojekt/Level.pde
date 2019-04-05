@@ -12,22 +12,9 @@ class Level extends Game {
   boolean levelisComplete = false;
   boolean pause = false;
   boolean dead = false;
-  //int level = 0;
-
-
-
-  PVector tline1s = new PVector(0, 0);
-  PVector tline1e = new PVector(0, 0);
-  float tangle1;
-
-
-  PVector gate1s = new PVector(0, 0);
-  PVector gate1e = new PVector(0, 0);
-
 
 
   float radius = 17.5;
-
   boolean onPlatform = false; //boolean to check whether or not player is currently on a platform
 
   Level() {
@@ -38,23 +25,16 @@ class Level extends Game {
   void stage() {
 
     for (Line l : lines) {
-      fill(255);
+      stroke(0, 255, 0);
+      
+      if(currentlevel == 1 && l.wallType == "gate") stroke(0, 0, 255);
+      if(currentlevel == 2 && l.wallType == "elevator") stroke(0, 0, 255);
+      if(currentlevel == 3 && l.wallType == "movingfloor") stroke(0, 0, 255);
+      
       line(l.x1, l.y1, l.x2, l.y2);
     }
+    
 
-    // draw the elevator
-    stroke(255);
-    strokeWeight(2);
-    if (currentlevel == 2) stroke(0, 0, 255);
-
-
-
-    stroke(0, 240, 0);
-    strokeWeight(2);
-
-
-
-    line(tline1s.x, tline1s.y, tline1e.x, tline1e.y);
   }
 
 
@@ -63,10 +43,11 @@ class Level extends Game {
 
     for (Line l : lines) {
       // collision with floors
-      if (l.wallType == "floor" || l.wallType == "elevator") {
+      if (l.wallType == "floor" || l.wallType == "elevator" || l.wallType == "movingfloor") {
         if (p.location.x > l.x1 - radius+1 && p.location.x < l.x2 + radius && p.location.y >= l.y1 -radius && p.location.y <= l.y1 -radius+30 && p.speed.y > 0) {
           p.location.y = l.y1-radius;
-          onPlatform = true;
+          onPlatform = true; 
+          if (l.wallType == "movingfloor") p.location.x += l.mfspeed;        
         }
       }
       // collision with roofs
@@ -77,23 +58,16 @@ class Level extends Game {
       // collision with walls to the left of the player
       if (l.wallType == "leftwall" && p.location.x < l.x1 + radius && p.location.x > l.x1 + radius - 30 && p.location.y > l.y2 && p.location.y < l.y1) p.location.x = l.x1 + radius;
       // collision with walls to the right of the player
-      if (l.wallType == "rightwall" && p.location.x > l.x2-radius && p.location.x < l.x1-radius+30 && p.location.y > l.y2 && p.location.y < l.y1) p.location.x = l.x1 - radius;
-
-      // collision with moving floors
-      if (l.wallType == "movingfloor" && p.location.x > l.x1  - radius+1 && p.location.x < l.x2 + radius-1 && p.location.y >= l.y1-radius && p.location.y <= l.y2-radius+30 && p.speed.y > 0) {
-        p.location.y = l.y1-radius;
-        onPlatform = true;
-        p.location.x += l.mfspeed;
+      if (l.wallType == "rightwall" || l.wallType == "gate") { 
+        if (p.location.x > l.x2-radius && p.location.x < l.x1-radius+30 && p.location.y > l.y2 && p.location.y < l.y1) p.location.x = l.x1 - radius;
       }
-    }
 
-
-
-    // tilted lines
-    if (p.location.x > tline1s.x  - radius+1 && p.location.x < tline1e.x + radius-1 && p.location.y >= 500 - radius + (p.location.x-tline1s.x) * tangle1 && p.location.y <= 15 + 500 - radius + (p.location.x-tline1s.x) * tangle1) {
-      p.location.y = 500 - radius + (p.location.x-tline1s.x) * tangle1;
-      onPlatform = true;
-      p.speed.x +=1;
+      // collision with tilted lines
+      if (l.wallType == "tline" && p.location.x > l.x1  - radius+1 && p.location.x < l.x2 + radius-1 && p.location.y >= 500 - radius + (p.location.x-l.x1) * l.angle && p.location.y <= 15 + 500 - radius + (p.location.x-l.x1) * l.angle) {
+        p.location.y = 500 - radius + (p.location.x-l.x1) * l.angle;
+        onPlatform = true;
+        p.speed.x +=1;
+      }
     }
 
 
