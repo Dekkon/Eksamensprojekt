@@ -1,6 +1,6 @@
 class Level1 extends Level {
 
-  MathQuestions mq;
+  
   boolean gothekey = false;
   boolean gateopen = false;
   int numberofwrongguesses;
@@ -11,7 +11,7 @@ class Level1 extends Level {
   Level1() {
     currentlevel = 1;
     spawnlocation = new PVector(30, 600);
-    mq = new MathQuestions();
+    
     p = new Player(spawnlocation.x, spawnlocation.y, radius);
     mq.keylocation = new PVector(40, 80);
 
@@ -23,30 +23,30 @@ class Level1 extends Level {
 
 
   void run() { 
-    p.update();
+    
     collision();
-    mq.display();
-
-
-    collectkey();
+    stage();
     gates();
-
+    
+    mq.display();
+    collectkey();    
     if (p.location.x > 0 && p.location.x < 150 && p.location.y < 400) mq.typeanswer(1);
     mathQuestion();
     mq.level1Question(klassetrin);
-
-    respawn();
+        
     playermovement();
+    p.update();
     p.display();
-
-    stage();
-
+    
+    respawn();
+    
     pauseGame();
     if (pause) inGameMenu();
 
     if (p.location.x > width) levelisComplete = true;
     if (levelisComplete)levelComplete();
   }
+
 
   void mathQuestion() {
 

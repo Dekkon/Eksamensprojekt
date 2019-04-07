@@ -1,6 +1,7 @@
 class Level extends Game {
   Player p;
   PVector spawnlocation;
+  MathQuestions mq;
 
   ArrayList<Line> lines = new ArrayList<Line>();
 
@@ -18,9 +19,12 @@ class Level extends Game {
   boolean onPlatform = false; //boolean to check whether or not player is currently on a platform
 
   Level() {
+    mq = new MathQuestions();
     pausebutton = loadImage("pauseButton.png");
     startbutton = loadImage("startButton.png");
   }
+  
+  
 
   void stage() {
 
@@ -36,8 +40,6 @@ class Level extends Game {
     
 
   }
-
-
 
   void collision() {
 
@@ -69,7 +71,6 @@ class Level extends Game {
         p.speed.x +=1;
       }
     }
-
 
     if (onPlatform) p.speed.y = 0;
   }

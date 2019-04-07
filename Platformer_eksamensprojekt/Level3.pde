@@ -1,5 +1,4 @@
 class Level3 extends Level {
-  MathQuestions mq;
 
   ArrayList<Shot> shots = new ArrayList<Shot>();
   PImage stickman, spikes;
@@ -8,7 +7,6 @@ class Level3 extends Level {
   Level3() { 
     currentlevel = 3;
     spawnlocation = new PVector(30, 120);
-    mq = new MathQuestions();
     p = new Player(spawnlocation.x, spawnlocation.y, radius);
 
     stickman = loadImage("Stickman.png");
@@ -20,26 +18,25 @@ class Level3 extends Level {
   }
 
   void run() {
-
     if (mousePressed) p.location = new PVector(mouseX, mouseY);
 
-    p.update();
-    stage();
-    respawn();
-    playermovement();
     collision();
+    stage();
+    elevator();
+    movingFloors();
+    enemy();
+    pit();
+
     mathQuestion();
     if (p.location.x < 200) mq.typeanswer(1);
     if (p.location.x > 800 && p.location.x < 1050 && p.location.y > 200 && p.location.y < 400) mq.typeanswer(2);
     mq.level3Question(klassetrin);
-    elevator();
-    movingFloors();
-
-    enemy();
-    pit();
-
+    
+    playermovement();
+    p.update();
     p.display();
 
+    respawn();
 
     pauseGame();
     if (pause) inGameMenu();
@@ -83,6 +80,7 @@ class Level3 extends Level {
     //draw spikes
     imageMode(CORNER);
     for (int i = 0; i < 7; i++) {
+      noTint();
       image(spikes, 250 + i * 75, 460);
     }
     // image(spikes, 330, 460);
@@ -213,6 +211,5 @@ class Level3 extends Level {
 
     // elevatores
     lines.add(new Line(1050, 140, width, 140, "elevator"));
-
   }
 }

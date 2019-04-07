@@ -1,11 +1,9 @@
 class Level2 extends Level {
-  MathQuestions mq;
 
 
   Level2() {
     currentlevel = 2;
     spawnlocation = new PVector(30, 600);
-    mq = new MathQuestions();
     p = new Player(spawnlocation.x, spawnlocation.y, radius);
 
     lines();
@@ -13,30 +11,29 @@ class Level2 extends Level {
 
   void run() {
 
-
-
-    movingFloors();
-
-    p.update();
+    collision();
     stage();
     elevator();
-    respawn();
-    playermovement();
-    collision();
+    movingFloors();
 
     mathQuestion();
     if (p.location.x > 1100) mq.typeanswer(1);
     if (p.location.x < 200 && p.location.y < 550) mq.typeanswer(2);
     mq.level2Question(klassetrin);
 
+    playermovement();
+    p.update();
     p.display();
+
+    respawn();
 
     pauseGame();
     if (pause) inGameMenu();
 
     if (p.location.x > width) levelisComplete = true;
     if (levelisComplete)levelComplete();
-  }
+  } 
+
 
   void mathQuestion() {
     fill(0, 0, 255);
@@ -142,7 +139,7 @@ class Level2 extends Level {
         if (l.x1 == 0) {
           if (l.y1 > 450 && l.elespeed > 0) l.elespeed *= -1;
           if (l.y1 < 270 && l.elespeed < 0) l.elespeed *= -1;
-          
+
           if (mq.guesscheck[1] == 1) {
             l.y1 += l.elespeed;
             l.y2 += l.elespeed;
@@ -170,8 +167,9 @@ class Level2 extends Level {
 
     //walls to the right of the player
     lines.add(new Line(1100, 560, 1100, 450, "rightwall"));
-    lines.add(new Line(width, height, width, 270, "rightwall"));
+    lines.add(new Line(width-1, height, width-1, 270, "rightwall"));
     lines.add(new Line(200, 380, 200, 270, "rightwall"));
+    lines.add(new Line(width-1, 180, width-1, 0, "rightwall"));
 
     //moving floors
     lines.add(new Line(380, 600, 480, 600, "movingfloor"));
