@@ -27,13 +27,19 @@ class Level extends Game {
   
 
   void stage() {
-
+    
+    strokeWeight(3);
     for (Line l : lines) {
       stroke(0, 255, 0);
       
       if(currentlevel == 1 && l.wallType == "gate") stroke(0, 0, 255);
       if(currentlevel == 2 && l.wallType == "elevator") stroke(0, 0, 255);
       if(currentlevel == 3 && l.wallType == "movingfloor") stroke(0, 0, 255);
+      
+      if(l.wallType == "activatefloor") {
+        if (mq.guesscheck[1] != 1) stroke(0, 0, 255, 50);
+        if (mq.guesscheck[1] == 1) stroke(0, 0, 255);
+      }
       
       line(l.x1, l.y1, l.x2, l.y2);
     }
@@ -45,7 +51,7 @@ class Level extends Game {
 
     for (Line l : lines) {
       // collision with floors
-      if (l.wallType == "floor" || l.wallType == "elevator" || l.wallType == "movingfloor") {
+      if (l.wallType == "floor" || l.wallType == "elevator" || l.wallType == "movingfloor" || l.wallType == "activatefloor" && mq.guesscheck[1] == 1) {
         if (p.location.x > l.x1 - radius+1 && p.location.x < l.x2 + radius && p.location.y >= l.y1 -radius && p.location.y <= l.y1 -radius+30 && p.speed.y > 0) {
           p.location.y = l.y1-radius;
           onPlatform = true; 

@@ -19,10 +19,11 @@ class Level2 extends Level {
     mathQuestion();
     if (p.location.x > 1100) mq.typeanswer(1);
     if (p.location.x < 200 && p.location.y < 550) mq.typeanswer(2);
-    mq.level2Question(klassetrin);
+    mq.questions(klassetrin, currentlevel);
 
     playermovement();
-    p.update();
+    if (!pause) p.update();
+    collision();
     p.display();
 
     respawn();
@@ -36,6 +37,14 @@ class Level2 extends Level {
 
 
   void mathQuestion() {
+    
+    noStroke();
+    fill(0, 0, 255, 120);
+    rect(1102, 520, 176, 110);
+    
+    rect(2, 340, 196, 110);
+    
+    
     fill(0, 0, 255);
     stroke(0, 0, 255);
     rectMode(CORNER);

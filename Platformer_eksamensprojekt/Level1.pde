@@ -24,7 +24,7 @@ class Level1 extends Level {
 
   void run() { 
     
-    collision();
+    
     stage();
     gates();
     
@@ -32,10 +32,11 @@ class Level1 extends Level {
     collectkey();    
     if (p.location.x > 0 && p.location.x < 150 && p.location.y < 400) mq.typeanswer(1);
     mathQuestion();
-    mq.level1Question(klassetrin);
+    mq.questions(klassetrin, currentlevel);
         
     playermovement();
-    p.update();
+    if (!pause) p.update();
+    collision();
     p.display();
     
     respawn();
@@ -50,7 +51,9 @@ class Level1 extends Level {
 
   void mathQuestion() {
 
-
+    noStroke();
+    fill(0, 0, 255, 120);
+    rect(2, 280, 148, 120);
 
     fill(0, 0, 255);
     stroke(0, 0, 255);
