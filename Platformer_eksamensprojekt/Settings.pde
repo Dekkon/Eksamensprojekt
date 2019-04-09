@@ -1,7 +1,11 @@
 class Settings extends Menu {
+  Button[] b = new Button[2];
 
+  color buttoncolor;
 
   Settings() {
+    b[0] = new Button(1100, 100, 300, 90, "Klasse: " + klassetrin);
+    b[1] = new Button(180, 100, 240, 90, "Menu");
   }
 
   void run() {
@@ -14,32 +18,25 @@ class Settings extends Menu {
 
   void buttons() {
     textSize(60);
-    rectMode(CENTER);
-    textAlign(CENTER, CENTER);
 
-    // vælg klasse button
-    fill(150);
-    if (mouseX > 920 && mouseX < 1280 && mouseY < 145 && mouseY > 55) fill(150, 150);
-    rect(1100, 100, 300, 90);
-    fill(255);
-    text("klasse: " + klassetrin, 1100, 95);
-    if (mousePressed && mouseX > 920 && mouseX < 1280 && mouseY < 145 && mouseY > 55 && wait < 0) {
-      if (klassetrin == 1)  klassetrin = 5;
-      else if (klassetrin == 5) klassetrin = 9;
-      else if (klassetrin == 9) klassetrin = 1;
+    for (int i = 0; i < b.length; i++) {
+      if (b[i].overbutton()) {
+        buttoncolor = color(150, 150);
+        if (mousePressed) {
+          if (i == 0 && wait < 0) {
+            if (klassetrin == 1)  klassetrin = 5;
+            else if (klassetrin == 5) klassetrin = 9;
+            else if (klassetrin == 9) klassetrin = 1;
 
-      wait = 15;
+            b[i].buttontext = "Klasse: " + klassetrin;
+            wait = 15;
+          }
+          if (i == 1) menu = 1;
+        }
+      } else {
+        buttoncolor = color(150, 200);
+      }
+      b[i].drawbutton(buttoncolor);
     }
-
-
-    //return to menu button
-
-
-    fill(150);
-    if (mouseX > 60 && mouseX < 300 && mouseY < 145 && mouseY > 55) fill(150, 150);
-    rect(180, 100, 240, 90);
-    fill(255);
-    text("Menu", 180, 95);
-    if (mousePressed && mouseX > 60 && mouseX < 300 && mouseY < 145 && mouseY > 55) menu = 1;
   }
 }

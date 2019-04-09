@@ -100,16 +100,17 @@
     //question 1
     fill(0, 0, 255);
     stroke(0, 0, 255);
-    rect(100, 0, 140, 50);
+    rect(80, 0, 180, 50);
 
     fill(255);
     if (klassetrin == 1) text(mq.kl1lvl3tal[0] + " * " + mq.kl1lvl3tal[1], 170, 30);
-    if (klassetrin == 5) text(mq.kl5lvl2tal[0] + " + " + mq.kl5lvl2tal[1], 170, 30);
-    if (klassetrin == 9) text(mq.kl9lvl2tal[0] + "min, " + mq.kl9lvl2tal[1] + " sek.", 170, 30);
+    if (klassetrin == 5) text(mq.kl5lvl3tal[0] + " * x = " + mq.kl5lvl3tal[1], 170, 30);
+    if (klassetrin == 9) text(mq.kl9lvl3tal[0] + "(x + " + mq.kl9lvl3tal[1] + ") = " + mq.kl9lvl3tal[2] + "(" + mq.kl9lvl3tal[3] + " + x)", 170, 30);
 
     if (mq.guesscheck[0] == 1) fill(0, 255, 0);
-    if (klassetrin == 1 || klassetrin == 5) text("= " +mq.guess1, 170, 75);
-    if (klassetrin == 9) text("= " + mq.guess1 + "  sek.", 170, 75);
+    if (klassetrin == 1) text("= " + mq.guess1, 170, 75);
+    if (klassetrin == 5) text("x = " + mq.guess1, 170, 75);
+    if (klassetrin == 9) text("x = " + mq.guess1, 170, 75);
 
     mq.redbox--;
     if (mq.guesscheck[0] == 2) {
@@ -134,12 +135,13 @@
 
     fill(255);
     if (klassetrin == 1) text(mq.kl1lvl3tal[2] + " + " + mq.kl1lvl3tal[3], 830, 220);
-    if (klassetrin == 5) text(mq.kl5lvl2tal[0] + " + " + mq.kl5lvl2tal[1], 830, 220);
-    if (klassetrin == 9) text(mq.kl9lvl2tal[0] + "min, " + mq.kl9lvl2tal[1] + " sek.", 830, 220);
+    if (klassetrin == 5) text(mq.kl5lvl3tal[2] + "x = " + mq.kl5lvl3tal[3], 830, 220);
+    if (klassetrin == 9) text("√" + mq.kl9lvl3tal[4] + " - √" + mq.kl9lvl3tal[5], 830, 220);
 
     if (mq.guesscheck[1] == 1) fill(0, 255, 0);
-    if (klassetrin == 1 || klassetrin == 5) text("= " +mq.guess2, 830, 265);
-    if (klassetrin == 9) text("= " + mq.guess2 + "  sek.", 830, 265);
+    if (klassetrin == 1) text("= " + mq.guess2, 830, 265);
+    if (klassetrin == 5) text("x = " + mq.guess2, 830, 265);
+    if (klassetrin == 9) text("= " + mq.guess2, 830, 265);
 
     mq.redbox--;
     if (mq.guesscheck[1] == 2) {

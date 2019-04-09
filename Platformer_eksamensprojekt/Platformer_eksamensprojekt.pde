@@ -1,7 +1,7 @@
 
 Game g;
-int levelsCompleted;
-int klassetrin = 1;
+int levelsCompleted = 0;
+int klassetrin = 5;
 
 
 boolean keys[] = new boolean [4];
@@ -10,7 +10,7 @@ void setup() {
 
   size(1280, 720);
 
-  g = new Level1();
+  g = new Level4();
 }
 
 

@@ -1,7 +1,16 @@
 class LevelSelect extends Menu {
+  Button[] b = new Button[5];
+
+  color buttoncolor;
 
   LevelSelect() {
     menu = 0;
+
+    b[0] = new Button(1100, 100, 240, 90, "Menu");
+    b[1] = new Button(140, 120, 100, 100, "1");
+    b[2] = new Button(320, 120, 100, 100, "2");
+    b[3] = new Button(500, 120, 100, 100, "3");
+    b[4] = new Button(680, 120, 100, 100, "4");
   }
 
   void run() {
@@ -10,51 +19,26 @@ class LevelSelect extends Menu {
   }
 
   void buttons() {
-    
-    rectMode(CORNER);
     textSize(60);
     noStroke();
-    
-    // level 1 button
-    fill(0, 255, 0, 160);
-    if (mouseX > 90 && mouseX < 190 && mouseY < 170 && mouseY > 70) fill(0, 210, 0, 110);
-    rect(90, 70, 100, 100);
-    fill(255);
-    text("1", 140, 120); 
-    if (mousePressed && mouseX > 90 && mouseX < 190 && mouseY < 170 && mouseY > 70) level = 1;
 
-    // level 2 button
-    if (levelsCompleted >= 1) fill(0, 255, 0, 160);
-    if (levelsCompleted < 1) fill(255, 0, 0, 160);
-    if (levelsCompleted >= 1 && mouseX > 280 && mouseX < 380 && mouseY < 170 && mouseY > 70) fill(0, 210, 0, 110);
-    rect(280, 70, 100, 100);
-    fill(255);
-    text("2", 330, 120); 
-    if (levelsCompleted >= 1 && mousePressed && mouseX > 280 && mouseX < 380 && mouseY < 170 && mouseY > 70) level = 2;
-    
-    
-    // level 3 button
-    if (levelsCompleted >= 2) fill(0, 255, 0, 160);
-    if (levelsCompleted < 2) fill(255, 0, 0, 160);
-    if (levelsCompleted >= 1 && mouseX > 470 && mouseX < 570 && mouseY < 170 && mouseY > 70) fill(0, 210, 0, 110);
-    rect(479, 70, 100, 100);
-    fill(255);
-    text("3", 530, 120); 
-    if (levelsCompleted >= 1 && mousePressed && mouseX > 470 && mouseX < 570 && mouseY < 170 && mouseY > 70) level = 2;
-    
-    
-    
-    //return to menu button
-    rectMode(CENTER);
-    textAlign(CENTER, CENTER);
-    
-    fill(150);
-    if (mouseX > 980 && mouseX < 1220 && mouseY < 145 && mouseY > 55) fill(150, 150);
-    rect(1100, 100, 240, 90);
-    fill(255);
-    text("Menu", 1100, 95);
-    if (mousePressed && mouseX > 980 && mouseX < 1220 && mouseY < 145 && mouseY > 55) menu = 1;
-    
-    
+    for (int i = 0; i < b.length; i++) {
+
+      if (i == 0)buttoncolor = color(150, 200);
+      if (i > 0 && i-1 <= levelsCompleted) buttoncolor = color(0, 255, 0, 160);
+      if (i-1 > levelsCompleted) buttoncolor = color(255, 0, 0, 160);
+
+      if (b[i].overbutton()) {
+        if (i == 0) buttoncolor = color(150, 150);
+        if (i > 0 && i-1 <= levelsCompleted) buttoncolor = color(0, 255, 0, 110);
+
+        if (mousePressed) {
+          if (i == 0) menu = 1;
+          if (i > 0 && i-1 <= levelsCompleted) level = i;
+        }
+      } 
+
+      b[i].drawbutton(buttoncolor);
+    }
   }
 }

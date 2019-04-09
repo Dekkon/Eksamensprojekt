@@ -14,7 +14,6 @@ class Level4 extends Level {
   }
 
   void run() {
-    if (mousePressed) p.location = new PVector(mouseX, mouseY);
     stage();
     boxdrop();
     elevator();
@@ -57,12 +56,12 @@ class Level4 extends Level {
 
     fill(255);
     if (klassetrin == 1) text(mq.kl1lvl4tal[0] + " + " + mq.kl1lvl4tal[1] + " + " + mq.kl1lvl4tal[2], 370, 430);
-    if (klassetrin == 5) text(mq.kl5lvl2tal[0] + " + " + mq.kl5lvl2tal[1], 370, 430);
-    if (klassetrin == 9) text(mq.kl9lvl2tal[0] + "min, " + mq.kl9lvl2tal[1] + " sek.", 370, 430);
+    if (klassetrin == 5) text(mq.kl5lvl4tal[0] + " - " + mq.kl5lvl4tal[1], 370, 430);
+    if (klassetrin == 9) text(mq.kl9lvl4tal[0] + " + " + mq.kl9lvl4tal[1], 370, 430);
 
     if (mq.guesscheck[0] == 1) fill(0, 255, 0);
     if (klassetrin == 1 || klassetrin == 5) text("= " +mq.guess1, 370, 475);
-    if (klassetrin == 9) text("= " + mq.guess1 + "  sek.", 370, 475);
+    if (klassetrin == 9) text("= " + mq.guess1, 370, 475);
 
     mq.redbox--;
     if (mq.guesscheck[0] == 2) {
@@ -87,12 +86,12 @@ class Level4 extends Level {
 
     fill(255);
     if (klassetrin == 1) text(mq.kl1lvl4tal[3] + " + " + mq.kl1lvl4tal[4] + " - " + mq.kl1lvl4tal[5], 170, 220);
-    if (klassetrin == 5) text(mq.kl5lvl2tal[0] + " + " + mq.kl5lvl2tal[1], 170, 220);
-    if (klassetrin == 9) text(mq.kl9lvl2tal[1] + "min, " + mq.kl9lvl2tal[1] + " sek.", 170, 220);
+    if (klassetrin == 5) text(mq.kl5lvl4tal[2] + " * " + mq.kl5lvl4tal[3], 170, 220);
+    if (klassetrin == 9) text(mq.kl9lvl4tal[2] + " * " + mq.kl9lvl4tal[3], 170, 220);
 
     if (mq.guesscheck[1] == 1) fill(0, 255, 0);
     if (klassetrin == 1 || klassetrin == 5) text("= " +mq.guess2, 170, 265);
-    if (klassetrin == 9) text("= " + mq.guess2 + "  sek.", 170, 265);
+    if (klassetrin == 9) text("= " + mq.guess2, 170, 265);
 
     mq.redbox--;
     if (mq.guesscheck[1] == 2) {

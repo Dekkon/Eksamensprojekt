@@ -37,7 +37,7 @@ class Level2 extends Level {
 
 
   void mathQuestion() {
-    
+    rectMode(CORNER);
     noStroke();
     fill(0, 0, 255, 120);
     rect(1102, 520, 176, 110);
@@ -47,7 +47,7 @@ class Level2 extends Level {
     
     fill(0, 0, 255);
     stroke(0, 0, 255);
-    rectMode(CORNER);
+    
 
     //question 1
     rect(1140, 360, 140, 50);

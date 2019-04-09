@@ -7,6 +7,7 @@ class Level extends Game {
 
   PImage pausebutton; //pauseknappen billede
   PImage startbutton; //startknappens billede
+  PImage finishline;  //finishline billede
 
   int currentlevel;
 
@@ -18,33 +19,40 @@ class Level extends Game {
   float radius = 17.5;
   boolean onPlatform = false; //boolean to check whether or not player is currently on a platform
 
+  Button[] b = new Button[3];
+  color buttoncolor;
+
   Level() {
     mq = new MathQuestions();
     pausebutton = loadImage("pauseButton.png");
     startbutton = loadImage("startButton.png");
+    finishline = loadImage("finishicon.png");
+    finishline.resize(200, 130);
+
+    b[0] = new Button(width/2, 245, 200, 70, "resumse");
+    b[1] = new Button(width/2, 365, 200, 70, "settings");
+    b[2] = new Button(width/2, 485, 200, 70, "exit");
   }
-  
-  
+
+
 
   void stage() {
-    
+
     strokeWeight(3);
     for (Line l : lines) {
       stroke(0, 255, 0);
-      
-      if(currentlevel == 1 && l.wallType == "gate") stroke(0, 0, 255);
-      if(currentlevel == 2 && l.wallType == "elevator") stroke(0, 0, 255);
-      if(currentlevel == 3 && l.wallType == "movingfloor") stroke(0, 0, 255);
-      
-      if(l.wallType == "activatefloor") {
+
+      if (currentlevel == 1 && l.wallType == "gate") stroke(0, 0, 255);
+      if (currentlevel == 2 && l.wallType == "elevator") stroke(0, 0, 255);
+      if (currentlevel == 3 && l.wallType == "movingfloor") stroke(0, 0, 255);
+
+      if (l.wallType == "activatefloor") {
         if (mq.guesscheck[1] != 1) stroke(0, 0, 255, 50);
         if (mq.guesscheck[1] == 1) stroke(0, 0, 255);
       }
-      
+
       line(l.x1, l.y1, l.x2, l.y2);
     }
-    
-
   }
 
   void collision() {
@@ -55,7 +63,7 @@ class Level extends Game {
         if (p.location.x > l.x1 - radius+1 && p.location.x < l.x2 + radius && p.location.y >= l.y1 -radius && p.location.y <= l.y1 -radius+30 && p.speed.y > 0) {
           p.location.y = l.y1-radius;
           onPlatform = true; 
-          if (l.wallType == "movingfloor") p.location.x += l.mfspeed;        
+          if (l.wallType == "movingfloor") p.location.x += l.mfspeed;
         }
       }
       // collision with roofs
@@ -151,35 +159,26 @@ class Level extends Game {
   }
 
   void inGameMenu() {
-
+    textSize(40);
+    noStroke();
 
     rectMode(CENTER);
     fill(0, 230);
     noStroke();
     rect(width/2, height/2, 300, 380);
 
-    stroke(0);
-    fill(150);
-    if (mouseX > width/2-100 && mouseX < width/2+100 && mouseY < 280 && mouseY > 210) fill(150, 150);
-    rect(width/2, 245, 200, 70);
-    if (mousePressed && mouseX > width/2-100 && mouseX < width/2+100 && mouseY < 280 && mouseY > 210) pause = false;
-
-
-    fill(150);
-    if (mouseX > width/2-100 && mouseX < width/2+100 && mouseY < 400 && mouseY > 330) fill(150, 150);
-    rect(width/2, 365, 200, 70);
-
-    fill(150);
-    if (mouseX > width/2-100 && mouseX < width/2+100 && mouseY < 520 && mouseY > 450) fill(150, 150);
-    rect(width/2, 485, 200, 70);
-    if (mousePressed && mouseX > width/2-100 && mouseX < width/2+100 && mouseY < 520 && mouseY > 450) menu = 1;
-
-    textSize(40);
-    textAlign(CENTER, CENTER);
-    fill(255, 255, 0); 
-
-    text("resume", width/2, 240);
-    text("settings", width/2, 360);
-    text("exit", width/2, 480);
+    for (int i = 0; i < b.length; i++) {
+      if (b[i].overbutton()) {
+        buttoncolor = color(150, 150);
+        if (mousePressed) {
+          if (i == 0) pause = false;
+          if (i == 1);
+          if (i == 2) menu = 1;
+        }
+      } else {
+        buttoncolor = color(150, 200);
+      }
+      b[i].drawbutton(buttoncolor);
+    }
   }
 }

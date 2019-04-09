@@ -1,6 +1,12 @@
 class MainMenu extends Menu {
 
+  Button[] b = new Button[2];
+
+  color buttoncolor = color(150, 200);
+
   MainMenu() {
+    b[0] = new Button(width/2, 180, 400, 120, "Levels");
+    b[1] = new Button(width/2, 360, 400, 120, "Settings");
   }
 
   void run() {
@@ -12,32 +18,20 @@ class MainMenu extends Menu {
 
   void buttons() {
 
-    rectMode(CENTER);
     noStroke();
-    textAlign(CENTER, CENTER);
     textSize(90);
 
-
-    fill(150, 200);
-    if (mouseX > width/2-100*2 && mouseX < width/2+100*2 && mouseY < 120*2 && mouseY > 60*2) fill(150, 150);
-    rect(width/2, 90*2, 200*2, 60*2);
-    fill(0, 255, 0);
-    text("Levels", width/2, 90*2);
-    if (mousePressed && mouseX > width/2-100*2 && mouseX < width/2+100*2 && mouseY < 120*2 && mouseY > 60*2) menu = 2;
-
-    // tegner firkant, og skriver tekst, hvor man kan klikke hvilket fører en til settings menuen
-    fill(150, 200);
-    if (mouseX > width/2-100*2 && mouseX < width/2+100*2 && mouseY < 210*2 && mouseY > 150*2) fill(150, 150);
-    rect(width/2, 180*2, 200*2, 60*2);
-    fill(0, 255, 0);
-    text("Settings", width/2, 180*2);
-    if (mousePressed && mouseX > width/2-100*2 && mouseX < width/2+100*2 && mouseY < 210*2 && mouseY > 150*2) menu =  3;
-
-    // fill(150, 200);
-    // if (mouseX > width/2-100*2 && mouseX < width/2+100*2 && mouseY < 300*2 && mouseY > 240*2) fill(150, 150);
-    // rect(width/2, 270*2, 200*2, 60*2);
-    // fill(0, 255, 0);
-    // text("", width/2, 270*2);
-    // if (mousePressed && mouseX > width/2-100*2 && mouseX < width/2+100*2 && mouseY < 300*2 && mouseY > 240*2 && holdon == 0) ;
+    for (int i = 0; i < b.length; i++) {
+      if (b[i].overbutton()) {
+        buttoncolor = color(150, 150);
+        if (mousePressed) {
+          if (i == 0) menu = 2;
+          if (i == 1) menu = 3;
+        }
+      } else {
+        buttoncolor = color(150, 200);
+      }
+      b[i].drawbutton(buttoncolor);
+    }
   }
 }
