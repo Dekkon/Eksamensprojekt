@@ -29,7 +29,7 @@ class Level extends Game {
     finishline = loadImage("finishicon.png");
     finishline.resize(200, 130);
 
-    b[0] = new Button(width/2, 245, 200, 70, "resumse");
+    b[0] = new Button(width/2, 245, 200, 70, "resume");
     b[1] = new Button(width/2, 365, 200, 70, "settings");
     b[2] = new Button(width/2, 485, 200, 70, "exit");
   }

@@ -3,10 +3,10 @@ class Box {
   PVector location;
   PVector speed;
   
-  color boxc = color(0, 0, 255);
+  color boxc = color(255, 0, 0);
   
   float angle;
-  float angles = 0.05;
+  float anglespeed = 0.05;
   
   
   int lifespan = 255;
@@ -27,7 +27,7 @@ class Box {
     
     location.add(speed);
     
-    angle += angles;
+    angle += anglespeed;
   }
   
   void display() {

@@ -10,14 +10,14 @@ void setup() {
 
   size(1280, 720);
 
-  g = new Level4();
+  g = new Level1();
 }
 
 
 void draw() {
   background(25);
 
-  println("X: " + mouseX + " Y: " + mouseY); 
+  //println("X: " + mouseX + " Y: " + mouseY); 
 
   switch(g.level) {
   case 1:

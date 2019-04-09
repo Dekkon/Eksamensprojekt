@@ -178,8 +178,8 @@ class Level4 extends Level {
     
     // right walls
     lines.add(new Line(100, 220, 100, 70, "rightwall"));
-    lines.add(new Line(width-1, 140, width-1, 0, "rightwall"));
-    lines.add(new Line(width-1, height, width-1, 220, "rightwall"));
+    lines.add(new Line(width-2, 140, width-2, 0, "rightwall"));
+    lines.add(new Line(width-2, height, width-2, 220, "rightwall"));
 
     // elevatores
     lines.add(new Line(1050, 620, width, 620, "elevator"));

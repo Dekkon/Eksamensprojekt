@@ -58,7 +58,7 @@ class MathQuestions {
     PVector desired = PVector.sub(target, keylocation);
 
 
-    desired.setMag(1);
+    desired.setMag(2);
 
     if (distance.mag() > 3) {
       keylocation.add(desired);

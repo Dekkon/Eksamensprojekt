@@ -1,7 +1,7 @@
 class Level1 extends Level {
 
 
-  boolean gothekey = false;
+  boolean gotthekey = false;
   boolean gateopen = false;
   int numberofwrongguesses;
 
@@ -23,7 +23,9 @@ class Level1 extends Level {
 
 
   void run() { 
-
+    
+    if(mousePressed) p.location = new PVector(mouseX, mouseY);
+    
 
     stage();
     gates();
@@ -90,15 +92,16 @@ class Level1 extends Level {
   void collectkey() {
 
 
-    if (mq.guesscheck[0] == 1 && !gothekey) {
-      if (mq.keylocation.y + radius < p.location.y) {
-        mq.keylocation.y += 2;
-      }
-      if (mq.keylocation.y + radius > p.location.y) gothekey = true;
+    if (mq.guesscheck[0] == 1 && !gotthekey) {      
+      mq.seekKeyhole(p.location);
+      
+      if (PVector.dist(p.location, mq.keylocation) < 15) gotthekey = true;
+      
+      //if (mq.distance.mag() < 3)
     }
-    // println(gothekey);
 
-    if (gothekey && !gateopen) {
+
+    if (gotthekey && !gateopen) {
       mq.keylocation.y = p.location.y - radius;
       mq.keylocation.x = p.location.x + radius;
     }

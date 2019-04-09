@@ -25,7 +25,7 @@ class Line {
     try {
      angle = (y2-y1)/(x2-x1) ;
     } 
-    catch (Exception e) { // so the game doesn't crash if a non integer is written. i.e. '2-2'
+    catch (Exception e) { 
     }
   }
 }
