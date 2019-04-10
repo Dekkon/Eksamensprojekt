@@ -14,7 +14,7 @@ class Level extends Game {
   boolean levelisComplete = false;
   boolean pause = false;
   boolean dead = false;
-  
+
   String question1;
   String question2;
 
@@ -90,6 +90,44 @@ class Level extends Game {
     }
 
     if (onPlatform) p.speed.y = 0;
+  }
+  
+  void blueBox(int x, int y, int wx, int wy) {
+    rectMode(CORNER);  
+    noStroke();
+    fill(0, 0, 255, 120);
+    rect(x, y, wx, wy);
+  }
+
+  void mathQuestion(int x1, int y1, int questionnum) {
+    rectMode(CENTER);
+    fill(0, 0, 255);
+    stroke(0, 0, 255);
+    rect(x1, y1, 175, 50);
+
+    textSize(20);
+    textAlign(CENTER);
+    fill(255);
+    if (currentlevel == 1 && questionnum == 1) {
+      if (klassetrin == 1) question1 = mq.kl1lvl1tal[0] + " + " + mq.kl1lvl1tal[1];
+      if (klassetrin == 5) question1 = mq.kl5lvl1tal[0] + " * " + mq.kl5lvl1tal[1];
+      if (klassetrin == 9) question1 = mq.kl9lvl1tal[0] + "(x + " + mq.kl9lvl1tal[1] + ") = " + mq.kl9lvl1tal[2];
+    }
+    if (currentlevel == 2 && questionnum == 1) {
+      if (klassetrin == 1) question1 = mq.kl1lvl1tal[0] + " - " + mq.kl1lvl1tal[1];
+      if (klassetrin == 5) question1 = mq.kl5lvl2tal[0] + " + " + mq.kl5lvl2tal[1];
+      if (klassetrin == 9) question1 = mq.kl9lvl2tal[0] + "x - (" + mq.kl9lvl2tal[1] + "x + " + mq.kl9lvl2tal[2] + ") = " + mq.kl9lvl2tal[3];
+    }
+  
+
+    text(question1, x1, y1+5);
+
+
+    if (mq.guesscheck[0] == 1) fill(0, 255, 0);
+    if (klassetrin == 1 || klassetrin == 5) text("= " +mq.guess1, x1, y1+45);
+    if (klassetrin == 9) text("x = " +mq.guess1, x1, y1+45);
+
+    mq.wronganswerbox(x1, y1+43, 0);
   }
 
   void playermovement() {
@@ -184,13 +222,10 @@ class Level extends Game {
       b[i].drawbutton(buttoncolor);
     }
   }
-  
+
   void finishline(int x, int y) {
     imageMode(CORNER);
     noTint();
-    image(finishline, x, y);   
+    image(finishline, x, y);
   }
-  
-  
-  
 }

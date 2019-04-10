@@ -66,21 +66,8 @@ class Level4 extends Level {
     if (mq.guesscheck[0] == 1) fill(0, 255, 0);
     if (klassetrin == 1 || klassetrin == 5) text("= " +mq.guess1, 370, 475);
     if (klassetrin == 9) text("= " + mq.guess1, 370, 475);
-
-    mq.redbox[0]--;
-    if (mq.guesscheck[0] == 2) {
-      // numberofwrongguesses ++;
-      mq.testguess[0] = -234;
-      mq.guesscheck[0] = 0;
-
-      mq.redbox[0] = 30;
-    }
-    if (mq.redbox[0] > 0) {
-      fill(255, 0, 0);
-      noStroke();
-      rectMode(CENTER);
-      rect(370, 472, 80, 30);
-    }
+    
+    mq.wronganswerbox(370, 472, 0);
     
     // question 2
     fill(0, 0, 255);
@@ -99,23 +86,8 @@ class Level4 extends Level {
     if (mq.guesscheck[1] == 1) fill(0, 255, 0);
     if (klassetrin == 1 || klassetrin == 5) text("= " +mq.guess2, 170, 265);
     if (klassetrin == 9) text("= " + mq.guess2, 170, 265);
-
-    mq.redbox[1]--;
-    if (mq.guesscheck[1] == 2) {
-      // numberofwrongguesses ++;
-      mq.testguess[1] = -234;
-      mq.guesscheck[1] = 0;
-
-      mq.redbox[1] = 30;
-    }
-    if (mq.redbox[1] > 0) {
-      fill(255, 0, 0);
-      noStroke();
-      rectMode(CENTER);
-      rect(170, 262, 80, 30);
-    }
     
-    
+    mq.wronganswerbox(170, 262, 1);
   }
 
 

@@ -115,21 +115,8 @@
     if (klassetrin == 1) text("= " + mq.guess1, 170, 75);
     if (klassetrin == 5) text("x = " + mq.guess1, 170, 75);
     if (klassetrin == 9) text("x = " + mq.guess1, 170, 75);
-
-    mq.redbox[0]--;
-    if (mq.guesscheck[0] == 2) {
-      // numberofwrongguesses ++;
-      mq.testguess[0] = -234;
-      mq.guesscheck[0] = 0;
-
-      mq.redbox[0] = 30;
-    }
-    if (mq.redbox[0] > 0) {
-      fill(255, 0, 0);
-      noStroke();
-      rectMode(CENTER);
-      rect(170, 72, 80, 30);
-    }
+    
+    mq.wronganswerbox(170, 72, 0);
 
     // question 2
     fill(0, 0, 255);
@@ -149,21 +136,8 @@
     if (klassetrin == 1) text("= " + mq.guess2, 830, 265);
     if (klassetrin == 5) text("x = " + mq.guess2, 830, 265);
     if (klassetrin == 9) text("= " + mq.guess2, 830, 265);
-
-    mq.redbox[1]--;
-    if (mq.guesscheck[1] == 2) {
-      // numberofwrongguesses ++;
-      mq.testguess[1] = -234;
-      mq.guesscheck[1] = 0;
-
-      mq.redbox[1] = 30;
-    }
-    if (mq.redbox[1] > 0) {
-      fill(255, 0, 0);
-      noStroke();
-      rectMode(CENTER);
-      rect(830, 262, 80, 30);
-    }
+    
+    mq.wronganswerbox(830, 262, 1);
   }
 
   void elevator() {

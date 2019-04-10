@@ -47,7 +47,8 @@ class Level1 extends Level {
     mq.display();
     collectkey();    
     if (p.location.x > 0 && p.location.x < 150 && p.location.y < 400) mq.typeanswer(1);
-    mathQuestion();
+    mathQuestion(100, 45, 1);
+    blueBox(2, 280, 148, 120);
     mq.questions(klassetrin, currentlevel);
 
     playermovement();
@@ -65,32 +66,32 @@ class Level1 extends Level {
   }
 
 
-  void mathQuestion() {
-    rectMode(CORNER);
-    noStroke();
-    fill(0, 0, 255, 120);
-    rect(2, 280, 148, 120);
+  //void mathQuestion() {
+  //  rectMode(CORNER);
+  //  noStroke();
+  //  fill(0, 0, 255, 120);
+  //  rect(2, 280, 148, 120);
 
-    fill(0, 0, 255);
-    stroke(0, 0, 255);
-    rect(30, 20, 140, 50);
+  //  fill(0, 0, 255);
+  //  stroke(0, 0, 255);
+  //  rect(30, 20, 140, 50);
 
-    textSize(20);
-    textAlign(CENTER);
-    fill(255);
-    if (klassetrin == 1) question1 = mq.kl1lvl1tal[0] + " + " + mq.kl1lvl1tal[1];
-    if (klassetrin == 5) question1 = mq.kl5lvl1tal[0] + " * " + mq.kl5lvl1tal[1];
-    if (klassetrin == 9) question1 = mq.kl9lvl1tal[0] + "(x + " + mq.kl9lvl1tal[1] + ") = " + mq.kl9lvl1tal[2];
+  //  textSize(20);
+  //  textAlign(CENTER);
+  //  fill(255);
+  //  if (klassetrin == 1) question1 = mq.kl1lvl1tal[0] + " + " + mq.kl1lvl1tal[1];
+  //  if (klassetrin == 5) question1 = mq.kl5lvl1tal[0] + " * " + mq.kl5lvl1tal[1];
+  //  if (klassetrin == 9) question1 = mq.kl9lvl1tal[0] + "(x + " + mq.kl9lvl1tal[1] + ") = " + mq.kl9lvl1tal[2];
 
-    text(question1, 100, 50);
+  //  text(question1, 100, 50);
 
 
-    if (mq.guesscheck[0] == 1) fill(0, 255, 0);
-    if (klassetrin == 1 || klassetrin == 5) text("= " +mq.guess1, 100, 95);
-    if (klassetrin == 9) text("x = " +mq.guess1, 100, 95);
+  //  if (mq.guesscheck[0] == 1) fill(0, 255, 0);
+  //  if (klassetrin == 1 || klassetrin == 5) text("= " +mq.guess1, 100, 95);
+  //  if (klassetrin == 9) text("x = " +mq.guess1, 100, 95);
 
-    mq.wronganswerbox(100, 90, 0);
-  }
+  //  mq.wronganswerbox(100, 90, 0);
+  //}
 
   void collectkey() {
 
