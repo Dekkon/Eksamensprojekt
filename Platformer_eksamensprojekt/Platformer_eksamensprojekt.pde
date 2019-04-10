@@ -1,7 +1,7 @@
 
 Game g;
 int levelsCompleted = 0;
-int klassetrin = 5;
+int klassetrin = 9;
 
 
 boolean keys[] = new boolean [4];
@@ -10,14 +10,13 @@ void setup() {
 
   size(1280, 720);
 
-  g = new Level1();
+  g = new Level2();
 }
 
 
 void draw() {
   background(25);
 
-  //println("X: " + mouseX + " Y: " + mouseY); 
 
   switch(g.level) {
   case 1:

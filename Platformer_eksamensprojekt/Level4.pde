@@ -17,6 +17,7 @@ class Level4 extends Level {
     stage();
     boxdrop();
     elevator();
+    finishline(1180, 95); 
 
     mathQuestion();
     if (p.location.x > 200 && p.location.x < 440) mq.typeanswer(1);
@@ -55,23 +56,26 @@ class Level4 extends Level {
     rect(300, 400, 140, 50);
 
     fill(255);
-    if (klassetrin == 1) text(mq.kl1lvl4tal[0] + " + " + mq.kl1lvl4tal[1] + " + " + mq.kl1lvl4tal[2], 370, 430);
-    if (klassetrin == 5) text(mq.kl5lvl4tal[0] + " - " + mq.kl5lvl4tal[1], 370, 430);
-    if (klassetrin == 9) text(mq.kl9lvl4tal[0] + " + " + mq.kl9lvl4tal[1], 370, 430);
+    
+    if (klassetrin == 1) question1 = mq.kl1lvl4tal[0] + " + " + mq.kl1lvl4tal[1] + " + " + mq.kl1lvl4tal[2];
+    if (klassetrin == 5) question1 = mq.kl5lvl4tal[0] + " - " + mq.kl5lvl4tal[1];
+    if (klassetrin == 9) question1 = mq.kl9lvl4tal[0] + " + " + mq.kl9lvl4tal[1];
+    
+    text(question1, 370, 430);
 
     if (mq.guesscheck[0] == 1) fill(0, 255, 0);
     if (klassetrin == 1 || klassetrin == 5) text("= " +mq.guess1, 370, 475);
     if (klassetrin == 9) text("= " + mq.guess1, 370, 475);
 
-    mq.redbox--;
+    mq.redbox[0]--;
     if (mq.guesscheck[0] == 2) {
       // numberofwrongguesses ++;
       mq.testguess[0] = -234;
       mq.guesscheck[0] = 0;
 
-      mq.redbox = 30;
+      mq.redbox[0] = 30;
     }
-    if (mq.redbox > 0) {
+    if (mq.redbox[0] > 0) {
       fill(255, 0, 0);
       noStroke();
       rectMode(CENTER);
@@ -85,23 +89,26 @@ class Level4 extends Level {
     rect(100, 190, 140, 50);
 
     fill(255);
-    if (klassetrin == 1) text(mq.kl1lvl4tal[3] + " + " + mq.kl1lvl4tal[4] + " - " + mq.kl1lvl4tal[5], 170, 220);
-    if (klassetrin == 5) text(mq.kl5lvl4tal[2] + " * " + mq.kl5lvl4tal[3], 170, 220);
-    if (klassetrin == 9) text(mq.kl9lvl4tal[2] + " * " + mq.kl9lvl4tal[3], 170, 220);
+    
+    if (klassetrin == 1) question2 = mq.kl1lvl4tal[3] + " + " + mq.kl1lvl4tal[4] + " - " + mq.kl1lvl4tal[5];
+    if (klassetrin == 5) question2 = mq.kl5lvl4tal[2] + " * " + mq.kl5lvl4tal[3];
+    if (klassetrin == 9) question2 = mq.kl9lvl4tal[2] + " * " + mq.kl9lvl4tal[3];
+    
+    text(question2, 170, 220);
 
     if (mq.guesscheck[1] == 1) fill(0, 255, 0);
     if (klassetrin == 1 || klassetrin == 5) text("= " +mq.guess2, 170, 265);
     if (klassetrin == 9) text("= " + mq.guess2, 170, 265);
 
-    mq.redbox--;
+    mq.redbox[1]--;
     if (mq.guesscheck[1] == 2) {
       // numberofwrongguesses ++;
       mq.testguess[1] = -234;
       mq.guesscheck[1] = 0;
 
-      mq.redbox = 30;
+      mq.redbox[1] = 30;
     }
-    if (mq.redbox > 0) {
+    if (mq.redbox[1] > 0) {
       fill(255, 0, 0);
       noStroke();
       rectMode(CENTER);
@@ -116,21 +123,20 @@ class Level4 extends Level {
     for (int i = boxes.size()-1; i >= 0; i--) {
       Box b = boxes.get(i);
       b.boxesrun();
-
-
+      
+      //collision with player and boxes
       if (PVector.dist(p.location, b.location) <  radius + 15) {
         dead = true;
       }
 
       if (b.location.y + 20 >= 620) b.speed.y = 0;
 
-
       if (b.lifespan <= 0) boxes.remove(i);
     }
 
     int boxadd = 5;
     if (mq.guesscheck[0] != 1) boxadd = 5;
-    if (mq.guesscheck[0] == 1) boxadd = 25;
+    if (mq.guesscheck[0] == 1) boxadd = 30;
 
     if (boxfrequency == boxadd) {
       boxes.add(new Box(random(450, 800), 420));
@@ -163,6 +169,9 @@ class Level4 extends Level {
     lines.add(new Line(350, 120, 600, 120, "floor"));
     lines.add(new Line(600, 170, 850, 170, "floor"));
     lines.add(new Line(850, 220, width, 220, "floor"));
+    
+    //roofs
+    lines.add(new Line(0, 1, width, 1, "roof"));
     
     
     //activateable floors

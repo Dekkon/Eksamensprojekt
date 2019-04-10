@@ -24,6 +24,7 @@
     movingFloors();
     enemy();
     pit();
+    finishline(1180, 545);
 
     mathQuestion();
     if (p.location.x < 200) mq.typeanswer(1);
@@ -50,7 +51,7 @@
     int nuoshots = 2;
 
     if (mq.guesscheck[0] != 1) nuoshots = 15;
-    if (mq.guesscheck[0] == 1) nuoshots = 50;
+    if (mq.guesscheck[0] == 1) nuoshots = 55;
 
     if (shotfq == nuoshots) {
       shots.add(new Shot(700, 155));
@@ -103,24 +104,27 @@
     rect(80, 0, 180, 50);
 
     fill(255);
-    if (klassetrin == 1) text(mq.kl1lvl3tal[0] + " * " + mq.kl1lvl3tal[1], 170, 30);
-    if (klassetrin == 5) text(mq.kl5lvl3tal[0] + " * x = " + mq.kl5lvl3tal[1], 170, 30);
-    if (klassetrin == 9) text(mq.kl9lvl3tal[0] + "(x + " + mq.kl9lvl3tal[1] + ") = " + mq.kl9lvl3tal[2] + "(" + mq.kl9lvl3tal[3] + " + x)", 170, 30);
+    
+    if (klassetrin == 1) question1 = mq.kl1lvl3tal[0] + " * " + mq.kl1lvl3tal[1];
+    if (klassetrin == 5) question1 = mq.kl5lvl3tal[0] + " * x = " + mq.kl5lvl3tal[1];
+    if (klassetrin == 9) question1 = mq.kl9lvl3tal[0] + "(x + " + mq.kl9lvl3tal[1] + ") = " + mq.kl9lvl3tal[2] + "(" + mq.kl9lvl3tal[3] + " + x)";
+    
+    text(question1, 170, 30);
 
     if (mq.guesscheck[0] == 1) fill(0, 255, 0);
     if (klassetrin == 1) text("= " + mq.guess1, 170, 75);
     if (klassetrin == 5) text("x = " + mq.guess1, 170, 75);
     if (klassetrin == 9) text("x = " + mq.guess1, 170, 75);
 
-    mq.redbox--;
+    mq.redbox[0]--;
     if (mq.guesscheck[0] == 2) {
       // numberofwrongguesses ++;
       mq.testguess[0] = -234;
       mq.guesscheck[0] = 0;
 
-      mq.redbox = 30;
+      mq.redbox[0] = 30;
     }
-    if (mq.redbox > 0) {
+    if (mq.redbox[0] > 0) {
       fill(255, 0, 0);
       noStroke();
       rectMode(CENTER);
@@ -134,24 +138,27 @@
     rect(760, 190, 140, 50);
 
     fill(255);
-    if (klassetrin == 1) text(mq.kl1lvl3tal[2] + " + " + mq.kl1lvl3tal[3], 830, 220);
-    if (klassetrin == 5) text(mq.kl5lvl3tal[2] + "x = " + mq.kl5lvl3tal[3], 830, 220);
-    if (klassetrin == 9) text("√" + mq.kl9lvl3tal[4] + " - √" + mq.kl9lvl3tal[5], 830, 220);
+    
+    if (klassetrin == 1) question2 = mq.kl1lvl3tal[2] + " + " + mq.kl1lvl3tal[3];
+    if (klassetrin == 5) question2 = mq.kl5lvl3tal[2] + "x = " + mq.kl5lvl3tal[3];
+    if (klassetrin == 9) question2 = "√" + mq.kl9lvl3tal[4] + " - √" + mq.kl9lvl3tal[5];
+    
+    text(question2, 830, 220);
 
     if (mq.guesscheck[1] == 1) fill(0, 255, 0);
     if (klassetrin == 1) text("= " + mq.guess2, 830, 265);
     if (klassetrin == 5) text("x = " + mq.guess2, 830, 265);
     if (klassetrin == 9) text("= " + mq.guess2, 830, 265);
 
-    mq.redbox--;
+    mq.redbox[1]--;
     if (mq.guesscheck[1] == 2) {
       // numberofwrongguesses ++;
       mq.testguess[1] = -234;
       mq.guesscheck[1] = 0;
 
-      mq.redbox = 30;
+      mq.redbox[1] = 30;
     }
-    if (mq.redbox > 0) {
+    if (mq.redbox[1] > 0) {
       fill(255, 0, 0);
       noStroke();
       rectMode(CENTER);

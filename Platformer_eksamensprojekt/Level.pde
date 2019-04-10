@@ -14,6 +14,9 @@ class Level extends Game {
   boolean levelisComplete = false;
   boolean pause = false;
   boolean dead = false;
+  
+  String question1;
+  String question2;
 
 
   float radius = 17.5;
@@ -27,7 +30,7 @@ class Level extends Game {
     pausebutton = loadImage("pauseButton.png");
     startbutton = loadImage("startButton.png");
     finishline = loadImage("finishicon.png");
-    finishline.resize(200, 130);
+    finishline.resize(100, 55);
 
     b[0] = new Button(width/2, 245, 200, 70, "resume");
     b[1] = new Button(width/2, 365, 200, 70, "settings");
@@ -181,4 +184,13 @@ class Level extends Game {
       b[i].drawbutton(buttoncolor);
     }
   }
+  
+  void finishline(int x, int y) {
+    imageMode(CORNER);
+    noTint();
+    image(finishline, x, y);   
+  }
+  
+  
+  
 }

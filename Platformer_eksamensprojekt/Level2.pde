@@ -15,6 +15,7 @@ class Level2 extends Level {
     stage();
     elevator();
     movingFloors();
+    finishline(1180, 125);
 
     mathQuestion();
     if (p.location.x > 1100) mq.typeanswer(1);
@@ -50,33 +51,23 @@ class Level2 extends Level {
     
 
     //question 1
-    rect(1140, 360, 140, 50);
+    rect(1100, 360, 175, 50);
 
     textSize(20);
     textAlign(CENTER);
     fill(255);
-    if (klassetrin == 1) text(mq.kl1lvl1tal[0] + " - " + mq.kl1lvl1tal[1], 1210, 390);
-    if (klassetrin == 5) text(mq.kl5lvl2tal[0] + " + " + mq.kl5lvl2tal[1], 1210, 390);
-    if (klassetrin == 9) text(mq.kl9lvl2tal[0] + "min, " + mq.kl9lvl2tal[1] + " sek.", 1210, 390);
+    
+    if (klassetrin == 1) question1 = mq.kl1lvl1tal[0] + " - " + mq.kl1lvl1tal[1];
+    if (klassetrin == 5) question1 = mq.kl5lvl2tal[0] + " + " + mq.kl5lvl2tal[1];
+    if (klassetrin == 9) question1 = mq.kl9lvl2tal[0] + "x - (" + mq.kl9lvl2tal[1] + "x + " + mq.kl9lvl2tal[2] + ") = " + mq.kl9lvl2tal[3];
+    
+    text(question1, 1190, 390);
 
     if (mq.guesscheck[0] == 1) fill(0, 255, 0);
-    if (klassetrin == 1 || klassetrin == 5) text("= " +mq.guess1, 1210, 435);
-    if (klassetrin == 9) text("= " + mq.guess1 + "  sek.", 1210, 435);
-
-    mq.redbox--;
-    if (mq.guesscheck[0] == 2) {
-      // numberofwrongguesses ++;
-      mq.testguess[0] = -234;
-      mq.guesscheck[0] = 0;
-
-      mq.redbox = 30;
-    }
-    if (mq.redbox > 0) {
-      fill(255, 0, 0);
-      noStroke();
-      rectMode(CENTER);
-      rect(1210, 435, 60, 20);
-    }
+    if (klassetrin == 1 || klassetrin == 5) text("= " +mq.guess1, 1190, 435);
+    if (klassetrin == 9) text("x = " + mq.guess1, 1190, 435);
+    
+    mq.wronganswerbox(1190, 432, 0);
 
     //question 2
     rectMode(CORNER);
@@ -86,28 +77,19 @@ class Level2 extends Level {
     textSize(20);
     textAlign(CENTER);
     fill(255);
-    if (klassetrin == 1) text(mq.kl1lvl1tal[2] + " + " + mq.kl1lvl1tal[3], 72, 230);
-    if (klassetrin == 5) text(mq.kl5lvl2tal[2] + " + " + mq.kl5lvl2tal[3] + " * " + mq.kl5lvl2tal[4], 72, 230);
-    if (klassetrin == 9) text("√" + mq.kl9lvl2tal[2] + " + √" + mq.kl9lvl2tal[3], 72, 230);
+    
+    if (klassetrin == 1) question2 = mq.kl1lvl1tal[2] + " + " + mq.kl1lvl1tal[3];
+    if (klassetrin == 5) question2 = mq.kl5lvl2tal[2] + " + " + mq.kl5lvl2tal[3] + " * " + mq.kl5lvl2tal[4];
+    if (klassetrin == 9) question2 = "√" + mq.kl9lvl2tal[4] + " + √" + mq.kl9lvl2tal[5];
+    
+    text(question2, 72, 230);
 
     if (mq.guesscheck[1] == 1) fill(0, 255, 0);
     if (klassetrin == 1 || klassetrin == 5) text("= " +mq.guess2, 72, 285);
     if (klassetrin == 9) text("= " +mq.guess2, 72, 285);
+    
+    mq.wronganswerbox(72, 285, 1);
 
-    mq.redbox--;
-    if (mq.guesscheck[1] == 2) {
-      // numberofwrongguesses ++;
-      mq.testguess[1] = -234;
-      mq.guesscheck[1] = 0;
-
-      mq.redbox = 30;
-    }
-    if (mq.redbox > 0) {
-      fill(255, 0, 0);
-      noStroke();
-      rectMode(CENTER);
-      rect(72, 285, 60, 20);
-    }
   }
 
   void movingFloors() {
