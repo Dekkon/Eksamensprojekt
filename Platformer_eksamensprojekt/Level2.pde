@@ -6,6 +6,28 @@ class Level2 extends Level {
     spawnlocation = new PVector(30, 600);
     p = new Player(spawnlocation.x, spawnlocation.y, radius);
 
+
+
+
+    switch(klassetrin) {
+    case 1:
+      question1 = mq.kl1lvl1tal[0] + " - " + mq.kl1lvl1tal[1];
+      question2 = mq.kl1lvl1tal[2] + " + " + mq.kl1lvl1tal[3];
+      writeguess1 = "= ";
+      break;
+    case 5:
+      question1 = mq.kl5lvl2tal[0] + " + " + mq.kl5lvl2tal[1];
+      question2 = mq.kl5lvl2tal[2] + " + " + mq.kl5lvl2tal[3] + " * " + mq.kl5lvl2tal[4];
+      writeguess1 = "= ";
+      break;
+    case 9:
+      question1 = mq.kl9lvl2tal[0] + "x - (" + mq.kl9lvl2tal[1] + "x + " + mq.kl9lvl2tal[2] + ") = " + mq.kl9lvl2tal[3];
+      question2 = "√" + mq.kl9lvl2tal[4] + " + √" + mq.kl9lvl2tal[5];
+      writeguess1 = "x = ";
+      break;
+    }    
+    writeguess2 = "= ";
+
     lines();
   }
 
@@ -19,10 +41,12 @@ class Level2 extends Level {
 
     mathQuestion(1190, 390, 1);
     blueBox(1102, 520, 176, 110);
-    
+    mathQuestion(72, 230, 2);
     blueBox(2, 340, 196, 110);
-    if (p.location.x > 1100) mq.typeanswer(1);
-    if (p.location.x < 200 && p.location.y < 550) mq.typeanswer(2);
+    if (p.location.x > 1100) canType[0] = true;
+    else canType[0] = false;
+    if (p.location.x < 200 && p.location.y < 550) canType[1] = true;
+    else canType[1] = false;
     mq.questions(klassetrin, currentlevel);
 
     playermovement();
@@ -38,62 +62,6 @@ class Level2 extends Level {
     if (p.location.x > width) levelisComplete = true;
     if (levelisComplete)levelComplete();
   } 
-
-
-  //void mathQuestion() {
-  //  rectMode(CORNER);
-  //  noStroke();
-  //  fill(0, 0, 255, 120);
-  //  rect(1102, 520, 176, 110);
-    
-  //  rect(2, 340, 196, 110);
-    
-    
-  //  fill(0, 0, 255);
-  //  stroke(0, 0, 255);
-    
-
-  //  //question 1
-  //  rect(1100, 360, 175, 50);
-
-  //  textSize(20);
-  //  textAlign(CENTER);
-  //  fill(255);
-    
-  //  if (klassetrin == 1) question1 = mq.kl1lvl1tal[0] + " - " + mq.kl1lvl1tal[1];
-  //  if (klassetrin == 5) question1 = mq.kl5lvl2tal[0] + " + " + mq.kl5lvl2tal[1];
-  //  if (klassetrin == 9) question1 = mq.kl9lvl2tal[0] + "x - (" + mq.kl9lvl2tal[1] + "x + " + mq.kl9lvl2tal[2] + ") = " + mq.kl9lvl2tal[3];
-    
-  //  text(question1, 1190, 390);
-
-  //  if (mq.guesscheck[0] == 1) fill(0, 255, 0);
-  //  if (klassetrin == 1 || klassetrin == 5) text("= " +mq.guess1, 1190, 435);
-  //  if (klassetrin == 9) text("x = " + mq.guess1, 1190, 435);
-    
-  //  mq.wronganswerbox(1190, 432, 0);
-
-  //  //question 2
-  //  rectMode(CORNER);
-  //  fill(0, 0, 255);
-  //  rect(2, 200, 140, 50);
-
-  //  textSize(20);
-  //  textAlign(CENTER);
-  //  fill(255);
-    
-  //  if (klassetrin == 1) question2 = mq.kl1lvl1tal[2] + " + " + mq.kl1lvl1tal[3];
-  //  if (klassetrin == 5) question2 = mq.kl5lvl2tal[2] + " + " + mq.kl5lvl2tal[3] + " * " + mq.kl5lvl2tal[4];
-  //  if (klassetrin == 9) question2 = "√" + mq.kl9lvl2tal[4] + " + √" + mq.kl9lvl2tal[5];
-    
-  //  text(question2, 72, 230);
-
-  //  if (mq.guesscheck[1] == 1) fill(0, 255, 0);
-  //  if (klassetrin == 1 || klassetrin == 5) text("= " +mq.guess2, 72, 285);
-  //  if (klassetrin == 9) text("= " +mq.guess2, 72, 285);
-    
-  //  mq.wronganswerbox(72, 285, 1);
-
-  //}
 
   void movingFloors() {
 

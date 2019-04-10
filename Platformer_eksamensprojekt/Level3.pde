@@ -1,4 +1,4 @@
-  class Level3 extends Level {
+class Level3 extends Level {
 
   ArrayList<Shot> shots = new ArrayList<Shot>();
   PImage stickman, spikes;
@@ -13,6 +13,27 @@
     stickman.resize(50, 50);
     spikes = loadImage("spikes.png");
     spikes.resize(100, 40);   
+    
+    switch(klassetrin) {
+    case 1:
+      question1 = mq.kl1lvl3tal[0] + " * " + mq.kl1lvl3tal[1];
+      question2 = mq.kl1lvl3tal[2] + " + " + mq.kl1lvl3tal[3];
+      writeguess1 = "= ";
+      writeguess2 = "= ";
+      break;
+    case 5:
+      question1 = mq.kl5lvl3tal[0] + " * x = " + mq.kl5lvl3tal[1];
+      question2 = mq.kl5lvl3tal[2] + "x = " + mq.kl5lvl3tal[3];
+      writeguess1 = "x = ";
+      writeguess2 = "x = ";
+      break;
+    case 9:
+      question1 = mq.kl9lvl3tal[0] + "(x + " + mq.kl9lvl3tal[1] + ") = " + mq.kl9lvl3tal[2] + "(" + mq.kl9lvl3tal[3] + " + x)";
+      question2 = "√" + mq.kl9lvl3tal[4] + " - √" + mq.kl9lvl3tal[5];
+      writeguess1 = "x = ";
+      writeguess2 = "= ";
+      break;
+    }
 
     lines();
   }
@@ -26,11 +47,18 @@
     pit();
     finishline(1180, 545);
 
-    mathQuestion();
-    if (p.location.x < 200) mq.typeanswer(1);
-    if (p.location.x > 800 && p.location.x < 1050 && p.location.y > 200 && p.location.y < 400) mq.typeanswer(2);
+    blueBox(50, 40, 150, 100);
+    mathQuestion(170, 30, 1);
+    blueBox(800, 250, 150, 100);
+    mathQuestion(860, 190, 2);
+
+
+    if (p.location.x < 200) canType[0] = true;
+    else canType[0] = false;
+    if (p.location.x > 800 && p.location.x < 1050 && p.location.y > 200 && p.location.y < 400) canType[1] = true;
+    else canType[1] = false;
     mq.questions(klassetrin, currentlevel);
-    
+
     playermovement();
     if (!pause) p.update();
     collision();
@@ -84,60 +112,6 @@
       image(spikes, 250 + i * 75, 460);
     }
     // image(spikes, 330, 460);
-  }
-
-  void mathQuestion() {
-    
-    rectMode(CORNER);
-    noStroke();
-    fill(0, 0, 255, 120);
-    rect(50, 40, 150, 100);    
-    
-    rect(800, 250, 150, 100);
-    
-    textSize(20);
-    textAlign(CENTER);
-
-    //question 1
-    fill(0, 0, 255);
-    stroke(0, 0, 255);
-    rect(80, 0, 180, 50);
-
-    fill(255);
-    
-    if (klassetrin == 1) question1 = mq.kl1lvl3tal[0] + " * " + mq.kl1lvl3tal[1];
-    if (klassetrin == 5) question1 = mq.kl5lvl3tal[0] + " * x = " + mq.kl5lvl3tal[1];
-    if (klassetrin == 9) question1 = mq.kl9lvl3tal[0] + "(x + " + mq.kl9lvl3tal[1] + ") = " + mq.kl9lvl3tal[2] + "(" + mq.kl9lvl3tal[3] + " + x)";
-    
-    text(question1, 170, 30);
-
-    if (mq.guesscheck[0] == 1) fill(0, 255, 0);
-    if (klassetrin == 1) text("= " + mq.guess1, 170, 75);
-    if (klassetrin == 5) text("x = " + mq.guess1, 170, 75);
-    if (klassetrin == 9) text("x = " + mq.guess1, 170, 75);
-    
-    mq.wronganswerbox(170, 72, 0);
-
-    // question 2
-    fill(0, 0, 255);
-    stroke(0, 0, 255);
-    rectMode(CORNER);
-    rect(760, 190, 140, 50);
-
-    fill(255);
-    
-    if (klassetrin == 1) question2 = mq.kl1lvl3tal[2] + " + " + mq.kl1lvl3tal[3];
-    if (klassetrin == 5) question2 = mq.kl5lvl3tal[2] + "x = " + mq.kl5lvl3tal[3];
-    if (klassetrin == 9) question2 = "√" + mq.kl9lvl3tal[4] + " - √" + mq.kl9lvl3tal[5];
-    
-    text(question2, 830, 220);
-
-    if (mq.guesscheck[1] == 1) fill(0, 255, 0);
-    if (klassetrin == 1) text("= " + mq.guess2, 830, 265);
-    if (klassetrin == 5) text("x = " + mq.guess2, 830, 265);
-    if (klassetrin == 9) text("= " + mq.guess2, 830, 265);
-    
-    mq.wronganswerbox(830, 262, 1);
   }
 
   void elevator() {

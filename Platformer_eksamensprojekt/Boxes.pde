@@ -40,10 +40,6 @@ class Box {
     rotate(angle);
     rect(0, 0, 40, 40);
     popMatrix();
-    
-    
-  }
-  
-  
-  
+       
+  } 
 }

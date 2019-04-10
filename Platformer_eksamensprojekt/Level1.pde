@@ -29,6 +29,22 @@ class Level1 extends Level {
     moveguide.resize(413, 220);
     questionguide = loadImage("questionguide.png");
     questionguide.resize(368, 49);
+    
+    
+    switch(klassetrin) {
+    case 1:
+      question1 = mq.kl1lvl1tal[0] + " + " + mq.kl1lvl1tal[1];
+      writeguess1 = "= ";
+      break;
+    case 5:
+      question1 = mq.kl5lvl1tal[0] + " * " + mq.kl5lvl1tal[1];
+      writeguess1 = "= ";
+      break;
+    case 9:
+      question1 = mq.kl9lvl1tal[0] + "(x + " + mq.kl9lvl1tal[1] + ") = " + mq.kl9lvl1tal[2];
+      writeguess1 = "x = ";
+      break;
+    }
 
     lines();
   }
@@ -41,12 +57,13 @@ class Level1 extends Level {
     gates();
     finishline(1180, 463);
     guide();
-
+    
 
 
     mq.display();
     collectkey();    
-    if (p.location.x > 0 && p.location.x < 150 && p.location.y < 400) mq.typeanswer(1);
+    if (p.location.x > 0 && p.location.x < 150 && p.location.y < 400) canType[0] = true;
+    else canType[0] = false;
     mathQuestion(100, 45, 1);
     blueBox(2, 280, 148, 120);
     mq.questions(klassetrin, currentlevel);
@@ -64,34 +81,8 @@ class Level1 extends Level {
     if (p.location.x > width) levelisComplete = true;
     if (levelisComplete)levelComplete();
   }
+  
 
-
-  //void mathQuestion() {
-  //  rectMode(CORNER);
-  //  noStroke();
-  //  fill(0, 0, 255, 120);
-  //  rect(2, 280, 148, 120);
-
-  //  fill(0, 0, 255);
-  //  stroke(0, 0, 255);
-  //  rect(30, 20, 140, 50);
-
-  //  textSize(20);
-  //  textAlign(CENTER);
-  //  fill(255);
-  //  if (klassetrin == 1) question1 = mq.kl1lvl1tal[0] + " + " + mq.kl1lvl1tal[1];
-  //  if (klassetrin == 5) question1 = mq.kl5lvl1tal[0] + " * " + mq.kl5lvl1tal[1];
-  //  if (klassetrin == 9) question1 = mq.kl9lvl1tal[0] + "(x + " + mq.kl9lvl1tal[1] + ") = " + mq.kl9lvl1tal[2];
-
-  //  text(question1, 100, 50);
-
-
-  //  if (mq.guesscheck[0] == 1) fill(0, 255, 0);
-  //  if (klassetrin == 1 || klassetrin == 5) text("= " +mq.guess1, 100, 95);
-  //  if (klassetrin == 9) text("x = " +mq.guess1, 100, 95);
-
-  //  mq.wronganswerbox(100, 90, 0);
-  //}
 
   void collectkey() {
 

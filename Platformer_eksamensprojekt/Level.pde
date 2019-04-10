@@ -15,8 +15,13 @@ class Level extends Game {
   boolean pause = false;
   boolean dead = false;
 
+
+
   String question1;
   String question2;
+
+  String writeguess1;
+  String writeguess2;
 
 
   float radius = 17.5;
@@ -91,7 +96,7 @@ class Level extends Game {
 
     if (onPlatform) p.speed.y = 0;
   }
-  
+
   void blueBox(int x, int y, int wx, int wy) {
     rectMode(CORNER);  
     noStroke();
@@ -103,31 +108,25 @@ class Level extends Game {
     rectMode(CENTER);
     fill(0, 0, 255);
     stroke(0, 0, 255);
-    rect(x1, y1, 175, 50);
+    rect(x1, y1, 155, 50);
 
-    textSize(20);
+    textSize(17);
     textAlign(CENTER);
     fill(255);
-    if (currentlevel == 1 && questionnum == 1) {
-      if (klassetrin == 1) question1 = mq.kl1lvl1tal[0] + " + " + mq.kl1lvl1tal[1];
-      if (klassetrin == 5) question1 = mq.kl5lvl1tal[0] + " * " + mq.kl5lvl1tal[1];
-      if (klassetrin == 9) question1 = mq.kl9lvl1tal[0] + "(x + " + mq.kl9lvl1tal[1] + ") = " + mq.kl9lvl1tal[2];
-    }
-    if (currentlevel == 2 && questionnum == 1) {
-      if (klassetrin == 1) question1 = mq.kl1lvl1tal[0] + " - " + mq.kl1lvl1tal[1];
-      if (klassetrin == 5) question1 = mq.kl5lvl2tal[0] + " + " + mq.kl5lvl2tal[1];
-      if (klassetrin == 9) question1 = mq.kl9lvl2tal[0] + "x - (" + mq.kl9lvl2tal[1] + "x + " + mq.kl9lvl2tal[2] + ") = " + mq.kl9lvl2tal[3];
-    }
-  
 
-    text(question1, x1, y1+5);
+    if (questionnum == 1) text(question1, x1, y1+5);
+    if (questionnum == 2) text(question2, x1, y1+5);
 
+    if (mq.guesscheck[questionnum-1] == 1) fill(0, 255, 0);
 
-    if (mq.guesscheck[0] == 1) fill(0, 255, 0);
-    if (klassetrin == 1 || klassetrin == 5) text("= " +mq.guess1, x1, y1+45);
-    if (klassetrin == 9) text("x = " +mq.guess1, x1, y1+45);
+    if (questionnum == 1) text(writeguess1 + mq.guess1, x1, y1+45);
+    if (questionnum == 2) text(writeguess2 + mq.guess2, x1, y1+45);
 
-    mq.wronganswerbox(x1, y1+43, 0);
+    mq.wronganswerbox(x1, y1+43, questionnum-1);
+  }
+
+  void typeanswer(int wq) {
+    mq.typeanswer(wq);
   }
 
   void playermovement() {

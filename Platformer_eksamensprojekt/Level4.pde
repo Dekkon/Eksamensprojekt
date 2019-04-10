@@ -10,6 +10,23 @@ class Level4 extends Level {
     spawnlocation = new PVector(30, 630);
     p = new Player(spawnlocation.x, spawnlocation.y, radius);
 
+    switch(klassetrin) {
+    case 1:
+      question1 = mq.kl1lvl4tal[0] + " + " + mq.kl1lvl4tal[1] + " + " + mq.kl1lvl4tal[2];
+      question2 = mq.kl1lvl4tal[3] + " + " + mq.kl1lvl4tal[4] + " - " + mq.kl1lvl4tal[5];
+      break;
+    case 5:
+      question1 = mq.kl5lvl4tal[0] + " - " + mq.kl5lvl4tal[1];
+      question2 = mq.kl5lvl4tal[2] + " * " + mq.kl5lvl4tal[3];
+      break;
+    case 9:
+      question1 = mq.kl9lvl4tal[0] + " + " + mq.kl9lvl4tal[1];
+      question2 = mq.kl9lvl4tal[2] + " * " + mq.kl9lvl4tal[3];
+      break;
+    }
+    writeguess1 = "= ";
+    writeguess2 = "= ";
+
     lines();
   }
 
@@ -19,9 +36,15 @@ class Level4 extends Level {
     elevator();
     finishline(1180, 95); 
 
-    mathQuestion();
-    if (p.location.x > 200 && p.location.x < 440) mq.typeanswer(1);
-    if (p.location.x < 200 && p.location.y < 300) mq.typeanswer(2);
+    blueBox(270, 520, 170, 100);
+    mathQuestion(360, 430, 1);
+    blueBox(2, 220, 98, 70);
+    mathQuestion(150, 130, 2);
+
+    if (p.location.x > 200 && p.location.x < 440) canType[0] = true;
+    else canType[0] = false;
+    if (p.location.x < 200 && p.location.y < 300) canType[1] = true;
+    else canType[1] = false;
     mq.questions(klassetrin, currentlevel);
 
     playermovement();
@@ -38,64 +61,12 @@ class Level4 extends Level {
     if (levelisComplete)levelComplete();
   }
 
-  void mathQuestion() {
-    rectMode(CORNER);
-    
-    noStroke();
-    fill(0, 0, 255, 120);
-    rect(300, 520, 140, 100);    
-    
-    rect(2, 220, 98, 70);
-    
-    textSize(20);
-    textAlign(CENTER);
-
-    // question 1
-    fill(0, 0, 255);
-    stroke(0, 0, 255);
-    rect(300, 400, 140, 50);
-
-    fill(255);
-    
-    if (klassetrin == 1) question1 = mq.kl1lvl4tal[0] + " + " + mq.kl1lvl4tal[1] + " + " + mq.kl1lvl4tal[2];
-    if (klassetrin == 5) question1 = mq.kl5lvl4tal[0] + " - " + mq.kl5lvl4tal[1];
-    if (klassetrin == 9) question1 = mq.kl9lvl4tal[0] + " + " + mq.kl9lvl4tal[1];
-    
-    text(question1, 370, 430);
-
-    if (mq.guesscheck[0] == 1) fill(0, 255, 0);
-    if (klassetrin == 1 || klassetrin == 5) text("= " +mq.guess1, 370, 475);
-    if (klassetrin == 9) text("= " + mq.guess1, 370, 475);
-    
-    mq.wronganswerbox(370, 472, 0);
-    
-    // question 2
-    fill(0, 0, 255);
-    stroke(0, 0, 255);
-    rectMode(CORNER);
-    rect(100, 190, 140, 50);
-
-    fill(255);
-    
-    if (klassetrin == 1) question2 = mq.kl1lvl4tal[3] + " + " + mq.kl1lvl4tal[4] + " - " + mq.kl1lvl4tal[5];
-    if (klassetrin == 5) question2 = mq.kl5lvl4tal[2] + " * " + mq.kl5lvl4tal[3];
-    if (klassetrin == 9) question2 = mq.kl9lvl4tal[2] + " * " + mq.kl9lvl4tal[3];
-    
-    text(question2, 170, 220);
-
-    if (mq.guesscheck[1] == 1) fill(0, 255, 0);
-    if (klassetrin == 1 || klassetrin == 5) text("= " +mq.guess2, 170, 265);
-    if (klassetrin == 9) text("= " + mq.guess2, 170, 265);
-    
-    mq.wronganswerbox(170, 262, 1);
-  }
-
 
   void boxdrop() {
     for (int i = boxes.size()-1; i >= 0; i--) {
       Box b = boxes.get(i);
       b.boxesrun();
-      
+
       //collision with player and boxes
       if (PVector.dist(p.location, b.location) <  radius + 15) {
         dead = true;
@@ -141,11 +112,11 @@ class Level4 extends Level {
     lines.add(new Line(350, 120, 600, 120, "floor"));
     lines.add(new Line(600, 170, 850, 170, "floor"));
     lines.add(new Line(850, 220, width, 220, "floor"));
-    
+
     //roofs
     lines.add(new Line(0, 1, width, 1, "roof"));
-    
-    
+
+
     //activateable floors
     lines.add(new Line(60, 210, 100, 210, "activatefloor"));
     lines.add(new Line(2, 100, 40, 100, "activatefloor"));
@@ -156,7 +127,7 @@ class Level4 extends Level {
     lines.add(new Line(350, 120, 350, 70, "leftwall"));
     lines.add(new Line(600, 170, 600, 120, "leftwall"));
     lines.add(new Line(850, 220, 850, 170, "leftwall"));
-    
+
     // right walls
     lines.add(new Line(100, 220, 100, 70, "rightwall"));
     lines.add(new Line(width-2, 140, width-2, 0, "rightwall"));

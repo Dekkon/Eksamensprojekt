@@ -4,14 +4,18 @@ int levelsCompleted = 0;
 int klassetrin = 9;
 
 
+
 boolean keys[] = new boolean [4];
 
 void setup() {
 
   size(1280, 720);
 
-  g = new Level2();
+  g = new Level1();
+  
+ 
 }
+
 
 
 void draw() {
@@ -54,6 +58,10 @@ void keyPressed() {
   if (key == 'w' || key == 'W' || keyCode == UP || key == ' ')  keys[2] = true;
 
   if (keyCode == 8) keys[3] = true;
+
+  // kan ikke bruge enter i keyTyped(), så kører enter key her.
+  if (g.canType[0] && keyCode == ENTER) g.typeanswer(1);
+  if (g.canType[1] && keyCode == ENTER) g.typeanswer(2);
 }
 
 void keyReleased() {
@@ -63,3 +71,15 @@ void keyReleased() {
 
   if (keyCode == 8) keys[3] = false;
 }
+
+void keyTyped() {
+
+  if (g.canType[0]) g.typeanswer(1); 
+  if (g.canType[1]) g.typeanswer(2);
+}
+
+void mousePressed() {
+  
+}
+
+  

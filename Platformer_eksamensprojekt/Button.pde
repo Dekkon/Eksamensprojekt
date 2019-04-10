@@ -21,7 +21,6 @@ class Button {
   }
 
   boolean overbutton() {
-
     if (mouseX > location.x - size.x/2 && mouseX < location.x + size.x/2 && mouseY > location.y - size.y/2 && mouseY < location.y + size.y/2) {
       return true;
     } else {

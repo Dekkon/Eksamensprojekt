@@ -2,7 +2,7 @@ class MathQuestions {
 
   String guess1 = "";
   String guess2 = "";
-  float testguess[] = {-234, -234};
+  int testguess[] = {-234, -234};
   int answer[] = new int [2];
   int redbox[] = {0, 0};
 
@@ -20,13 +20,13 @@ class MathQuestions {
   int kl1lvl1tal[] = {int(random(2, 9)), int(random(2, 9)), int(random(10, 25)), int(random(10, 30))};
 
   int kl1lvl3tal[] = {int(random(2, 3)), int(random(2, 9)), int(random(40, 70)), int(random(1, 6))};
-  
-  int kl1lvl4tal[] = {int(random(1, 9)), int(random(1, 9)), int(random(1,9)), int(random(1, 9)), int(random(1, 9)), int(random(1,9))};
+
+  int kl1lvl4tal[] = {int(random(1, 9)), int(random(1, 9)), int(random(1, 9)), int(random(1, 9)), int(random(1, 9)), int(random(1, 9))};
 
   int kl5lvl1tal[] = {int(random(3, 9)), int(random(10, 19))};
   int kl5lvl2tal[] = {int(random(111, 222)), int(random(111, 222)), int(random(2, 7)), int(random(5, 9)), int(random(2, 9))};  
   int kl5lvl3tal[] = {int(random(2, 4.4)), 12, int(random(3, 6.4)), 60};
-  int kl5lvl4tal[] = {int(random(20, 40)), int(random(50, 70)), int(random(2, 9)), int(random(21,44))};
+  int kl5lvl4tal[] = {int(random(20, 40)), int(random(50, 70)), int(random(2, 9)), int(random(21, 44))};
 
   float whichnum = random(1);
   int kl9lvl1tal[] = {whichnum > 0.5 ? 8 : 5, whichnum>0.5 ? 2 : 4, whichnum>0.5 ? 40 : 10};
@@ -65,42 +65,40 @@ class MathQuestions {
 
 
   void typeanswer(int wq) {
-
-    nodoublepress --;
-
-
-    if (keyPressed && nodoublepress < 0) {
+    if (keyPressed) {
       if (key == '1' || key == '2' || key == '3' || key == '4' || key == '5' || key == '6' || key == '7' || key == '8' || key == '9' || key == '0' || key == '-') {
         if (wq == 1 && guesscheck[0] != 1) guess1 = guess1 + key;
         if (wq == 2 && guesscheck[1] != 1) guess2 = guess2 + key;
       } 
-      nodoublepress = 13; 
       if (keys[3]) {
         if (guess1.length() > 0 && wq == 1 && guesscheck[0] != 1) guess1 = guess1.substring(0, guess1.length()-1);
         if (guess2.length() > 0 && wq == 2 && guesscheck[1] != 1) guess2 = guess2.substring(0, guess2.length()-1);
       }
     }
 
-
-    try {
+    // so the game doesn't crash if a non integer is written. i.e. '2-2'
+    try { 
       if (keyCode == ENTER) {
-        if (wq == 1) testguess[0] = Float.parseFloat(guess1);
-        if (wq == 2) testguess[1] = Float.parseFloat(guess2);
+        if (wq == 1) testguess[0] = Integer.parseInt(guess1);
+        if (wq == 2) testguess[1] = Integer.parseInt(guess2);
       }
     } 
-    catch (Exception e) { // so the game doesn't crash if a non integer is written. i.e. '2-2'
-      guesscheck[0] = 2;
-      guess1 = guess1.substring(0, 0);
-      
-      guesscheck[1] = 2;
-      guess2 = guess2.substring(0, 0);
+    catch (Exception e) { // still records such an answer as an incorrect answer
+      if (wq == 1) {
+        guesscheck[0] = 2;
+        guess1 = guess1.substring(0, 0);
+      }
+      if (wq == 2) {
+        guesscheck[1] = 2;
+        guess2 = guess2.substring(0, 0);
+      }
     }
   }
-  
+
   void wronganswerbox(int x, int y, int answernumber) {
     redbox[answernumber]--;
     if (guesscheck[answernumber] == 2) {
-     // numberofwrongguesses ++;
+      // numberofwrongguesses ++;
       testguess[answernumber] = -234;
       guesscheck[answernumber] = 0;
 
@@ -112,15 +110,14 @@ class MathQuestions {
       rectMode(CENTER);
       rect(x, y, 60, 20);
     }
-    
   }
 
   void questions(int klasse, int currentlevel) {
 
     klassetrin = klasse;
-    
+
     // question 1
-    
+
     // 1. klasse
     if (klassetrin == 1) {
       if (currentlevel == 1) answer[0] = kl1lvl1tal[0] + kl1lvl1tal[1];
@@ -183,5 +180,4 @@ class MathQuestions {
       guess2 = guess2.substring(0, 0);
     }
   }
-
 }
