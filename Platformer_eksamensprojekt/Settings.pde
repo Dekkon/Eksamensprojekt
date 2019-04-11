@@ -3,16 +3,26 @@ class Settings extends Menu {
 
   color buttoncolor;
 
+  PImage instruktion;
+
   Settings() {
     b[0] = new Button(1100, 100, 300, 90, "Klasse: " + klassetrin);
     b[1] = new Button(180, 100, 240, 90, "Menu");
+
+
+    instruktion = loadImage("instruktion.PNG");
+    instruktion.resize(1085, 615);
   }
 
   void run() {
 
+    imageMode(CENTER);
+    image(instruktion, width/2, height/2);
+
     buttons();
 
     wait --;
+
   }
 
 

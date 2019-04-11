@@ -8,6 +8,9 @@ class Level extends Game {
   PImage pausebutton; //pauseknappen billede
   PImage startbutton; //startknappens billede
   PImage finishline;  //finishline billede
+  
+  PImage baggrundsbillede1;
+  PImage baggrundsbillede2;
 
   int currentlevel;
 
@@ -15,14 +18,11 @@ class Level extends Game {
   boolean pause = false;
   boolean dead = false;
 
-
-
   String question1;
   String question2;
 
   String writeguess1;
   String writeguess2;
-
 
   float radius = 17.5;
   boolean onPlatform = false; //boolean to check whether or not player is currently on a platform
@@ -85,7 +85,6 @@ class Level extends Game {
       if (l.wallType == "rightwall" || l.wallType == "gate") { 
         if (p.location.x > l.x2-radius && p.location.x < l.x1-radius+30 && p.location.y > l.y2 && p.location.y < l.y1) p.location.x = l.x1 - radius;
       }
-
       // collision with tilted lines
       if (l.wallType == "tline" && p.location.x > l.x1  - radius+1 && p.location.x < l.x2 + radius-1 && p.location.y >= 500 - radius + (p.location.x-l.x1) * l.angle && p.location.y <= 15 + 500 - radius + (p.location.x-l.x1) * l.angle) {
         p.location.y = 500 - radius + (p.location.x-l.x1) * l.angle;
@@ -161,8 +160,11 @@ class Level extends Game {
 
     if (key == ' ') level = currentlevel + 1;
 
-    if (currentlevel > levelsCompleted) levelsCompleted = currentlevel;
-    println(levelsCompleted);
+    if (currentlevel > levelsCompleted) {
+      levelsCompleted = currentlevel;
+      newRow.setInt("levelsCompleted", levelsCompleted);
+      saveTable(levelsCompletedtable, "data/levelsCompleted.csv");
+    }
   }
 
   void respawn() {

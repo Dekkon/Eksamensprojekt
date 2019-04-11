@@ -11,9 +11,6 @@ class MathQuestions {
   PVector keylocation;
   PImage keyimage;
 
-
-  int nodoublepress;
-
   int[] guesscheck = {0, 0};
 
 
