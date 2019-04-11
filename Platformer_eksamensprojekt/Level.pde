@@ -8,9 +8,8 @@ class Level extends Game {
   PImage pausebutton; //pauseknappen billede
   PImage startbutton; //startknappens billede
   PImage finishline;  //finishline billede
-  
-  PImage baggrundsbillede1;
-  PImage baggrundsbillede2;
+
+  PImage baggrundsbillede;
 
   int currentlevel;
 
@@ -37,12 +36,19 @@ class Level extends Game {
     finishline = loadImage("finishicon.png");
     finishline.resize(100, 55);
 
+    baggrundsbillede = loadImage("baggrundsbillede2.png");
+    baggrundsbillede.resize(width, height);
+
+
     b[0] = new Button(width/2, 245, 200, 70, "resume");
     b[1] = new Button(width/2, 365, 200, 70, "settings");
     b[2] = new Button(width/2, 485, 200, 70, "exit");
   }
 
-
+  void backgroundimage() {
+    imageMode(CORNER);
+    image(baggrundsbillede, 0, 0);
+  }
 
   void stage() {
 
@@ -165,6 +171,28 @@ class Level extends Game {
       newRow.setInt("levelsCompleted", levelsCompleted);
       saveTable(levelsCompletedtable, "data/levelsCompleted.csv");
     }
+    
+    newDataRow.setInt("id", 0);
+    
+    switch(currentlevel) {
+    case 1:
+      newDataRow.setInt("question1", mq.numberofwrongguesses[0]);
+      break;
+    case 2:
+      newDataRow.setInt("question2", mq.numberofwrongguesses[0]);
+      newDataRow.setInt("question3", mq.numberofwrongguesses[1]);
+      break;
+    case 3:
+      newDataRow.setInt("question4", mq.numberofwrongguesses[0]);
+      newDataRow.setInt("question5", mq.numberofwrongguesses[1]);
+      break;
+    case 4:
+      newDataRow.setInt("question6", mq.numberofwrongguesses[0]);
+      newDataRow.setInt("question7", mq.numberofwrongguesses[1]);
+      break;
+    }
+
+    saveTable(answerData, "data/answerData.csv");
   }
 
   void respawn() {

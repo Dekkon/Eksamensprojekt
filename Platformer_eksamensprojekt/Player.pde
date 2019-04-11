@@ -46,4 +46,5 @@ class Player {
 
     speed.x = 0;
   }
+
 }

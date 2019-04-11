@@ -32,6 +32,8 @@ class Level2 extends Level {
   }
 
   void run() {
+    backgroundimage();
+
 
     collision();
     stage();

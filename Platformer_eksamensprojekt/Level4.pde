@@ -31,6 +31,8 @@ class Level4 extends Level {
   }
 
   void run() {
+    backgroundimage();
+
     stage();
     boxdrop();
     elevator();

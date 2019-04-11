@@ -1,4 +1,6 @@
 class Menu extends Game {
+  
+  color buttoncolor;
 
   Menu() {
   }

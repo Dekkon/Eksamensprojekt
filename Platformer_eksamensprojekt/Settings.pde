@@ -1,8 +1,6 @@
 class Settings extends Menu {
   Button[] b = new Button[2];
 
-  color buttoncolor;
-
   PImage instruktion;
 
   Settings() {

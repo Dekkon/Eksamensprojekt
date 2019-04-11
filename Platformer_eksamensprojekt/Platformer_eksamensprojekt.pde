@@ -6,10 +6,12 @@ int klassetrin = 9;
 Table levelsCompletedtable = new Table();
 TableRow newRow = levelsCompletedtable.addRow(); 
 
+Table answerData = new Table();
+TableRow newDataRow = answerData.addRow();
+
 Table loadlevelsCompleted;
 
 boolean keys[] = new boolean [4];
-
 
 
 void setup() {
@@ -17,20 +19,25 @@ void setup() {
   size(1280, 720);
   
   levelsCompletedtable.addColumn("levelsCompleted");
+  answerData.addColumn("id");
+  answerData.addColumn("question1");
+  answerData.addColumn("question2");
+  answerData.addColumn("question3");
+  answerData.addColumn("question4");
+  answerData.addColumn("question5");
+  answerData.addColumn("question6");
+  answerData.addColumn("question7");
   
   loadlevelsCompleted= loadTable("levelsCompleted.csv", "header");
   for (TableRow row : loadlevelsCompleted.rows()) {
     levelsCompleted = row.getInt("levelsCompleted");
   }
 
-  g = new Level1();
+  g = new MainMenu();
 }
-
-
 
 void draw() {
   background(25);
-
 
   switch(g.level) {
   case 1:
@@ -46,7 +53,6 @@ void draw() {
     g = new Level4(); 
     break;
   }
-
   switch(g.menu) {
   case 1:
     g = new MainMenu();
@@ -56,6 +62,9 @@ void draw() {
     break;
   case 3:
     g = new Settings();
+    break;
+  case 4:
+    g = new Data();
     break;
   }
 
@@ -84,8 +93,6 @@ void keyReleased() {
 }
 
 void keyTyped() {
-
-
   if (g.canType[0]) g.typeanswer(1);
   if (g.canType[1]) g.typeanswer(2);
 

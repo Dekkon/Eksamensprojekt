@@ -5,7 +5,8 @@ class MathQuestions {
   int testguess[] = {-234, -234};
   int answer[] = new int [2];
   int redbox[] = {0, 0};
-
+  
+  int numberofwrongguesses[] = {0, 0};
 
   boolean keytogate = false;
   PVector keylocation;
@@ -95,7 +96,14 @@ class MathQuestions {
   void wronganswerbox(int x, int y, int answernumber) {
     redbox[answernumber]--;
     if (guesscheck[answernumber] == 2) {
-      // numberofwrongguesses ++;
+      
+      
+      if (answernumber == 0) numberofwrongguesses[0] ++;
+      if (answernumber == 1) numberofwrongguesses[1] ++;
+      
+      
+      
+      
       testguess[answernumber] = -234;
       guesscheck[answernumber] = 0;
 

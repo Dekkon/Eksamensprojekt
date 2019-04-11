@@ -51,7 +51,7 @@ class Level1 extends Level {
 
 
   void run() { 
-
+    backgroundimage();
 
     stage();
     gates();

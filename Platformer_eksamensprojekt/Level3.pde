@@ -13,7 +13,7 @@ class Level3 extends Level {
     stickman.resize(50, 50);
     spikes = loadImage("spikes.png");
     spikes.resize(100, 40);   
-    
+
     switch(klassetrin) {
     case 1:
       question1 = mq.kl1lvl3tal[0] + " * " + mq.kl1lvl3tal[1];
@@ -39,6 +39,7 @@ class Level3 extends Level {
   }
 
   void run() {
+    backgroundimage();
 
     stage();
     elevator();
@@ -86,6 +87,7 @@ class Level3 extends Level {
       shotfq = 0;
     }
 
+    imageMode(CENTER);
     image(stickman, 720, 170);
 
     for (int i = shots.size()-1; i >= 0; i--) {
