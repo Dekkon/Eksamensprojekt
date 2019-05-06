@@ -18,9 +18,7 @@ class Settings extends Menu {
     image(instruktion, width/2, height/2);
 
     buttons();
-
-    wait --;
-
+    mouselistener();
   }
 
 
@@ -28,16 +26,15 @@ class Settings extends Menu {
     textSize(60);
 
     for (int i = 0; i < b.length; i++) {
-      if (b[i].overbutton()) {
+      if (b[i].mouseOverButton()) {
         buttoncolor = color(150, 150);
         if (mousePressed) {
-          if (i == 0 && wait < 0) {
+          if (i == 0 && mousecheck == 1) {
             if (klassetrin == 1)  klassetrin = 5;
             else if (klassetrin == 5) klassetrin = 9;
             else if (klassetrin == 9) klassetrin = 1;
 
             b[i].buttontext = "Klasse: " + klassetrin;
-            wait = 15;
           }
           if (i == 1) menu = 1;
         }
@@ -46,5 +43,7 @@ class Settings extends Menu {
       }
       b[i].drawbutton(buttoncolor);
     }
+     
   }
+ 
 }

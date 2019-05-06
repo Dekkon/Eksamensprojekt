@@ -1,8 +1,6 @@
 class LevelSelect extends Menu {
   Button[] b = new Button[5];
 
-  color buttoncolor;
-
   LevelSelect() {
     menu = 0;
 
@@ -14,7 +12,7 @@ class LevelSelect extends Menu {
   }
 
   void run() {
-    println(levelsCompleted);
+    mouselistener();
     buttons();
   }
 
@@ -28,11 +26,11 @@ class LevelSelect extends Menu {
       if (i > 0 && i-1 <= levelsCompleted) buttoncolor = color(0, 255, 0, 160);
       if (i-1 > levelsCompleted) buttoncolor = color(255, 0, 0, 160);
 
-      if (b[i].overbutton()) {
+      if (b[i].mouseOverButton()) {
         if (i == 0) buttoncolor = color(150, 150);
         if (i > 0 && i-1 <= levelsCompleted) buttoncolor = color(0, 255, 0, 110);
 
-        if (mousePressed) {
+        if (mousePressed  && mousecheck == 1) {
           if (i == 0) menu = 1;
           if (i > 0 && i-1 <= levelsCompleted) level = i;
         }

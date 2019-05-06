@@ -1,14 +1,12 @@
 class Menu extends Game {
   
-  color buttoncolor;
+  // denne klasse er bare dannet får at få et mere struktureret klasse hieraki.
 
   Menu() {
   }
   
   
-  void run() {
-
-  }
+  
   
   
 }

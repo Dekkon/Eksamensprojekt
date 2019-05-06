@@ -1,28 +1,25 @@
 class Level2 extends Level {
 
-
   Level2() {
-    currentlevel = 2;
-    spawnlocation = new PVector(30, 600);
-    p = new Player(spawnlocation.x, spawnlocation.y, radius);
-
-
-
-
+    currentlevel = 2; // sætter det nuværende level til 2
+    spawnlocation = new PVector(30, 600); // hvor spilleren spawner
+    p = new Player(spawnlocation.x, spawnlocation.y); // initialisere spiller klassen.
+    
+    // teksten til spørgsmålene, samt til der hvor svaret skrives til de forskellige klassetrin dannes i switchen.
     switch(klassetrin) {
     case 1:
-      question1 = mq.kl1lvl1tal[0] + " - " + mq.kl1lvl1tal[1];
-      question2 = mq.kl1lvl1tal[2] + " + " + mq.kl1lvl1tal[3];
+      question1 = mq.lvl1tal[0] + " - " + mq.lvl1tal[1];
+      question2 = mq.lvl1tal[2] + " + " + mq.lvl1tal[3];
       writeguess1 = "= ";
       break;
     case 5:
-      question1 = mq.kl5lvl2tal[0] + " + " + mq.kl5lvl2tal[1];
-      question2 = mq.kl5lvl2tal[2] + " + " + mq.kl5lvl2tal[3] + " * " + mq.kl5lvl2tal[4];
+      question1 = mq.lvl2tal[0] + " + " + mq.lvl2tal[1];
+      question2 = mq.lvl2tal[2] + " + " + mq.lvl2tal[3] + " * " + mq.lvl2tal[4];
       writeguess1 = "= ";
       break;
     case 9:
-      question1 = mq.kl9lvl2tal[0] + "x - (" + mq.kl9lvl2tal[1] + "x + " + mq.kl9lvl2tal[2] + ") = " + mq.kl9lvl2tal[3];
-      question2 = "√" + mq.kl9lvl2tal[4] + " + √" + mq.kl9lvl2tal[5];
+      question1 = mq.lvl2tal[0] + "x - (" + mq.lvl2tal[1] + "x + " + mq.lvl2tal[2] + ") = " + mq.lvl2tal[3];
+      question2 = "√" + mq.lvl2tal[4] + " + √" + mq.lvl2tal[5];
       writeguess1 = "x = ";
       break;
     }    
@@ -32,35 +29,38 @@ class Level2 extends Level {
   }
 
   void run() {
-    backgroundimage();
+    backgroundimage(); //bagrundsbilledet
 
 
-    collision();
-    stage();
-    elevator();
-    movingFloors();
-    finishline(1180, 125);
+    
+    stage();  // hvor banen tegnes
+    elevator(); // bevægelse af eleavtore
+    movingFloors(); // bevægelse af bevægende gulve
+    finishline(1180, 125); // hvor 'finishline' billedet vises
 
-    mathQuestion(1190, 390, 1);
-    blueBox(1102, 520, 176, 110);
-    mathQuestion(72, 230, 2);
-    blueBox(2, 340, 196, 110);
-    if (p.location.x > 1100) canType[0] = true;
-    else canType[0] = false;
-    if (p.location.x < 200 && p.location.y < 550) canType[1] = true;
+    mathQuestion(1190, 390, 1); // visning af spørgsmål 1
+    blueBox(1102, 520, 176, 110); // blå boks til spørgsmål 1
+    mathQuestion(72, 230, 2); // visning af spørgsmål 2
+    blueBox(2, 340, 196, 110); // blå boks til spørsgmål 2
+    if (p.location.x > 1100) canType[0] = true; // hvor man kan svarer på sprg 1.
+    else canType[0] = false; 
+    if (p.location.x < 200 && p.location.y < 550) canType[1] = true; // hvor man kan svare på sprg 2.
     else canType[1] = false;
-    mq.questions(klassetrin, currentlevel);
-
+    mq.questions(currentlevel); // spørgsmålene til det nuværende level.
+    
+    //bevægelse, styring og visning af spiller samt kollision mellem spiller og bane.
     playermovement();
     if (!pause) p.update();
     collision();
     p.display();
 
-    respawn();
-
+    respawn(); // respawn når man dør
+    
+    //styring af pausning af spillet
     pauseGame();
     if (pause) inGameMenu();
-
+    
+    // når man klarer banen.
     if (p.location.x > width) levelisComplete = true;
     if (levelisComplete)levelComplete();
   } 

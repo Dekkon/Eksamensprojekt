@@ -2,20 +2,18 @@ class MainMenu extends Menu {
 
   Button[] b = new Button[3];
 
-  color buttoncolor = color(150, 200);
-
   MainMenu() {
     b[0] = new Button(width/2, 180, 400, 120, "Levels");
     b[1] = new Button(width/2, 360, 400, 120, "Settings");
     b[2] = new Button(width/2, 540, 400, 120, "Data");
+    buttoncolor = color(150, 200);
   }
 
   void run() {
-    background(25); 
-
+    background(25);     
+    mouselistener();
     buttons();
   }
-
 
   void buttons() {
 
@@ -23,9 +21,9 @@ class MainMenu extends Menu {
     textSize(90);
 
     for (int i = 0; i < b.length; i++) {
-      if (b[i].overbutton()) {
+      if (b[i].mouseOverButton()) {
         buttoncolor = color(150, 150);
-        if (mousePressed) {
+        if (mousePressed && mousecheck == 1) {
           if (i == 0) menu = 2;
           if (i == 1) menu = 3;
           if (i == 2) menu = 4;

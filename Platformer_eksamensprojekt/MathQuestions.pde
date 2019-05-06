@@ -4,39 +4,95 @@ class MathQuestions {
   String guess2 = "";
   int testguess[] = {-234, -234};
   int answer[] = new int [2];
+  int guesscheck[] = {0, 0};
   int redbox[] = {0, 0};
-  
+
   int numberofwrongguesses[] = {0, 0};
 
   boolean keytogate = false;
   PVector keylocation;
   PImage keyimage;
 
-  int[] guesscheck = {0, 0};
 
 
-  int kl1lvl1tal[] = {int(random(2, 9)), int(random(2, 9)), int(random(10, 25)), int(random(10, 30))};
+  int lvl1tal[] = new int[4];
+  int lvl2tal[] = new int[6];
+  int lvl3tal[] = new int[6];
+  int lvl4tal[] = new int[6];
 
-  int kl1lvl3tal[] = {int(random(2, 3)), int(random(2, 9)), int(random(40, 70)), int(random(1, 6))};
-
-  int kl1lvl4tal[] = {int(random(1, 9)), int(random(1, 9)), int(random(1, 9)), int(random(1, 9)), int(random(1, 9)), int(random(1, 9))};
-
-  int kl5lvl1tal[] = {int(random(3, 9)), int(random(10, 19))};
-  int kl5lvl2tal[] = {int(random(111, 222)), int(random(111, 222)), int(random(2, 7)), int(random(5, 9)), int(random(2, 9))};  
-  int kl5lvl3tal[] = {int(random(2, 4.4)), 12, int(random(3, 6.4)), 60};
-  int kl5lvl4tal[] = {int(random(20, 40)), int(random(50, 70)), int(random(2, 9)), int(random(21, 44))};
-
-  float whichnum = random(1);
-  int kl9lvl1tal[] = {whichnum > 0.5 ? 8 : 5, whichnum>0.5 ? 2 : 4, whichnum>0.5 ? 40 : 10};
-  int kl9lvl2tal[] = {whichnum > 0.5 ? 6 : 5, whichnum > 0.5 ? 3 : 2, whichnum > 0.5 ? 8 : 4, whichnum > 0.5 ? 16 : 8, random(1)>0.5 ? 4 : 16, random(1)>0.5 ? 9 : 25 };
-  int kl9lvl3tal[] = {whichnum > 0.5 ? 3 : 4, whichnum > 0.5 ? 3 : 1, whichnum > 0.5 ? 2 : 2, whichnum > 0.5 ? 4 : 5, random(1) > 0.5 ? 25 : 16, random(1) > 0.5 ? 36 : 9};
-  int kl9lvl4tal[] = {int(random(222, 999)), int(random(222, 999)), int(random(11, 19)), int(random(31, 59))};
-
-  int klassetrin;
 
   MathQuestions() {
     keyimage = loadImage("key.png");
     keyimage.resize(30, 15);
+
+    switch(klassetrin) {
+    case 1:
+      //level 1
+      lvl1tal[0] = int(random(2, 9)); 
+      lvl1tal[1] = int(random(2, 9)); 
+      lvl1tal[2] = int(random(10, 20)); 
+      lvl1tal[3] = int(random(10, 30));
+      //level 3
+      lvl3tal[0] = int(random(2, 3));
+      lvl3tal[1] = int(random(2, 9));
+      lvl3tal[2] = int(random(40, 70));
+      lvl3tal[3] = int(random(1, 6));
+      //level 4
+      lvl4tal[0] = int(random(1, 9));
+      lvl4tal[1] = int(random(1, 9));
+      lvl4tal[2] = int(random(1, 9));
+      lvl4tal[3] = int(random(1, 9));
+      lvl4tal[4] = int(random(1, 9));
+      lvl4tal[5] = int(random(1, 9));
+      break;
+    case 5:
+      //level 1
+      lvl1tal[0]= int(random(3, 9)); 
+      lvl1tal[1] = int(random(10, 19));
+      //level 2
+      lvl2tal[0] = int(random(111, 222)); 
+      lvl2tal[1] = int(random(111, 222)); 
+      lvl2tal[2] = int(random(2, 7)); 
+      lvl2tal[3] = int(random(5, 9)); 
+      lvl2tal[4] = int(random(2, 9));
+      //level 3
+      lvl3tal[0] = int(random(2, 4.4));
+      lvl3tal[1] = 12;
+      lvl3tal[2] = int(random(3, 6.4));
+      lvl3tal[3] = 60;
+      //level 4
+      lvl4tal[0] = int(random(20, 40));
+      lvl4tal[1] = int(random(50, 70));
+      lvl4tal[2] = int(random(2, 9));
+      lvl4tal[3] = int(random(21, 44));
+      break;
+    case 9:
+      float whichnum = random(1);
+      //level 1
+      lvl1tal[0] = whichnum > 0.5 ? 8 : 5; 
+      lvl1tal[1] = whichnum>0.5 ? 2 : 4 ; 
+      lvl1tal[2] = whichnum>0.5 ? 40 : 10;
+      //level 2
+      lvl2tal[0] = whichnum > 0.5 ? 6 : 5;
+      lvl2tal[1] = whichnum > 0.5 ? 3 : 2;
+      lvl2tal[2] = whichnum > 0.5 ? 8 : 4;
+      lvl2tal[3] = whichnum > 0.5 ? 16 : 8;
+      lvl2tal[4] = random(1)>0.5 ? 4 : 16;
+      lvl2tal[5] = random(1)>0.5 ? 9 : 25;
+      //level 3
+      lvl3tal[0] = whichnum > 0.5 ? 3 : 4;
+      lvl3tal[1] = whichnum > 0.5 ? 3 : 1;
+      lvl3tal[2] = 2;
+      lvl3tal[3] = whichnum > 0.5 ? 4 : 5;
+      lvl3tal[4] = random(1) > 0.5 ? 25 : 16;
+      lvl3tal[5] = random(1) > 0.5 ? 36 : 9;
+      //level 4
+      lvl4tal[0] = int(random(222, 999));
+      lvl4tal[1] = int(random(222, 999));
+      lvl4tal[2] = int(random(11, 19));
+      lvl4tal[3] = int(random(31, 59));      
+      break;
+    }
   }
 
 
@@ -49,7 +105,7 @@ class MathQuestions {
     image(keyimage, keylocation.x, keylocation.y);
   }
 
-  void seekKeyhole(PVector target) {
+  void keySeekLocation(PVector target) {
     PVector distance = PVector.sub(target, keylocation);
     PVector desired = PVector.sub(target, keylocation);
 
@@ -96,14 +152,13 @@ class MathQuestions {
   void wronganswerbox(int x, int y, int answernumber) {
     redbox[answernumber]--;
     if (guesscheck[answernumber] == 2) {
-      
-      
+
+
       if (answernumber == 0) numberofwrongguesses[0] ++;
       if (answernumber == 1) numberofwrongguesses[1] ++;
-      
-      
-      
-      
+
+
+
       testguess[answernumber] = -234;
       guesscheck[answernumber] = 0;
 
@@ -117,32 +172,30 @@ class MathQuestions {
     }
   }
 
-  void questions(int klasse, int currentlevel) {
-
-    klassetrin = klasse;
+  void questions(int currentlevel) {
 
     // question 1
 
     // 1. klasse
     if (klassetrin == 1) {
-      if (currentlevel == 1) answer[0] = kl1lvl1tal[0] + kl1lvl1tal[1];
-      if (currentlevel == 2) answer[0] = kl1lvl1tal[0] - kl1lvl1tal[1];
-      if (currentlevel == 3) answer[0] = kl1lvl3tal[0] * kl1lvl3tal[1];
-      if (currentlevel == 4) answer[0] = kl1lvl4tal[0] + kl1lvl4tal[1] + kl1lvl4tal[2];
+      if (currentlevel == 1) answer[0] = lvl1tal[0] + lvl1tal[1];
+      if (currentlevel == 2) answer[0] = lvl1tal[0] - lvl1tal[1];
+      if (currentlevel == 3) answer[0] = lvl3tal[0] * lvl3tal[1];
+      if (currentlevel == 4) answer[0] = lvl4tal[0] + lvl4tal[1] + lvl4tal[2];
     }
     // 5. klasse
     if (klassetrin == 5) {
-      if (currentlevel == 1) answer[0] = kl5lvl1tal[0] * kl5lvl1tal[1];
-      if (currentlevel == 2) answer[0] = kl5lvl2tal[0] + kl5lvl2tal[1];
-      if (currentlevel == 3) answer[0] = kl5lvl3tal[1] / kl5lvl3tal[0];
-      if (currentlevel == 4) answer[0] = kl5lvl4tal[0] - kl5lvl4tal[1];
+      if (currentlevel == 1) answer[0] = lvl1tal[0] * lvl1tal[1];
+      if (currentlevel == 2) answer[0] = lvl2tal[0] + lvl2tal[1];
+      if (currentlevel == 3) answer[0] = lvl3tal[1] / lvl3tal[0];
+      if (currentlevel == 4) answer[0] = lvl4tal[0] - lvl4tal[1];
     }
     // 9. klasse
     if (klassetrin == 9) {
-      if (currentlevel == 1) answer[0] = (kl9lvl1tal[2] - kl9lvl1tal[0] * kl9lvl1tal[1]) / kl9lvl1tal[0];
-      if (currentlevel == 2) answer[0] = (kl9lvl2tal[2] + kl9lvl2tal[3]) / (kl9lvl2tal[0] - kl9lvl2tal[1]);
-      if (currentlevel == 3) answer[0] = (kl9lvl3tal[2] * kl9lvl3tal[3] - kl9lvl3tal[0] * kl9lvl3tal[1]) / (kl9lvl3tal[0] - kl9lvl3tal[2]) ;
-      if (currentlevel == 4) answer[0] = kl9lvl4tal[0] + kl9lvl4tal[1];
+      if (currentlevel == 1) answer[0] = (lvl1tal[2] - lvl1tal[0] * lvl1tal[1]) / lvl1tal[0];
+      if (currentlevel == 2) answer[0] = (lvl2tal[2] + lvl2tal[3]) / (lvl2tal[0] - lvl2tal[1]);
+      if (currentlevel == 3) answer[0] = (lvl3tal[2] * lvl3tal[3] - lvl3tal[0] * lvl3tal[1]) / (lvl3tal[0] - lvl3tal[2]) ;
+      if (currentlevel == 4) answer[0] = lvl4tal[0] + lvl4tal[1];
     }
 
     if (testguess[0] == -234) guesscheck[0] = 0;
@@ -158,22 +211,22 @@ class MathQuestions {
     /// question 2 
     if (klassetrin == 1) {
       if (currentlevel == 1);
-      if (currentlevel == 2) answer[1] = kl1lvl1tal[2] + kl1lvl1tal[3];
-      if (currentlevel == 3) answer[1] = kl1lvl3tal[2] + kl1lvl3tal[3];
-      if (currentlevel == 4) answer[1] = kl1lvl4tal[3] + kl1lvl4tal[4] - kl1lvl4tal[5];
+      if (currentlevel == 2) answer[1] = lvl1tal[2] + lvl1tal[3];
+      if (currentlevel == 3) answer[1] = lvl3tal[2] + lvl3tal[3];
+      if (currentlevel == 4) answer[1] = lvl4tal[3] + lvl4tal[4] - lvl4tal[5];
     }
     // 5. klasse
     if (klassetrin == 5) {
       if (currentlevel == 1);
-      if (currentlevel == 2) answer[1] = kl5lvl2tal[2] + kl5lvl2tal[3] * kl5lvl2tal[4];
-      if (currentlevel == 3) answer[1] = kl5lvl3tal[3] / kl5lvl3tal[2];
-      if (currentlevel == 4) answer[1] = kl5lvl4tal[2] * kl5lvl4tal[3];
+      if (currentlevel == 2) answer[1] = lvl2tal[2] + lvl2tal[3] * lvl2tal[4];
+      if (currentlevel == 3) answer[1] = lvl3tal[3] / lvl3tal[2];
+      if (currentlevel == 4) answer[1] = lvl4tal[2] * lvl4tal[3];
     }
     // 9. klasse
     if (klassetrin == 9) {
-      if (currentlevel == 2) answer[1] = int(sqrt(kl9lvl2tal[4])) + int(sqrt(kl9lvl2tal[5]));
-      if (currentlevel == 3) answer[1] = int(sqrt(kl9lvl3tal[4])) - int(sqrt(kl9lvl3tal[5]));
-      if (currentlevel == 4) answer[1] = kl9lvl4tal[2] * kl9lvl4tal[3];
+      if (currentlevel == 2) answer[1] = int(sqrt(lvl2tal[4])) + int(sqrt(lvl2tal[5]));
+      if (currentlevel == 3) answer[1] = int(sqrt(lvl3tal[4])) - int(sqrt(lvl3tal[5]));
+      if (currentlevel == 4) answer[1] = lvl4tal[2] * lvl4tal[3];
     }
 
     if (testguess[1] == -234) guesscheck[1] = 0;

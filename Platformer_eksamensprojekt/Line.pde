@@ -9,8 +9,6 @@ class Line {
   int mfspeed = 2;
   int elespeed = 1;
 
-  int walltype;
-
   String wallType;
 
   Line(float x1, float y1, float x2, float y2, String wt) {

@@ -3,6 +3,8 @@ Game g;
 int levelsCompleted;
 int klassetrin = 9;
 
+int mousecheck = 0;
+
 Table levelsCompletedtable = new Table();
 TableRow newRow = levelsCompletedtable.addRow(); 
 
@@ -96,10 +98,4 @@ void keyTyped() {
   if (g.canType[0]) g.typeanswer(1);
   if (g.canType[1]) g.typeanswer(2);
 
-}
-
-void mousePressed() {
-  
-}
-
-  
+}  

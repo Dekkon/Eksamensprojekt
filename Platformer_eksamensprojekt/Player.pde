@@ -4,18 +4,17 @@ class Player {
   PVector speed;
   PVector acceleration;
 
-  float radius;
+  float radius = 17.5;
 
   float angle = 0;
   float anglespeed = 0;
 
 
-  Player(float x, float y, float r) {
+  Player(float x, float y) {
     location = new PVector(x, y);
     speed = new PVector(0, 0);
     acceleration = new PVector(0, 0.7);
 
-    radius = r;
   }
 
   void display() {

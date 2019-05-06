@@ -8,20 +8,20 @@ class Level4 extends Level {
   Level4() {
     currentlevel = 4;
     spawnlocation = new PVector(30, 630);
-    p = new Player(spawnlocation.x, spawnlocation.y, radius);
+    p = new Player(spawnlocation.x, spawnlocation.y);
 
     switch(klassetrin) {
     case 1:
-      question1 = mq.kl1lvl4tal[0] + " + " + mq.kl1lvl4tal[1] + " + " + mq.kl1lvl4tal[2];
-      question2 = mq.kl1lvl4tal[3] + " + " + mq.kl1lvl4tal[4] + " - " + mq.kl1lvl4tal[5];
+      question1 = mq.lvl4tal[0] + " + " + mq.lvl4tal[1] + " + " + mq.lvl4tal[2];
+      question2 = mq.lvl4tal[3] + " + " + mq.lvl4tal[4] + " - " + mq.lvl4tal[5];
       break;
     case 5:
-      question1 = mq.kl5lvl4tal[0] + " - " + mq.kl5lvl4tal[1];
-      question2 = mq.kl5lvl4tal[2] + " * " + mq.kl5lvl4tal[3];
+      question1 = mq.lvl4tal[0] + " - " + mq.lvl4tal[1];
+      question2 = mq.lvl4tal[2] + " * " + mq.lvl4tal[3];
       break;
     case 9:
-      question1 = mq.kl9lvl4tal[0] + " + " + mq.kl9lvl4tal[1];
-      question2 = mq.kl9lvl4tal[2] + " * " + mq.kl9lvl4tal[3];
+      question1 = mq.lvl4tal[0] + " + " + mq.lvl4tal[1];
+      question2 = mq.lvl4tal[2] + " * " + mq.lvl4tal[3];
       break;
     }
     writeguess1 = "= ";
@@ -47,7 +47,7 @@ class Level4 extends Level {
     else canType[0] = false;
     if (p.location.x < 200 && p.location.y < 300) canType[1] = true;
     else canType[1] = false;
-    mq.questions(klassetrin, currentlevel);
+    mq.questions(currentlevel);
 
     playermovement();
     if (!pause) p.update();
@@ -67,10 +67,10 @@ class Level4 extends Level {
   void boxdrop() {
     for (int i = boxes.size()-1; i >= 0; i--) {
       Box b = boxes.get(i);
-      b.boxesrun();
+      b.boxesRun();
 
       //collision with player and boxes
-      if (PVector.dist(p.location, b.location) <  radius + 15) {
+      if (PVector.dist(p.location, b.location) <  p.radius + 15) {
         dead = true;
       }
 

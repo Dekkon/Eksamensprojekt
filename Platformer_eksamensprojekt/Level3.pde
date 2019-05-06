@@ -7,7 +7,7 @@ class Level3 extends Level {
   Level3() { 
     currentlevel = 3;
     spawnlocation = new PVector(30, 120);
-    p = new Player(spawnlocation.x, spawnlocation.y, radius);
+    p = new Player(spawnlocation.x, spawnlocation.y);
 
     stickman = loadImage("Stickman.png");
     stickman.resize(50, 50);
@@ -16,20 +16,20 @@ class Level3 extends Level {
 
     switch(klassetrin) {
     case 1:
-      question1 = mq.kl1lvl3tal[0] + " * " + mq.kl1lvl3tal[1];
-      question2 = mq.kl1lvl3tal[2] + " + " + mq.kl1lvl3tal[3];
+      question1 = mq.lvl3tal[0] + " * " + mq.lvl3tal[1];
+      question2 = mq.lvl3tal[2] + " + " + mq.lvl3tal[3];
       writeguess1 = "= ";
       writeguess2 = "= ";
       break;
     case 5:
-      question1 = mq.kl5lvl3tal[0] + " * x = " + mq.kl5lvl3tal[1];
-      question2 = mq.kl5lvl3tal[2] + "x = " + mq.kl5lvl3tal[3];
+      question1 = mq.lvl3tal[0] + " * x = " + mq.lvl3tal[1];
+      question2 = mq.lvl3tal[2] + "x = " + mq.lvl3tal[3];
       writeguess1 = "x = ";
       writeguess2 = "x = ";
       break;
     case 9:
-      question1 = mq.kl9lvl3tal[0] + "(x + " + mq.kl9lvl3tal[1] + ") = " + mq.kl9lvl3tal[2] + "(" + mq.kl9lvl3tal[3] + " + x)";
-      question2 = "√" + mq.kl9lvl3tal[4] + " - √" + mq.kl9lvl3tal[5];
+      question1 = mq.lvl3tal[0] + "(x + " + mq.lvl3tal[1] + ") = " + mq.lvl3tal[2] + "(" + mq.lvl3tal[3] + " + x)";
+      question2 = "√" + mq.lvl3tal[4] + " - √" + mq.lvl3tal[5];
       writeguess1 = "x = ";
       writeguess2 = "= ";
       break;
@@ -58,7 +58,7 @@ class Level3 extends Level {
     else canType[0] = false;
     if (p.location.x > 800 && p.location.x < 1050 && p.location.y > 200 && p.location.y < 400) canType[1] = true;
     else canType[1] = false;
-    mq.questions(klassetrin, currentlevel);
+    mq.questions(currentlevel);
 
     playermovement();
     if (!pause) p.update();
@@ -94,7 +94,7 @@ class Level3 extends Level {
       Shot s = shots.get(i);
       s.display();
       s.movement();
-      if (PVector.dist(p.location, s.location) < radius+2) {
+      if (PVector.dist(p.location, s.location) < p.radius+2) {
         dead = true;
       }
 
