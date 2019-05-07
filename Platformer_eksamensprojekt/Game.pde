@@ -2,16 +2,10 @@ class Game {
 
   int level; // variabel til skift mellem levels
   int menu; // variabel til skift mellem menuer
-  color buttoncolor; // farve af knapper
-  
-  
-  
+  color buttoncolor; // farve af knapper  
   boolean canType[] = new boolean[2]; // til spørgsmål; om man kan skrive til sprg 1/2. 
 
-  //int levelsCompleted;
-
-  Game() {
-    
+  Game() {   
   }
 
   // run funktionen, hovedfunktion som kører i draw loopet, lavet her da sub-klasserne i main er fra denne, så funktionen er nød til at eksisterer i suberklassen for at programmet kan kører.

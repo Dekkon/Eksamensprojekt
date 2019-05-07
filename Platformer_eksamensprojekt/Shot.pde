@@ -3,7 +3,7 @@ class Shot {
   PVector location;
   PVector speed;
   
-  int lifespan = 98;
+  int lifespan = 98; //livstid af skud
   
   Shot(float x, float y) {
     location = new PVector(x, y);

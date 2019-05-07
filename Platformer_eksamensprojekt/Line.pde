@@ -1,17 +1,19 @@
 class Line {
+  //linjernes start og slutposition.
   float x1;
   float y1;
   float x2;
   float y2;
 
-  float angle;
+  float angle; //vinklen linjen er i
 
-  int mfspeed = 2;
-  int elespeed = 1;
+  int mfspeed = 2; //hastighed af 'movingfloors'
+  int elespeed = 1; //hasighed af 'elevatorer'
 
-  String wallType;
-
-  Line(float x1, float y1, float x2, float y2, String wt) {
+  String wallType; //hvilken type linje det er for banen.
+  
+  //constructor hvor koordinater og walltype skrives.
+  Line(float x1, float y1, float x2, float y2, String wt) { 
     this.x1 = x1;
     this.y1 = y1;
     this.x2 = x2;
@@ -19,9 +21,9 @@ class Line {
 
     wallType = wt;
 
-    // try statement so game doesn't crash by dividing by zero
+    // try statement så spillet ikke ender med at crashe ved at dividere med 0.
     try {
-     angle = (y2-y1)/(x2-x1) ;
+     angle = (y2-y1)/(x2-x1) ; // regner vinklen
     } 
     catch (Exception e) { 
     }

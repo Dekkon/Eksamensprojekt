@@ -1,19 +1,21 @@
 class Level3 extends Level {
 
-  ArrayList<Shot> shots = new ArrayList<Shot>();
-  PImage stickman, spikes;
-  int shotfq;
+  ArrayList<Shot> shots = new ArrayList<Shot>(); // arrayliste for skudene i banen.
+  PImage stickman, spikes; // billede af stickman enemyen. og et billede af spikes
+  int shotfq; // int-værdi til brug af hvor ofte der skal skydes.
 
   Level3() { 
-    currentlevel = 3;
-    spawnlocation = new PVector(30, 120);
-    p = new Player(spawnlocation.x, spawnlocation.y);
-
+    currentlevel = 3; // sætter det nuværende level til 2
+    spawnlocation = new PVector(30, 120); // hvor spilleren spawner
+    p = new Player(spawnlocation.x, spawnlocation.y); // initialisere spiller klassen.
+    
+    //loader billeder
     stickman = loadImage("Stickman.png");
     stickman.resize(50, 50);
     spikes = loadImage("spikes.png");
     spikes.resize(100, 40);   
-
+    
+    // teksten til spørgsmålene, samt til der hvor svaret skrives til de forskellige klassetrin dannes i switchen.
     switch(klassetrin) {
     case 1:
       question1 = mq.lvl3tal[0] + " * " + mq.lvl3tal[1];
@@ -35,70 +37,76 @@ class Level3 extends Level {
       break;
     }
 
-    lines();
+    lines(); // linjerne til banen
   }
 
   void run() {
     backgroundimage();
 
-    stage();
-    elevator();
-    movingFloors();
-    enemy();
-    pit();
-    finishline(1180, 545);
+    stage(); // banen tegnes
+    elevator(); // elevator funktionalitet
+    movingFloors(); //bevægene gulve funktionalitet
+    enemy(); //tegning af enemy, samt skud
+    pit(); //pit med spikes, man kan falde ned i
+    finishline(1180, 545); // finishline billede
 
-    blueBox(50, 40, 150, 100);
-    mathQuestion(170, 30, 1);
-    blueBox(800, 250, 150, 100);
-    mathQuestion(860, 190, 2);
+    blueBox(50, 40, 150, 100); // blå boks til sprg 1
+    mathQuestion(170, 30, 1); // visning af sprg 1
+    blueBox(800, 250, 150, 100); // blå boks til sprg 2
+    mathQuestion(860, 190, 2); // visning af sprg 2
 
-
+    //steder hvor man kan svarer på spørgsmålene
     if (p.location.x < 200) canType[0] = true;
     else canType[0] = false;
     if (p.location.x > 800 && p.location.x < 1050 && p.location.y > 200 && p.location.y < 400) canType[1] = true;
     else canType[1] = false;
-    mq.questions(currentlevel);
-
+    mq.questions(currentlevel); // spørgsmålene til det nuværende level.
+    
+    //bevægelse, styring og visning af spiller samt kollision mellem spiller og bane.
     playermovement();
     if (!pause) p.update();
     collision();
     p.display();
 
-    respawn();
-
+    respawn(); // respawn når spilleren dør
+    
+    //pausning af spillet
     pauseGame();
     if (pause) inGameMenu();
-
+    
+    //når man klarer banen.
     if (p.location.x > width) levelisComplete = true;
     if (levelisComplete)levelComplete();
   }
-
+  
+  //modstanderen som skyder mod spilleren
   void enemy() {
 
-    shotfq ++;
-    int nuoshots = 2;
-
+    shotfq ++; //tæller shotfrequency op en per frame
+    int nuoshots = 15;
+    
+    //ændrer nuoshots, baseret på om man har svaret på spørgsmålet eller ej, for at gøre det lettere at passere når man har svaret rigtigt.
     if (mq.guesscheck[0] != 1) nuoshots = 15;
     if (mq.guesscheck[0] == 1) nuoshots = 55;
 
-    if (shotfq == nuoshots) {
+    if (shotfq == nuoshots) { // hver gang shotfq, når værdien nuoshots, tilføjes et Shot objekt.
       shots.add(new Shot(700, 155));
       shotfq = 0;
     }
 
     imageMode(CENTER);
-    image(stickman, 720, 170);
-
+    image(stickman, 720, 170); // viser stickman billedet
+    
+    //koden for skudene
     for (int i = shots.size()-1; i >= 0; i--) {
       Shot s = shots.get(i);
-      s.display();
-      s.movement();
-      if (PVector.dist(p.location, s.location) < p.radius+2) {
-        dead = true;
+      s.display(); //viser skudene
+      s.movement(); // bevægelse af dem
+      if (PVector.dist(p.location, s.location) < p.radius+2) { //kollision mellem spiller og skud
+        dead = true; //er der kollison dør spilleren
       }
 
-      if (s.lifespan <= 0) shots.remove(i);
+      if (s.lifespan <= 0) shots.remove(i); //fjerne skudene
     }
   }
 
@@ -113,9 +121,8 @@ class Level3 extends Level {
       noTint();
       image(spikes, 250 + i * 75, 460);
     }
-    // image(spikes, 330, 460);
   }
-
+  //elevatorens funktionalitet
   void elevator() {
 
     for (Line l : lines) {
@@ -128,6 +135,7 @@ class Level3 extends Level {
       }
     }
   }
+  //funktionalitet for det bevægende gulv
   void movingFloors() {
 
     for (Line l : lines) {
@@ -144,7 +152,7 @@ class Level3 extends Level {
       }
     }
   }
-
+  // danner alle linjerne til banen, hvori start og slutpunktet af linjen skrives, samt hvilken type linje for banen det er.
   void lines() {
     //floors
     lines.add(new Line(0, 140, 200, 140, "floor"));

@@ -25,7 +25,7 @@ class Level extends Game {
 
   boolean onPlatform = false; //boolean to check whether or not player is currently on a platform
 
-  Button[] b = new Button[3]; // knap klassen i et array med 3, da der er 3 knapper i levels.
+  Button[] b = new Button[2]; // knap klassen i et array med 3, da der er 3 knapper i levels.
 
 
   Level() {
@@ -39,9 +39,8 @@ class Level extends Game {
     baggrundsbillede.resize(width, height);
 
     // de tre knapper, med deres lokation, størrelse, og tekst på knappen.
-    b[0] = new Button(width/2, 245, 200, 70, "resume");
-    b[1] = new Button(width/2, 365, 200, 70, "settings");
-    b[2] = new Button(width/2, 485, 200, 70, "exit");
+    b[0] = new Button(width/2, 300, 200, 70, "resume");
+    b[1] = new Button(width/2, 420, 200, 70, "exit");
   }
   // funktion for bagrundsbilledet
   void backgroundimage() {
@@ -246,7 +245,7 @@ class Level extends Game {
     rectMode(CENTER);
     fill(0, 230);
     noStroke();
-    rect(width/2, height/2, 300, 380);
+    rect(width/2, height/2, 300, 280);
 
     // for loop for knapperne
     for (int i = 0; i < b.length; i++) {
@@ -255,8 +254,7 @@ class Level extends Game {
         buttoncolor = color(150, 150); // knappernes farve hvis musen er over dem
         if (mousePressed && mousecheck == 1) { // klik på knapperne
           if (i == 0) pause = false; // resume knappen, gør at spillet fortsætter hvis den klikkes på
-          if (i == 1);
-          if (i == 2) menu = 1; // menu knappen for en tlbage til menuen. hvis den klikkes på
+          if (i == 1) menu = 1; // menu knappen for en tlbage til menuen. hvis den klikkes på
         }
       } else {
         buttoncolor = color(150, 200); // farven hvis musen ikke er over den

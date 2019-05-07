@@ -64,13 +64,16 @@ class Level2 extends Level {
     if (p.location.x > width) levelisComplete = true;
     if (levelisComplete)levelComplete();
   } 
-
+  
+  // styrer bevægelse af bevægene gulve
   void movingFloors() {
 
     for (Line l : lines) {
-      if (l.wallType == "movingfloor") {
-
-        if (l.x1 > 250 && l.x1 < 390) {
+      if (l.wallType == "movingfloor") { // så koden kun virke for bevægene gulve
+        
+        //identificere de specifikke gulve og får den til at skifte retning frem og tilbage
+        
+        if (l.x1 > 250 && l.x1 < 390) {  
           if (l.x1 < 260 && l.mfspeed < 0) l.mfspeed *= -1;
           if (l.x1 > 380 && l.mfspeed > 0) l.mfspeed *= -1;
         }
@@ -78,7 +81,7 @@ class Level2 extends Level {
           if (l.x1 < 560 && l.mfspeed < 0) l.mfspeed *= -1;
           if (l.x1 > 680 && l.mfspeed > 0) l.mfspeed *= -1;
         }
-
+        //bevæger gulvene
         l.x1 += l.mfspeed;
         l.x2 += l.mfspeed;
       }
@@ -89,13 +92,15 @@ class Level2 extends Level {
   void elevator() {
 
     for (Line l : lines) {
-      if (l.wallType == "elevator") {
-
+      if (l.wallType == "elevator") { // identificere elevatorne
+        
+        //finder de to elevator, og får dem til at bevæge sig frem og tilbage,
+        
         if (l.x1 == 1100) {
           if (l.y1 > 630 && l.elespeed > 0) l.elespeed *= -1;
           if (l.y1 < 450 && l.elespeed < 0) l.elespeed *= -1;
 
-          if (mq.guesscheck[0] == 1) {
+          if (mq.guesscheck[0] == 1) { // så den kun bevæger sig, hvis det første spørgsmål er svaret rigtigt på.
             l.y1 += l.elespeed;
             l.y2 += l.elespeed;
           }
@@ -104,7 +109,7 @@ class Level2 extends Level {
           if (l.y1 > 450 && l.elespeed > 0) l.elespeed *= -1;
           if (l.y1 < 270 && l.elespeed < 0) l.elespeed *= -1;
 
-          if (mq.guesscheck[1] == 1) {
+          if (mq.guesscheck[1] == 1) { // så den kun bevæger sig hvis det andet sprg, er svaret rigtigt på
             l.y1 += l.elespeed;
             l.y2 += l.elespeed;
           }
@@ -112,9 +117,8 @@ class Level2 extends Level {
       }
     }
   }
-
+  // danner alle linjerne til banen, hvori start og slutpunktet af linjen skrives, samt hvilken type linje for banen det er.
   void lines() {
-
     //floors
     lines.add(new Line(0, 630, 200, 630, "floor"));
     lines.add(new Line(900, 630, 1100, 630, "floor"));

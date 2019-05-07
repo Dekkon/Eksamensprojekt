@@ -1,20 +1,22 @@
 class MathQuestions {
-
+  
+  //strings hvori, ens gæt skrives ind
   String guess1 = "";
   String guess2 = "";
   int testguess[] = {-234, -234};
-  int answer[] = new int [2];
-  int guesscheck[] = {0, 0};
-  int redbox[] = {0, 0};
+  int answer[] = new int [2]; //array hvori svarene gemmes i
+  int guesscheck[] = {0, 0}; //bruges til at gemme og der er svaret rigtigt eller forkert.
+  int redbox[] = {0, 0}; //til de røde bokse der kommer når der svares forkert.
 
-  int numberofwrongguesses[] = {0, 0};
-
+  int numberofwrongguesses[] = {0, 0}; //til hvormange gange man svarer forkert på hvert spørgsmål.
+  
+  //til nøglen
   boolean keytogate = false;
   PVector keylocation;
   PImage keyimage;
 
 
-
+  //tal der skal bruges til spørgsmålene til de forskellige levels.
   int lvl1tal[] = new int[4];
   int lvl2tal[] = new int[6];
   int lvl3tal[] = new int[6];
@@ -24,7 +26,8 @@ class MathQuestions {
   MathQuestions() {
     keyimage = loadImage("key.png");
     keyimage.resize(30, 15);
-
+    
+    //sætter tallene til forskellige værdier baseret på hvad klassetrinnet er.
     switch(klassetrin) {
     case 1:
       //level 1
@@ -67,7 +70,8 @@ class MathQuestions {
       lvl4tal[3] = int(random(21, 44));
       break;
     case 9:
-      float whichnum = random(1);
+      float whichnum = random(1); //bruges for at der kan vælges mellem to numre, hvor det er vigtigt at der i de forskellige vælges de tal der passer sammen,
+                                  // da tallene bruges til ligninger, og meningen er at ligningerne skal løses i et heltal.
       //level 1
       lvl1tal[0] = whichnum > 0.5 ? 8 : 5; 
       lvl1tal[1] = whichnum>0.5 ? 2 : 4 ; 
@@ -95,7 +99,7 @@ class MathQuestions {
     }
   }
 
-
+  //viser nøglen, 
   void display() {
     //the key
     noStroke();
@@ -104,27 +108,28 @@ class MathQuestions {
     noTint();
     image(keyimage, keylocation.x, keylocation.y);
   }
-
+  // funktion hvor nøglen fås til at bevæge sig
   void keySeekLocation(PVector target) {
-    PVector distance = PVector.sub(target, keylocation);
-    PVector desired = PVector.sub(target, keylocation);
+    PVector distance = PVector.sub(target, keylocation); // bruges til hvor langt nøglen er fra dens ønskede lokation.
+    PVector desired = PVector.sub(target, keylocation); // bruges til den retning nøglen skal bevæge sig
 
-    desired.setMag(2);
+    desired.setMag(2); // sætter længden af vektoren til 2
 
     if (distance.mag() > 3) {
-      keylocation.add(desired);
+      keylocation.add(desired); //er nøglen mere end 3 fra sin destination, bevæger den sig med 'desired'
     }
-    if (distance.mag() < 3) keytogate = true;
+    if (distance.mag() < 3) keytogate = true; //når den når sen destination sættes booleanen sand.
   }
 
-
+  //funktion hvorfra der kan skrives svar
   void typeanswer(int wq) {
-    if (keyPressed) {
+    if (keyPressed) { 
+      // gjort så kun tal og minus tegn kan skrives.
       if (key == '1' || key == '2' || key == '3' || key == '4' || key == '5' || key == '6' || key == '7' || key == '8' || key == '9' || key == '0' || key == '-') {
         if (wq == 1 && guesscheck[0] != 1) guess1 = guess1 + key;
         if (wq == 2 && guesscheck[1] != 1) guess2 = guess2 + key;
       } 
-      if (keys[3]) {
+      if (keys[3]) { //backspace funktion, brugte booleanen keys, da det ikke gad at virke med  keyCoden
         if (guess1.length() > 0 && wq == 1 && guesscheck[0] != 1) guess1 = guess1.substring(0, guess1.length()-1);
         if (guess2.length() > 0 && wq == 2 && guesscheck[1] != 1) guess2 = guess2.substring(0, guess2.length()-1);
       }
@@ -148,12 +153,13 @@ class MathQuestions {
       }
     }
   }
-
+  //box som der vises når man svarer forkert
+  //variablerne styrer lokationen af boksen, samt hvilket spørgsmål den passer til.
   void wronganswerbox(int x, int y, int answernumber) {
-    redbox[answernumber]--;
+    redbox[answernumber]--; //tæller variablen ned
     if (guesscheck[answernumber] == 2) {
 
-
+       //svares der forkert tæller numberofwrongguesses, op, baseret på hvilket spørgsmål det passer til.
       if (answernumber == 0) numberofwrongguesses[0] ++;
       if (answernumber == 1) numberofwrongguesses[1] ++;
 
@@ -162,8 +168,9 @@ class MathQuestions {
       testguess[answernumber] = -234;
       guesscheck[answernumber] = 0;
 
-      redbox[answernumber] = 30;
+      redbox[answernumber] = 30; // svares der forkert sættes den til tredve
     }
+    // er redbox variablen større end nul, så tegnes den røde boks
     if (redbox[answernumber] > 0) {
       fill(255, 0, 0);
       noStroke();
@@ -171,8 +178,11 @@ class MathQuestions {
       rect(x, y, 60, 20);
     }
   }
-
+  //funktion for svarene til spørgsmålene regnes af programmet
+  //svaret findes baseret på hvilket level det er, og hvilket klassetrin det er
   void questions(int currentlevel) {
+    
+    //svaret på spørgsmålene udregnes, da tallene er randomiserede, og svarene er derfor nødt til at blive regnet.
 
     // question 1
 
@@ -209,6 +219,8 @@ class MathQuestions {
 
 
     /// question 2 
+    
+    // 1. klasse
     if (klassetrin == 1) {
       if (currentlevel == 1);
       if (currentlevel == 2) answer[1] = lvl1tal[2] + lvl1tal[3];

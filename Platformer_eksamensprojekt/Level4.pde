@@ -1,15 +1,16 @@
 class Level4 extends Level {
 
-  ArrayList<Box> boxes = new ArrayList<Box>();
+  ArrayList<Box> boxes = new ArrayList<Box>(); //arraylist for boksene i banen
 
-  int boxfrequency;
+  int boxfrequency; //til styring af hvor ofte boksene falder
 
 
   Level4() {
     currentlevel = 4;
-    spawnlocation = new PVector(30, 630);
-    p = new Player(spawnlocation.x, spawnlocation.y);
-
+    spawnlocation = new PVector(30, 630); //hvor spilleren spawner
+    p = new Player(spawnlocation.x, spawnlocation.y); //initialisere spillerklassen
+    
+    // teksten til spørgsmålene, samt til der hvor svaret skrives til de forskellige klassetrin dannes i switchen.
     switch(klassetrin) {
     case 1:
       question1 = mq.lvl4tal[0] + " + " + mq.lvl4tal[1] + " + " + mq.lvl4tal[2];
@@ -27,28 +28,32 @@ class Level4 extends Level {
     writeguess1 = "= ";
     writeguess2 = "= ";
 
-    lines();
+    lines(); // linjerne til banen
   }
 
   void run() {
     backgroundimage();
-
+    
+    //tegner banen samt elevator funktionalitet
     stage();
-    boxdrop();
+    boxdrop(); //funktionalitet for boksene
     elevator();
     finishline(1180, 95); 
-
+    
+    //de blå bokse samt mat spørgsmål.
     blueBox(270, 520, 170, 100);
     mathQuestion(360, 430, 1);
     blueBox(2, 220, 98, 70);
     mathQuestion(150, 130, 2);
-
+    
+    //hvor spørgsmålene kan svares på
     if (p.location.x > 200 && p.location.x < 440) canType[0] = true;
     else canType[0] = false;
     if (p.location.x < 200 && p.location.y < 300) canType[1] = true;
     else canType[1] = false;
     mq.questions(currentlevel);
-
+    
+    //styring og bevægelse af spilleren
     playermovement();
     if (!pause) p.update();
     collision();
@@ -58,7 +63,8 @@ class Level4 extends Level {
 
     pauseGame();
     if (pause) inGameMenu();
-
+    
+    //klaring af banen
     if (p.location.x > width) levelisComplete = true;
     if (levelisComplete)levelComplete();
   }
@@ -67,29 +73,30 @@ class Level4 extends Level {
   void boxdrop() {
     for (int i = boxes.size()-1; i >= 0; i--) {
       Box b = boxes.get(i);
-      b.boxesRun();
+      b.boxesRun(); //bevægelse + teging af bokse
 
       //collision with player and boxes
       if (PVector.dist(p.location, b.location) <  p.radius + 15) {
-        dead = true;
+        dead = true; //spilleren dør ved kollision
       }
 
-      if (b.location.y + 20 >= 620) b.speed.y = 0;
+      if (b.location.y + 20 >= 620) b.speed.y = 0; //boksen stopper når den rammer gulvet
 
-      if (b.lifespan <= 0) boxes.remove(i);
+      if (b.lifespan <= 0) boxes.remove(i); //boksene fjernes efter noget tid.
     }
 
-    int boxadd = 5;
+    int boxadd = 5; //hvor ofte boksene skal spawnes, ændres når man har klaret spørgsmålet for at gøre det letter,
     if (mq.guesscheck[0] != 1) boxadd = 5;
     if (mq.guesscheck[0] == 1) boxadd = 30;
 
-    if (boxfrequency == boxadd) {
+    if (boxfrequency == boxadd) { //tilføjer en boks, når boxfrequency når boxadd, og restarter tælleren
       boxes.add(new Box(random(450, 800), 420));
       boxfrequency = 0;
     }
 
-    boxfrequency ++;
+    boxfrequency ++; // tæller boxfq op
   }
+  //elevator funktionalitet
   void elevator() {
 
     for (Line l : lines) {
@@ -102,7 +109,7 @@ class Level4 extends Level {
       }
     }
   }
-
+  // danner alle linjerne til banen, hvori start og slutpunktet af linjen skrives, samt hvilken type linje for banen det er.
   void lines() {
     //floors 
     lines.add(new Line(0, 620, 1050, 620, "floor"));
