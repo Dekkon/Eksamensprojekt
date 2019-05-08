@@ -1,15 +1,15 @@
 class MathQuestions {
-  
+
   //strings hvori, ens gæt skrives ind
-  String guess1 = "";
-  String guess2 = "";
-  int testguess[] = {-234, -234};
+  String userGuess1s = ""; //userGuess1 String
+  String userGuess2s = ""; //userGuess2 String
+  int userGuessI[] = new int[2]; //userGuess 1&2 int
   int answer[] = new int [2]; //array hvori svarene gemmes i
   int guesscheck[] = {0, 0}; //bruges til at gemme og der er svaret rigtigt eller forkert.
   int redbox[] = {0, 0}; //til de røde bokse der kommer når der svares forkert.
 
   int numberofwrongguesses[] = {0, 0}; //til hvormange gange man svarer forkert på hvert spørgsmål.
-  
+
   //til nøglen
   boolean keytogate = false;
   PVector keylocation;
@@ -26,7 +26,7 @@ class MathQuestions {
   MathQuestions() {
     keyimage = loadImage("key.png");
     keyimage.resize(30, 15);
-    
+
     //sætter tallene til forskellige værdier baseret på hvad klassetrinnet er.
     switch(klassetrin) {
     case 1:
@@ -71,7 +71,7 @@ class MathQuestions {
       break;
     case 9:
       float whichnum = random(1); //bruges for at der kan vælges mellem to numre, hvor det er vigtigt at der i de forskellige vælges de tal der passer sammen,
-                                  // da tallene bruges til ligninger, og meningen er at ligningerne skal løses i et heltal.
+      // da tallene bruges til ligninger, og meningen er at ligningerne skal løses i et heltal.
       //level 1
       lvl1tal[0] = whichnum > 0.5 ? 8 : 5; 
       lvl1tal[1] = whichnum>0.5 ? 2 : 4 ; 
@@ -100,7 +100,7 @@ class MathQuestions {
   }
 
   //viser nøglen, 
-  void display() {
+  void displayKey() {
     //the key
     noStroke();
     fill(255);
@@ -126,49 +126,55 @@ class MathQuestions {
     if (keyPressed) { 
       // gjort så kun tal og minus tegn kan skrives.
       if (key == '1' || key == '2' || key == '3' || key == '4' || key == '5' || key == '6' || key == '7' || key == '8' || key == '9' || key == '0' || key == '-') {
-        if (wq == 1 && guesscheck[0] != 1) guess1 = guess1 + key;
-        if (wq == 2 && guesscheck[1] != 1) guess2 = guess2 + key;
+        if (wq == 1 && guesscheck[0] != 1) userGuess1s = userGuess1s + key;
+        if (wq == 2 && guesscheck[1] != 1) userGuess2s = userGuess2s + key;
       } 
       if (keys[3]) { //backspace funktion, brugte booleanen keys, da det ikke gad at virke med  keyCoden
-        if (guess1.length() > 0 && wq == 1 && guesscheck[0] != 1) guess1 = guess1.substring(0, guess1.length()-1);
-        if (guess2.length() > 0 && wq == 2 && guesscheck[1] != 1) guess2 = guess2.substring(0, guess2.length()-1);
+        if (userGuess1s.length() > 0 && wq == 1 && guesscheck[0] != 1) userGuess1s = userGuess1s.substring(0, userGuess1s.length()-1);
+        if (userGuess2s.length() > 0 && wq == 2 && guesscheck[1] != 1) userGuess2s = userGuess2s.substring(0, userGuess2s.length()-1);
       }
     }
 
     // so the game doesn't crash if a non integer is written. i.e. '2-2'
     try { 
       if (keyCode == ENTER) {
-        if (wq == 1) testguess[0] = Integer.parseInt(guess1);
-        if (wq == 2) testguess[1] = Integer.parseInt(guess2);
+        if (wq == 1) userGuessI[0] = Integer.parseInt(userGuess1s);
+        if (wq == 2) userGuessI[1] = Integer.parseInt(userGuess2s);
+
+
+        //tests if the questions was answered correctly or not
+        //checks specificly on the question which is currently being answered
+        if (userGuessI[wq-1] == answer[wq-1]) { //if question is correct
+          guesscheck[wq-1] = 1; //sets the guesscheck to 1, which is used as the question being answered correctly
+        }
+        if (userGuessI[wq-1] != answer[wq-1]) { // if question is answered incorrectly
+          guesscheck[wq-1] = 2; //sets the guesscheck to 2, which to the program understsands as the question being answered incorrectly
+          if (wq == 1) userGuess1s = userGuess1s.substring(0, 0); //empties the string which stores the users guess, in order to remove it from the screen once the question is answered incorectly
+          if (wq == 2)userGuess2s = userGuess2s.substring(0, 0); // -||-
+        }
       }
     } 
-    catch (Exception e) { // still records such an answer as an incorrect answer
+    catch (Exception e) { // still records an asnwer which can't be parsed into an integer as an incorrect answer
       if (wq == 1) {
         guesscheck[0] = 2;
-        guess1 = guess1.substring(0, 0);
+        userGuess1s = userGuess1s.substring(0, 0);
       }
       if (wq == 2) {
         guesscheck[1] = 2;
-        guess2 = guess2.substring(0, 0);
+        userGuess2s = userGuess2s.substring(0, 0);
       }
     }
   }
   //box som der vises når man svarer forkert
   //variablerne styrer lokationen af boksen, samt hvilket spørgsmål den passer til.
   void wronganswerbox(int x, int y, int answernumber) {
-    redbox[answernumber]--; //tæller variablen ned
-    if (guesscheck[answernumber] == 2) {
-
-       //svares der forkert tæller numberofwrongguesses, op, baseret på hvilket spørgsmål det passer til.
-      if (answernumber == 0) numberofwrongguesses[0] ++;
-      if (answernumber == 1) numberofwrongguesses[1] ++;
-
-
-
-      testguess[answernumber] = -234;
-      guesscheck[answernumber] = 0;
-
-      redbox[answernumber] = 30; // svares der forkert sættes den til tredve
+    
+    //når der er svaret forkert på et spørgsmål
+    if (guesscheck[answernumber] == 2) { 
+      //svares der forkert tæller numberofwrongguesses, op, baseret på hvilket spørgsmål det passer til.
+      numberofwrongguesses[answernumber] ++;      
+      redbox[answernumber] = 30; // svares der forkert sættes redbox til tredve      
+      guesscheck[answernumber] = 0; //sætter guesscheck til 0, så koden der sker når der er svaret forkert ikke bliver ved med at ske, for bl.a. at forhindre at 'numberofwrongguesses' tælles op konstant.      
     }
     // er redbox variablen større end nul, så tegnes den røde boks
     if (redbox[answernumber] > 0) {
@@ -176,12 +182,13 @@ class MathQuestions {
       noStroke();
       rectMode(CENTER);
       rect(x, y, 60, 20);
+      
+     redbox[answernumber]--; //tæller variablen ned, få at fo boksen som tegnes til at forsvinde efter et kort stykke tid
     }
   }
   //funktion for svarene til spørgsmålene regnes af programmet
   //svaret findes baseret på hvilket level det er, og hvilket klassetrin det er
   void questions(int currentlevel) {
-    
     //svaret på spørgsmålene udregnes, da tallene er randomiserede, og svarene er derfor nødt til at blive regnet.
 
     // question 1
@@ -208,18 +215,8 @@ class MathQuestions {
       if (currentlevel == 4) answer[0] = lvl4tal[0] + lvl4tal[1];
     }
 
-    if (testguess[0] == -234) guesscheck[0] = 0;
-    if (testguess[0] != -234 && testguess[0] == answer[0]) {
-      guesscheck[0] = 1;
-    }
-    if (testguess[0] != -234 && testguess[0] != answer[0]) {
-      guesscheck[0] = 2;
-      guess1 = guess1.substring(0, 0);
-    }
-
-
     /// question 2 
-    
+
     // 1. klasse
     if (klassetrin == 1) {
       if (currentlevel == 1);
@@ -239,15 +236,6 @@ class MathQuestions {
       if (currentlevel == 2) answer[1] = int(sqrt(lvl2tal[4])) + int(sqrt(lvl2tal[5]));
       if (currentlevel == 3) answer[1] = int(sqrt(lvl3tal[4])) - int(sqrt(lvl3tal[5]));
       if (currentlevel == 4) answer[1] = lvl4tal[2] * lvl4tal[3];
-    }
-
-    if (testguess[1] == -234) guesscheck[1] = 0;
-    if (testguess[1] != -234 && testguess[1] == answer[1]) {
-      guesscheck[1] = 1;
-    }
-    if (testguess[1] != -234 && testguess[1] != answer[1]) {
-      guesscheck[1] = 2;
-      guess2 = guess2.substring(0, 0);
     }
   }
 }

@@ -144,8 +144,8 @@ class Level extends Game {
 
     if (mq.guesscheck[questnr-1] == 1) fill(0, 255, 0);
 
-    if (questnr == 1) text(writeguess1 + mq.guess1, x1, y1+45);
-    if (questnr == 2) text(writeguess2 + mq.guess2, x1, y1+45);
+    if (questnr == 1) text(writeguess1 + mq.userGuess1s, x1, y1+45);
+    if (questnr == 2) text(writeguess2 + mq.userGuess2s, x1, y1+45);
 
     mq.wronganswerbox(x1, y1+43, questnr-1);
   }

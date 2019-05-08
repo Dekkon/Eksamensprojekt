@@ -52,7 +52,7 @@ class Level1 extends Level {
     finishline(1180, 463); // hvor 'finishline' billedet tegnes
     guide(); // guides vises
 
-    mq.display(); //viser nøglen
+    mq.displayKey(); //viser nøglen
     collectkey(); // styrer bevægelse af nøglen fra nøglens startlokation til spiller 
     if (p.location.x > 0 && p.location.x < 150 && p.location.y < 400) canType[0] = true; // så man kan svarer på spørgsmålet når man er inden for den blå boks.
     else canType[0] = false; // så man ikke kan svarer hvis man ikke er det
@@ -125,7 +125,7 @@ class Level1 extends Level {
     // -||-
     if (questionguideremoval > 0) {
       image(questionguide, 40, 100);
-      if (mq.guess1.length() > 0) startedtyping = true;
+      if (mq.userGuess1s.length() > 0) startedtyping = true;
       if (startedtyping) questionguideremoval --;
     }
   }
