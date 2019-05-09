@@ -172,29 +172,28 @@ class Level extends Game {
     // hvis man når længere end man er nået før. så gemmes det i en csv fil, så spillet husker dette, så man kan starte fra den bane næste gang man åbner spillet.
     if (currentlevel > levelsCompleted) {
       levelsCompleted = currentlevel;
-      newRow.setInt("levelsCompleted", levelsCompleted);
-      saveTable(levelsCompletedtable, "data/levelsCompleted.csv");
+      levelsCompletedTable.setInt(0, "levelsCompleted", levelsCompleted);
+      saveTable(levelsCompletedTable, "data/levelsCompleted.csv");
     }
-
-    newDataRow.setInt("id", 0);
+            
+    //answerData.setInt(0, "id", 0);    
     
-    
-    //switch, hvori der gemmes hvor mange gange man har svaret forkert på de forskellige spørgsmål for de forskellige baner.
+    //switch, hvori der gemmes hvor mange gange man har svaret forkert på de forskellige spørgsmål i de forskellige baner.
     switch(currentlevel) {
     case 1:
-      newDataRow.setInt("question1", mq.numberofwrongguesses[0]);
+      answerData.setInt(0, "question1", mq.numberofwrongguesses[0]);
       break;
     case 2:
-      newDataRow.setInt("question2", mq.numberofwrongguesses[0]);
-      newDataRow.setInt("question3", mq.numberofwrongguesses[1]);
+      answerData.setInt(0, "question2", mq.numberofwrongguesses[0]);
+      answerData.setInt(0, "question3", mq.numberofwrongguesses[1]);
       break;
     case 3:
-      newDataRow.setInt("question4", mq.numberofwrongguesses[0]);
-      newDataRow.setInt("question5", mq.numberofwrongguesses[1]);
+      answerData.setInt(0, "question4", mq.numberofwrongguesses[0]);
+      answerData.setInt(0, "question5", mq.numberofwrongguesses[1]);
       break;
     case 4:
-      newDataRow.setInt("question6", mq.numberofwrongguesses[0]);
-      newDataRow.setInt("question7", mq.numberofwrongguesses[1]);
+      answerData.setInt(0, "question6", mq.numberofwrongguesses[0]);
+      answerData.setInt(0, "question7", mq.numberofwrongguesses[1]);
       break;
     }
     saveTable(answerData, "data/answerData.csv"); // gemmer dataen i en csv fil.

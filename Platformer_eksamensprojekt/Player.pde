@@ -4,8 +4,8 @@ class Player {
   PVector speed; 
   PVector acceleration; // accelerationen, som bruges som tyngdekraft
 
-  static final float radius = 17.5;
-
+  final float radius = 17.5;
+  
   float angle;
   float anglespeed;
 

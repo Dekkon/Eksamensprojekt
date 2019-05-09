@@ -1,15 +1,14 @@
 class Data extends Menu {
   Button[] b = new Button[1]; // en knap
-  Table loadAnswerData;
 
   int numberofwrongguesses[] = new int[7]; // int array, hvori antal forkete svar hentet fra datasæt, gemmes i.
 
   Data() {
-    loadlevelsCompleted= loadTable("answerData.csv", "header"); // loader table med data for forkerte svar
+    answerData= loadTable("answerData.csv", "header"); // loader table med data for forkerte svar
     b[0] = new Button(180, 100, 240, 90, "Menu"); // knap tilbage til menuen
     
     //gemmer dataen fra csv filen, i int-arrayet,
-    for (TableRow row : loadlevelsCompleted.rows()) {
+    for (TableRow row : answerData.rows()) {
       numberofwrongguesses[0] = row.getInt("question1");
       numberofwrongguesses[1] = row.getInt("question2");
       numberofwrongguesses[2] = row.getInt("question3");
