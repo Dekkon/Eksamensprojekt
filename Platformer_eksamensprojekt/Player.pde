@@ -4,7 +4,7 @@ class Player {
   PVector speed; 
   PVector acceleration; // accelerationen, som bruges som tyngdekraft
 
-  float radius = 17.5;
+  static final float radius = 17.5;
 
   float angle;
   float anglespeed;
@@ -18,7 +18,8 @@ class Player {
   }
   //tegner spilleren
   void display() {
-
+    
+    
     pushMatrix();
     translate(location.x, location.y);
 

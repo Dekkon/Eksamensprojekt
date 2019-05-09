@@ -122,8 +122,8 @@ class MathQuestions {
   }
 
   //funktion hvorfra der kan skrives svar
-  void typeanswer(int wq) {
-    if (keyPressed) { 
+  void typeanswer(int wq) { //parameteren bruges for at vide hvilket sprørgsmål der svares på når funktionen kaldes.
+   // if (keyPressed) { 
       // gjort så kun tal og minus tegn kan skrives.
       if (key == '1' || key == '2' || key == '3' || key == '4' || key == '5' || key == '6' || key == '7' || key == '8' || key == '9' || key == '0' || key == '-') {
         if (wq == 1 && guesscheck[0] != 1) userGuess1s = userGuess1s + key;
@@ -133,23 +133,21 @@ class MathQuestions {
         if (userGuess1s.length() > 0 && wq == 1 && guesscheck[0] != 1) userGuess1s = userGuess1s.substring(0, userGuess1s.length()-1);
         if (userGuess2s.length() > 0 && wq == 2 && guesscheck[1] != 1) userGuess2s = userGuess2s.substring(0, userGuess2s.length()-1);
       }
-    }
-
+   // }
     // so the game doesn't crash if a non integer is written. i.e. '2-2'
     try { 
       if (keyCode == ENTER) {
         if (wq == 1) userGuessI[0] = Integer.parseInt(userGuess1s);
         if (wq == 2) userGuessI[1] = Integer.parseInt(userGuess2s);
-
-
+        
         //tests if the questions was answered correctly or not
         //checks specificly on the question which is currently being answered
-        if (userGuessI[wq-1] == answer[wq-1]) { //if question is correct
+        if (userGuessI[wq-1] == answer[wq-1]) { //if question is asnwered correctly
           guesscheck[wq-1] = 1; //sets the guesscheck to 1, which is used as the question being answered correctly
         }
         if (userGuessI[wq-1] != answer[wq-1]) { // if question is answered incorrectly
           guesscheck[wq-1] = 2; //sets the guesscheck to 2, which to the program understsands as the question being answered incorrectly
-          if (wq == 1) userGuess1s = userGuess1s.substring(0, 0); //empties the string which stores the users guess, in order to remove it from the screen once the question is answered incorectly
+          if (wq == 1) userGuess1s = userGuess1s.substring(0, 0); //empties the string which stores the users guess,
           if (wq == 2)userGuess2s = userGuess2s.substring(0, 0); // -||-
         }
       }

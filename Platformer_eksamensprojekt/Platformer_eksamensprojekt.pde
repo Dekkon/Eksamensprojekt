@@ -113,5 +113,6 @@ void keyTyped() {
   //funktionen kaldes i keyTyped eventet, for at få en mere naturlig taste oplevelse i spillet.
   if (g.canType[0]) g.typeanswer(1);
   if (g.canType[1]) g.typeanswer(2);
+  
 
 }  

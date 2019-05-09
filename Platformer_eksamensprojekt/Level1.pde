@@ -74,12 +74,10 @@ class Level1 extends Level {
     if (levelisComplete)levelComplete(); // er banen klaret vises lecelComplete skærmen.
   }
   
-  void collectkey() {
-    
+  void collectkey() {   
     //svares spørgsmålet rigtigt på, og er nøglen ikke kommet hen til porten
     if (mq.guesscheck[0] == 1 && !gotthekey) {      
       mq.keySeekLocation(p.location); //nøglen flyver mod spilleren
-
       if (PVector.dist(p.location, mq.keylocation) < 15) gotthekey = true; // når nøglen når spilleren, gøres gotthekey sand, så nøglen kan sætte sig fast på spilleren.
     }
     

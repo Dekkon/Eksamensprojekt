@@ -141,9 +141,8 @@ class Level extends Game {
 
     if (questnr == 1) text(question1, x1, y1+5); // hvis det sprg 1, så skrives tekst til det
     if (questnr == 2) text(question2, x1, y1+5); // hvis det sprg 2. så skrives tekst til det
-
-    if (mq.guesscheck[questnr-1] == 1) fill(0, 255, 0);
-
+    
+    if (mq.guesscheck[questnr-1] == 1) fill(0, 255, 0); //if the question is answered correctly, color the answer text green    
     if (questnr == 1) text(writeguess1 + mq.userGuess1s, x1, y1+45);
     if (questnr == 2) text(writeguess2 + mq.userGuess2s, x1, y1+45);
 
