@@ -17,6 +17,8 @@ void setup() {
 
   size(1280, 720);
   
+  answerData = loadTable("answerData.csv", "header"); // loader table med data for forkerte svar
+
   levelsCompletedTable= loadTable("levelsCompleted.csv", "header"); //loader data om hvor mange levels der er klaret
   levelsCompleted = levelsCompletedTable.getInt(0, "levelsCompleted"); //gemmer denne data i ind int-værdi, så daten kan bruges i programmet    
 
