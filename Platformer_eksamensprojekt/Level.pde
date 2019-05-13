@@ -2,6 +2,7 @@ class Level extends Game {
   Player p; // spiller klassen, 
   MathQuestions mq; // matematikspørgsmål klassen
   ArrayList<Line> lines = new ArrayList<Line>(); // arraylist for linje klassen, af linjerne som udgør banen
+  Button[] b = new Button[2]; // knap klassen i et array med 3, da der er 3 knapper i levels.
 
   PVector spawnlocation; // hvor spilleren spawner
 
@@ -25,8 +26,6 @@ class Level extends Game {
 
   boolean onPlatform = false; //boolean to check whether or not player is currently on a platform
 
-  Button[] b = new Button[2]; // knap klassen i et array med 3, da der er 3 knapper i levels.
-
 
   Level() {
     mq = new MathQuestions();
@@ -49,12 +48,11 @@ class Level extends Game {
   }
   
   // funktion hvor linjerne på banen bliver tegnet.
-  void stage() {
-    
+  void stage() {    
     strokeWeight(3);
-    //for loop for linje klassen, hvori linjerne som udgør banen tegnes.
+    //for-loop for linje klassen, hvori linjerne som udgør banen tegnes.
     for (Line l : lines) {
-      stroke(0, 255, 0); // gør linjerne grønne
+      stroke(245, 243, 206); // gør linjerne hvide
       
       //gør nogle specifikker linjerne blå i nogle af banerne, da de har noget at gøre med spørgsmålene. 
       if (currentlevel == 1 && l.wallType == "gate") stroke(0, 0, 255);
@@ -70,7 +68,6 @@ class Level extends Game {
   
   // funktion hvor collision mellem linjerne og spilleren styres.
   void collision() {
-
     for (Line l : lines) {
       // collision with floors
       if (l.wallType == "floor" || l.wallType == "elevator" || l.wallType == "movingfloor" || l.wallType == "activatefloor" && mq.guesscheck[1] == 1) {
@@ -98,7 +95,6 @@ class Level extends Game {
         p.speed.x +=1;
       }
     }
-
     if (onPlatform) p.speed.y = 0; // sætter hastigheden til 0, hvis spilleren er på en platform, da ellers gør den nedadpegende acceleration hastigheden alt for høj og man kan falde gennem platformene.
   }
 
@@ -162,18 +158,22 @@ class Level extends Game {
     textAlign(CENTER, CENTER);
     fill(25);
 
-    text("Level " + currentlevel + " Complete", width/2, height/2);
+    if (currentlevel < 4) text("Level " + currentlevel + " Complete", width/2, height/2);
+    if (currentlevel == 4) text("Game Complete", width/2, height/2);
 
     textSize(35);
-    text("Press space to continue", width/2, height/2+50);
-
-    if (key == ' ') level = currentlevel + 1; // gør så man kan skifte til næste bane.
+    if (currentlevel < 4) text("press space to continue", width/2, height/2+60);
+    if (currentlevel == 4) text("press space to return to the menu", width/2, height/2+60);
+    
+    if (key == ' ' && currentlevel < 4) level = currentlevel + 1; // gør så man kan skifte til næste bane.
+    if (key == ' ' && currentlevel == 4) menu = 1;
+    
     
     // hvis man når længere end man er nået før. så gemmes det i en csv fil, så spillet husker dette, så man kan starte fra den bane næste gang man åbner spillet.
     if (currentlevel > levelsCompleted) {
       levelsCompleted = currentlevel;
-      levelsCompletedTable.setInt(0, "levelsCompleted", levelsCompleted);
-      saveTable(levelsCompletedTable, "data/levelsCompleted.csv");
+      levelsCompletedData.setInt(0, "levelsCompleted", levelsCompleted);
+      saveTable(levelsCompletedData, "data/levelsCompleted.csv");
     }
             
     //answerData.setInt(0, "id", 0);    

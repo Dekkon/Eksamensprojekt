@@ -9,7 +9,7 @@ class Level4 extends Level {
     currentlevel = 4;
     spawnlocation = new PVector(30, 630); //hvor spilleren spawner
     p = new Player(spawnlocation.x, spawnlocation.y); //initialisere spillerklassen
-    
+
     // teksten til spørgsmålene, samt til der hvor svaret skrives til de forskellige klassetrin dannes i switchen.
     switch(klassetrin) {
     case 1:
@@ -29,30 +29,30 @@ class Level4 extends Level {
     writeguess2 = "= ";
 
     lines(); // linjerne til banen
+    mq.questions(currentlevel);
   }
 
   void run() {
     backgroundimage();
-    
+
     //tegner banen samt elevator funktionalitet
     stage();
     boxdrop(); //funktionalitet for boksene
     elevator();
     finishline(1180, 95); 
-    
+
     //de blå bokse samt mat spørgsmål.
     blueBox(270, 520, 170, 100);
     mathQuestion(360, 430, 1);
     blueBox(2, 220, 98, 70);
     mathQuestion(150, 130, 2);
-    
+
     //hvor spørgsmålene kan svares på
     if (p.location.x > 200 && p.location.x < 440) canType[0] = true;
     else canType[0] = false;
     if (p.location.x < 200 && p.location.y < 300) canType[1] = true;
     else canType[1] = false;
-    mq.questions(currentlevel);
-    
+
     //styring og bevægelse af spilleren
     playermovement();
     if (!pause) p.update();
@@ -63,7 +63,7 @@ class Level4 extends Level {
 
     pauseGame();
     if (pause) inGameMenu();
-    
+
     //klaring af banen
     if (p.location.x > width) levelisComplete = true;
     if (levelisComplete)levelComplete();
@@ -76,7 +76,7 @@ class Level4 extends Level {
       b.boxesRun(); //bevægelse + teging af bokse
 
       //collision with player and boxes
-      if (PVector.dist(p.location, b.location) <  p.radius + 15) {
+      if (PVector.dist(p.location, b.location) <  p.radius + 15  && b.lifespan > 35) {
         dead = true; //spilleren dør ved kollision
       }
 
@@ -124,7 +124,6 @@ class Level4 extends Level {
 
     //roofs
     lines.add(new Line(0, 1, width, 1, "roof"));
-
 
     //activateable floors
     lines.add(new Line(60, 210, 100, 210, "activatefloor"));

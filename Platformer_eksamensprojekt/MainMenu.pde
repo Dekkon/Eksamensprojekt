@@ -23,7 +23,7 @@ class MainMenu extends Menu {
     for (int i = 0; i < b.length; i++) {
       if (b[i].mouseOverButton()) {
         buttoncolor = color(150, 150); //når musen holdes over knappen ændres farven
-        if (mousePressed && mousecheck == 1) { // når man klikker på musen
+        if (mousePressed && mousecheck == 1) { // når man klikker knappen
           if (i == 0) menu = 2; //klikkes på knap 1, føres man til LevelSelect
           if (i == 1) menu = 3; //på kan 2, føres man til settings
           if (i == 2) menu = 4; //på knap 3 føres man til data.

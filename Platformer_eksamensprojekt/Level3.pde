@@ -8,13 +8,13 @@ class Level3 extends Level {
     currentlevel = 3; // sætter det nuværende level til 2
     spawnlocation = new PVector(30, 120); // hvor spilleren spawner
     p = new Player(spawnlocation.x, spawnlocation.y); // initialisere spiller klassen.
-    
+
     //loader billeder
     stickman = loadImage("Stickman.png");
     stickman.resize(50, 50);
     spikes = loadImage("spikes.png");
     spikes.resize(100, 40);   
-    
+
     // teksten til spørgsmålene, samt til der hvor svaret skrives til de forskellige klassetrin dannes i switchen.
     switch(klassetrin) {
     case 1:
@@ -38,6 +38,7 @@ class Level3 extends Level {
     }
 
     lines(); // linjerne til banen
+    mq.questions(currentlevel); // spørgsmålene til det nuværende level.
   }
 
   void run() {
@@ -60,8 +61,7 @@ class Level3 extends Level {
     else canType[0] = false;
     if (p.location.x > 800 && p.location.x < 1050 && p.location.y > 200 && p.location.y < 400) canType[1] = true;
     else canType[1] = false;
-    mq.questions(currentlevel); // spørgsmålene til det nuværende level.
-    
+
     //bevægelse, styring og visning af spiller samt kollision mellem spiller og bane.
     playermovement();
     if (!pause) p.update();
@@ -69,22 +69,22 @@ class Level3 extends Level {
     p.display();
 
     respawn(); // respawn når spilleren dør
-    
+
     //pausning af spillet
     pauseGame();
     if (pause) inGameMenu();
-    
+
     //når man klarer banen.
     if (p.location.x > width) levelisComplete = true;
     if (levelisComplete)levelComplete();
   }
-  
+
   //modstanderen som skyder mod spilleren
   void enemy() {
 
     shotfq ++; //tæller shotfrequency op en per frame
     int nuoshots = 15;
-    
+
     //ændrer nuoshots, baseret på om man har svaret på spørgsmålet eller ej, for at gøre det lettere at passere når man har svaret rigtigt.
     if (mq.guesscheck[0] != 1) nuoshots = 15;
     if (mq.guesscheck[0] == 1) nuoshots = 55;
@@ -96,7 +96,7 @@ class Level3 extends Level {
 
     imageMode(CENTER);
     image(stickman, 720, 170); // viser stickman billedet
-    
+
     //koden for skudene
     for (int i = shots.size()-1; i >= 0; i--) {
       Shot s = shots.get(i);
@@ -117,8 +117,8 @@ class Level3 extends Level {
 
     //draw spikes
     imageMode(CORNER);
+    noTint();
     for (int i = 0; i < 7; i++) {
-      noTint();
       image(spikes, 250 + i * 75, 460);
     }
   }

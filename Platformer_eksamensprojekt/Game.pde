@@ -3,7 +3,7 @@ class Game {
   int level; // variabel til skift mellem levels
   int menu; // variabel til skift mellem menuer
   color buttoncolor; // farve af knapper  
-  boolean canType[] = new boolean[2]; // til spørgsmål; om man kan skrive til sprg 1/2. 
+  boolean canType[] = new boolean[2]; // til spørgsmål; om man kan skrive til sprg 1 eller 2. 
 
   Game() {   
   }
@@ -12,7 +12,7 @@ class Game {
   void run() {
   }
   
-  // funktionen er lavet her af samme grund som runfunktionen.
+  // funktionen er lavet her så funktionen af samme navn fra Level-klassen kan kaldes i keyTyped() og keyPressed()
   void typeanswer(int wq) {
     
   }

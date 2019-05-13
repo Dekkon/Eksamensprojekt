@@ -16,8 +16,8 @@ class Data extends Menu {
       numberofwrongguesses[4] = row.getInt("question5");
       numberofwrongguesses[5] = row.getInt("question6");
       numberofwrongguesses[6] = row.getInt("question7");
-  
     }
+    
   }
   // Data-klassens run funktion, som kører i drawloopet.
   void run() {

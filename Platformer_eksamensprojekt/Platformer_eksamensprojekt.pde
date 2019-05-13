@@ -5,23 +5,20 @@ int klassetrin = 9; //hvilket klassetrin man i, -klassetrinnet styrer sværhedsg
 
 int mousecheck = 0; //mousecheck variabel, som bruges til at styrer museklik til knapper.
 
-Table levelsCompletedTable; //date om hvor mange levels brugeren har klaret, for at vide fra hvilket level man kan starte
+Table levelsCompletedData; //date om hvor mange levels brugeren har klaret, for at vide fra hvilket level man kan starte
+Table answerData; //table til data om svar på spørgsmål
 
 boolean keys[] = new boolean [4]; //boolean, bruges til de knapper som bruges til at styre spillet, for at få spillet til at kunne håndtere flere key inputs på en gang.
 
-Table answerData; //table til data om svar på spørgsmål
-//TableRow row 
-
 
 void setup() {
-
   size(1280, 720);
   
   answerData = loadTable("answerData.csv", "header"); // loader table med data for forkerte svar
 
-  levelsCompletedTable= loadTable("levelsCompleted.csv", "header"); //loader data om hvor mange levels der er klaret
-  levelsCompleted = levelsCompletedTable.getInt(0, "levelsCompleted"); //gemmer denne data i ind int-værdi, så daten kan bruges i programmet    
-
+  levelsCompletedData= loadTable("levelsCompleted.csv", "header"); //loader data om hvor mange levels der er klaret
+  levelsCompleted = levelsCompletedData.getInt(0, "levelsCompleted"); //gemmer denne data i ind int-værdi, så daten kan bruges i programmet    
+  
   g = new MainMenu(); //initialisere sub-subklassen til Game - MainMenu da det er hovedmenuen spillet starter i.
 }
 
@@ -61,10 +58,9 @@ void draw() {
     g = new Data();
     break;
   }
-
   //due to these classes all being subclasses of the same superclass, it also means that whenever on of these objects are created, the other is removed, which is how changing between the different objects work,
 
-  // the function from which the objects which are created work
+  // the function from which the objects, which are created work
   //the function is created in the superclass, in order for it to run in the main sketch
   //the functionality of each of these subclasses, is put into their own run() function, this then runs, whichever one of these is active.
   g.run();

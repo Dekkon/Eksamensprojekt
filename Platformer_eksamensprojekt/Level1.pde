@@ -41,8 +41,8 @@ class Level1 extends Level {
       break;
     }
     lines(); // funktionen hvor linjerne i arraylisten er dannet
+    mq.questions(currentlevel); // funktion hvor programmet regner svaret til spørgsmålene i levelet.
   }
-
 
   void run() { 
     backgroundimage(); //bagrundsbilledet
@@ -57,8 +57,8 @@ class Level1 extends Level {
     if (p.location.x > 0 && p.location.x < 150 && p.location.y < 400) canType[0] = true; // så man kan svarer på spørgsmålet når man er inden for den blå boks.
     else canType[0] = false; // så man ikke kan svarer hvis man ikke er det
     mathQuestion(100, 45, 1); // funktion for visning af spørgsmålet, hvor der indsættes lokatin, samt at det er spørgsmål 1.
-    blueBox(2, 280, 148, 120); // tegning af blå boks, hvor der indsættes størrelse af boksen, samt dens lokation.
-    mq.questions(currentlevel); // funktion over spørgsmålene, for det nuværende levet er variabel, for at programmet ved hvad svaret er.
+    blueBox(2, 280, 148, 120); // tegning af blå boks, hvor der indsættes størrelse af boksen, samt dens lokation.    
+
 
     playermovement(); // styring af spiller movement
     if (!pause) p.update(); // selve movement af spiller, kan ikke kører når spillet er pauset
@@ -88,14 +88,12 @@ class Level1 extends Level {
     }
   }
   // styrer funktionen af porten
-  void gates() {
-    
+  void gates() {   
     for (Line l : lines) {
       if (l.wallType == "gate") {
         imageMode(CENTER);
         tint(0, 0, 255);
         image(keyhole, l.x2, l.y2); //tegner nøglehullet
-
          
         if (mq.keylocation.x > l.x1 - 50 && mq.keylocation.x <= l.x1 && mq.keylocation.y > l.y2 && mq.keylocation.y < l.y1) gateopen = true; //når nøglen er tæt nok på porten, sættes gatopen sand
         //når den variabel er sand, så begynder nøglen at flyve mod nøglehullet
@@ -116,10 +114,9 @@ class Level1 extends Level {
     // er guidefjerne variablen over 0, så kører dette, 
     if (moveguideremoval > 0) {
       image(moveguide, 400, 40); //viser guide billedet       
-      if (keys[0] || keys[1] || keys[2] && moveguideremoval < 0) startedmoving = true; //hvis man begynder at bevæge sig, sættes startedmoving til sand     
+      if (keys[0] || keys[1] || keys[2]) startedmoving = true; //hvis man begynder at bevæge sig, sættes startedmoving til sand     
       if (startedmoving) moveguideremoval --; //er denen sand, tælles guidefjerne variabblen ned, hvilket gør at guiden fjernes når variablen når til 0.
-    }
-    
+    }   
     // -||-
     if (questionguideremoval > 0) {
       image(questionguide, 40, 100);
