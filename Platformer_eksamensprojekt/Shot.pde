@@ -16,13 +16,13 @@ class Shot {
     strokeWeight(5);
     line(location.x+12, location.y, location.x-12, location.y);
     
-    lifespan --;
+    
   }
   
   void movement() {
     
     location.add(speed);
-    
+    lifespan --;
   }
   
 }

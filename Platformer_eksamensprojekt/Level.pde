@@ -101,18 +101,15 @@ class Level extends Game {
   // styrer bevægelse af spiller -- lavet i Level klassen, for at bedre kunne bruge onPlatform variablen som forhindrer dobbelt jump.
   void playermovement() {
     // key presses
-    if (keyPressed) {
+
       if (keys[0]) p.speed.x -= 4;
-    }
-    if (keyPressed) {
       if (keys[1]) p.speed.x += 4;
-    }
-    if (keyPressed) { 
+      
       // gør så man kun kan hoppe når man er på en platform.
       if (keys[2] && onPlatform) {   
         p.speed.y = -12;
       }
-    }
+    
     onPlatform = false; // sætter variablen til falsk, så spilleren ikke kan hoppe igen næste loop, medmindre den er på en platform.
   }
   

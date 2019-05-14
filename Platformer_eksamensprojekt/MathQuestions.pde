@@ -33,8 +33,11 @@ class MathQuestions {
       //level 1
       lvl1tal[0] = int(random(2, 9)); 
       lvl1tal[1] = int(random(2, 9)); 
-      lvl1tal[2] = int(random(10, 20)); 
-      lvl1tal[3] = int(random(10, 30));
+      //level 2
+      lvl2tal[0] = int(random(2, 9)); 
+      lvl2tal[1] = int(random(2, lvl2tal[0])); //gør at lvl2tal1, ikke kan blive højere end lvl2tal0, for 1-klasse casen, så der ikke kommer et minus stykke der giver et minus tal. 
+      lvl2tal[2] = int(random(10, 20)); 
+      lvl2tal[3] = int(random(10, 30));
       //level 3
       lvl3tal[0] = int(random(2, 3));
       lvl3tal[1] = int(random(2, 9));
@@ -194,7 +197,7 @@ class MathQuestions {
     // 1. klasse
     if (klassetrin == 1) {
       if (currentlevel == 1) answer[0] = lvl1tal[0] + lvl1tal[1];
-      if (currentlevel == 2) answer[0] = lvl1tal[0] - lvl1tal[1];
+      if (currentlevel == 2) answer[0] = lvl2tal[0] - lvl2tal[1];
       if (currentlevel == 3) answer[0] = lvl3tal[0] * lvl3tal[1];
       if (currentlevel == 4) answer[0] = lvl4tal[0] + lvl4tal[1] + lvl4tal[2];
     }
@@ -218,7 +221,7 @@ class MathQuestions {
     // 1. klasse
     if (klassetrin == 1) {
       if (currentlevel == 1);
-      if (currentlevel == 2) answer[1] = lvl1tal[2] + lvl1tal[3];
+      if (currentlevel == 2) answer[1] = lvl2tal[2] + lvl2tal[3];
       if (currentlevel == 3) answer[1] = lvl3tal[2] + lvl3tal[3];
       if (currentlevel == 4) answer[1] = lvl4tal[3] + lvl4tal[4] - lvl4tal[5];
     }

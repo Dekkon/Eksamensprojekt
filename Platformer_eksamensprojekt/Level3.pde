@@ -81,10 +81,8 @@ class Level3 extends Level {
 
   //modstanderen som skyder mod spilleren
   void enemy() {
-
     shotfq ++; //tæller shotfrequency op en per frame
     int nuoshots = 15;
-
     //ændrer nuoshots, baseret på om man har svaret på spørgsmålet eller ej, for at gøre det lettere at passere når man har svaret rigtigt.
     if (mq.guesscheck[0] != 1) nuoshots = 15;
     if (mq.guesscheck[0] == 1) nuoshots = 55;
@@ -93,7 +91,6 @@ class Level3 extends Level {
       shots.add(new Shot(700, 155));
       shotfq = 0;
     }
-
     imageMode(CENTER);
     image(stickman, 720, 170); // viser stickman billedet
 
@@ -105,7 +102,6 @@ class Level3 extends Level {
       if (PVector.dist(p.location, s.location) < p.radius+2) { //kollision mellem spiller og skud
         dead = true; //er der kollison dør spilleren
       }
-
       if (s.lifespan <= 0) shots.remove(i); //fjerne skudene
     }
   }

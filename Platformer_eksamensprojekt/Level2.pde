@@ -8,8 +8,8 @@ class Level2 extends Level {
     // teksten til spørgsmålene, samt til der hvor svaret skrives til de forskellige klassetrin dannes i switchen.
     switch(klassetrin) {
     case 1:
-      question1 = mq.lvl1tal[0] + " - " + mq.lvl1tal[1];
-      question2 = mq.lvl1tal[2] + " + " + mq.lvl1tal[3];
+      question1 = mq.lvl2tal[0] + " - " + mq.lvl2tal[1];
+      question2 = mq.lvl2tal[2] + " + " + mq.lvl2tal[3];
       writeguess1 = "= ";
       break;
     case 5:
