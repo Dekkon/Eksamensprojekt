@@ -107,7 +107,6 @@ class Level3 extends Level {
   }
 
   void pit() {
-
     // makes the player die if the player falls into the pit
     if (p.location.x > 250 && p.location.x < 800 && p.location.y > 480 && p.location.y < 520) dead = true;
 

@@ -46,14 +46,14 @@ class Level extends Game {
     imageMode(CORNER);
     image(baggrundsbillede, 0, 0);
   }
-  
+
   // funktion hvor linjerne på banen bliver tegnet.
   void stage() {    
     strokeWeight(3);
     //for-loop for linje klassen, hvori linjerne som udgør banen tegnes.
     for (Line l : lines) {
       stroke(245, 243, 206); // gør linjerne hvide
-      
+
       //gør nogle specifikker linjerne blå i nogle af banerne, da de har noget at gøre med spørgsmålene. 
       if (currentlevel == 1 && l.wallType == "gate") stroke(0, 0, 255);
       if (currentlevel == 2 && l.wallType == "elevator") stroke(0, 0, 255);
@@ -65,7 +65,7 @@ class Level extends Game {
       line(l.x1, l.y1, l.x2, l.y2); //tegner linjerne
     }
   }
-  
+
   // funktion hvor collision mellem linjerne og spilleren styres.
   void collision() {
     for (Line l : lines) {
@@ -101,18 +101,16 @@ class Level extends Game {
   // styrer bevægelse af spiller -- lavet i Level klassen, for at bedre kunne bruge onPlatform variablen som forhindrer dobbelt jump.
   void playermovement() {
     // key presses
+    if (keys[0]) p.speed.x -= 4; //klikkes der til venstre, sættes hastighed mod venstre
+    if (keys[1]) p.speed.x += 4; //klikkes der til højre, sættes hastighed mod højre
 
-      if (keys[0]) p.speed.x -= 4;
-      if (keys[1]) p.speed.x += 4;
-      
-      // gør så man kun kan hoppe når man er på en platform.
-      if (keys[2] && onPlatform) {   
-        p.speed.y = -12;
-      }
-    
+    // gør så man kun kan hoppe når man er på en platform.
+    if (keys[2] && onPlatform) {   
+      p.speed.y = -12;
+    }
     onPlatform = false; // sætter variablen til falsk, så spilleren ikke kan hoppe igen næste loop, medmindre den er på en platform.
   }
-  
+
   //funktion hvori de blå bokse som man svarer spørgsmål indenfor tegnes.
   void blueBox(int x, int y, int wx, int wy) { // variabler styrer hvor boks skal tegnes og størrelse af boks
     rectMode(CORNER);  
@@ -120,7 +118,7 @@ class Level extends Game {
     fill(0, 0, 255, 120);
     rect(x, y, wx, wy);
   }
-  
+
   //tegner boks til matematiksprøgsmålene samt der hvor sprg skrives, og hvor man kan skrive svar.
   void mathQuestion(int x1, int y1, int questnr) { // variabler styrer hvor det skal være på skærmen, samt hvilket sprg det er, så programmet ved hvilken spørgsmål tekst skal skrives.
     rectMode(CENTER);
@@ -134,14 +132,14 @@ class Level extends Game {
 
     if (questnr == 1) text(question1, x1, y1+5); // hvis det sprg 1, så skrives tekst til det
     if (questnr == 2) text(question2, x1, y1+5); // hvis det sprg 2. så skrives tekst til det
-    
+
     if (mq.guesscheck[questnr-1] == 1) fill(0, 255, 0); //if the question is answered correctly, color the answer text green    
     if (questnr == 1) text(writeguess1 + mq.userGuess1s, x1, y1+45);
     if (questnr == 2) text(writeguess2 + mq.userGuess2s, x1, y1+45);
 
     mq.wronganswerbox(x1, y1+43, questnr-1);
   }
-  
+
   // funktion hvor man kan skrive spørgsmål, funktion lavet her så den kan trækkes ud til eventsne 'keyTyped' og 'keyReleased'.
   void typeanswer(int wq) { // variabel styrer hvilket spørgsmål der skrives svar til.
     mq.typeanswer(wq);
@@ -161,20 +159,19 @@ class Level extends Game {
     textSize(35);
     if (currentlevel < 4) text("press space to continue", width/2, height/2+60);
     if (currentlevel == 4) text("press space to return to the menu", width/2, height/2+60);
-    
+
     if (key == ' ' && currentlevel < 4) level = currentlevel + 1; // gør så man kan skifte til næste bane.
     if (key == ' ' && currentlevel == 4) menu = 1;
-    
-    
-    // hvis man når længere end man er nået før. så gemmes det i en csv fil, så spillet husker dette, så man kan starte fra den bane næste gang man åbner spillet.
+
+    // hvis man når længere end man er nået før. så gemmes det i en .csv fil, så spillet husker dette, så man kan starte fra den bane næste gang man åbner spillet.
     if (currentlevel > levelsCompleted) {
       levelsCompleted = currentlevel;
       levelsCompletedData.setInt(0, "levelsCompleted", levelsCompleted);
       saveTable(levelsCompletedData, "data/levelsCompleted.csv");
     }
-            
+
     //answerData.setInt(0, "id", 0);    
-    
+
     //switch, hvori der gemmes hvor mange gange man har svaret forkert på de forskellige spørgsmål i de forskellige baner.
     switch(currentlevel) {
     case 1:
@@ -195,28 +192,27 @@ class Level extends Game {
     }
     saveTable(answerData, "data/answerData.csv"); // gemmer dataen i en csv fil.
   }
-  
+
   // funktion som styrer respawning af spilleren.
   void respawn() {
+    // gør så man dør hvis man falder ned ud af banen.
+    if (p.location.y > height) {
+      dead = true;
+    }
     if (dead) { // hvis boolean om man er død er sand, så respawner man i spawnlocation.
       p.location.x = spawnlocation.x;
       p.location.y = spawnlocation.y;
       p.speed.y = 0;
       dead = false; // den sættes falsk så man ikke bliver ved med at spawne.
     }
-    
-    // gør så man dør hvis man falder ned ud af banen.
-    if (p.location.y > height) {
-      dead = true;
-    }
   }
   //funktion som gør spillet kan pauses
   void pauseGame() {
     mouselistener();
-    
+
     // hvis man klikker på 'p', så pauses spillet
     if (keyPressed && key == 'p' || key == 'P') pause = true;
-    
+
     //hvis man holder over pauseknappen så lyser den op
     if (mouseX < 1220 + 24 && mouseX > 1220 - 24 && mouseY < 70 + 39 && mouseY > 70 - 39) {
       ellipse(1220, 70, 35, 35);
@@ -231,7 +227,7 @@ class Level extends Game {
     if (!pause) image(pausebutton, 1220, 70);
     if (pause) image(startbutton, 1220, 70);
   }
-  
+
   // pause menu
   void inGameMenu() {
     textSize(40);
@@ -257,7 +253,7 @@ class Level extends Game {
       b[i].drawbutton(buttoncolor); // tegner knapperne
     }
   }
-  
+
   // funktion for billede, af finish som hviser hvor banen slutter.
   void finishline(int x, int y) {
     imageMode(CORNER);

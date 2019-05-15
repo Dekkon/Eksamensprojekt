@@ -70,7 +70,6 @@ class Level2 extends Level {
       if (l.wallType == "movingfloor") { // så koden kun virke for bevægene gulve
 
         //identificere de specifikke gulve og får den til at skifte retning frem og tilbage
-
         if (l.x1 > 250 && l.x1 < 390) {  
           if (l.x1 < 260 && l.mfspeed < 0) l.mfspeed *= -1;
           if (l.x1 > 380 && l.mfspeed > 0) l.mfspeed *= -1;
@@ -87,7 +86,6 @@ class Level2 extends Level {
   }
 
   void elevator() {
-
     for (Line l : lines) {
       if (l.wallType == "elevator") { // identificere elevatorne
 

@@ -2,7 +2,6 @@ class LevelSelect extends Menu {
   Button[] b = new Button[6]; //danner array med knapper
 
   LevelSelect() {
-
     //danner knapperne, deres lokation-størrelse og hvad der står på dem.
     b[0] = new Button(1100, 100, 240, 90, "Menu");
     b[1] = new Button(1100, 240, 240, 90, "Restart");

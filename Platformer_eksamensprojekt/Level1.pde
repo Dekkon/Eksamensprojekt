@@ -23,7 +23,7 @@ class Level1 extends Level {
     moveguide = loadImage("moveguide.png");
     moveguide.resize(413, 220);
     questionguide = loadImage("questionguide.png");
-    questionguide.resize(368, 49);
+    questionguide.resize(368, 74);
     
     // teksten til spørgsmålene, samt til der hvor svaret skrives til de forskellige klassetrin dannes i switchen.
     switch(klassetrin) {
@@ -58,7 +58,6 @@ class Level1 extends Level {
     else canType[0] = false; // så man ikke kan svarer hvis man ikke er det
     mathQuestion(100, 45, 1); // funktion for visning af spørgsmålet, hvor der indsættes lokatin, samt at det er spørgsmål 1.
     blueBox(2, 280, 148, 120); // tegning af blå boks, hvor der indsættes størrelse af boksen, samt dens lokation.    
-
 
     playermovement(); // styring af spiller movement
     if (!pause) p.update(); // selve movement af spiller, kan ikke kører når spillet er pauset
@@ -104,8 +103,7 @@ class Level1 extends Level {
         // når nøglen er nået nøglehullet åbnes porten.
         if (gateopen && l.y1 > l.y2 && mq.keytogate) {
           l.y1 -= 2;
-        }
-        
+        }      
       }
     }
   }

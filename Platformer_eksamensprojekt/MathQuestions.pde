@@ -167,9 +167,8 @@ class MathQuestions {
     }
   }
   //box som der vises når man svarer forkert
-  //variablerne styrer lokationen af boksen, samt hvilket spørgsmål den passer til.
-  void wronganswerbox(int x, int y, int answernumber) {
-    
+  //parametrene styrer lokationen af boksen, samt hvilket spørgsmål den passer til.
+  void wronganswerbox(int x, int y, int answernumber) {    
     //når der er svaret forkert på et spørgsmål
     if (guesscheck[answernumber] == 2) { 
       //svares der forkert tæller numberofwrongguesses, op, baseret på hvilket spørgsmål det passer til.
@@ -216,7 +215,7 @@ class MathQuestions {
       if (currentlevel == 4) answer[0] = lvl4tal[0] + lvl4tal[1];
     }
 
-    /// question 2 
+    /// question 2
 
     // 1. klasse
     if (klassetrin == 1) {

@@ -1,9 +1,7 @@
 class Level4 extends Level {
 
   ArrayList<Box> boxes = new ArrayList<Box>(); //arraylist for boksene i banen
-
   int boxfrequency; //til styring af hvor ofte boksene falder
-
 
   Level4() {
     currentlevel = 4;
@@ -69,7 +67,6 @@ class Level4 extends Level {
     if (levelisComplete)levelComplete();
   }
 
-
   void boxdrop() {
     for (int i = boxes.size()-1; i >= 0; i--) {
       Box b = boxes.get(i);
@@ -93,12 +90,10 @@ class Level4 extends Level {
       boxes.add(new Box(random(450, 800), 420));
       boxfrequency = 0;
     }
-
     boxfrequency ++; // tæller boxfq op
   }
   //elevator funktionalitet
   void elevator() {
-
     for (Line l : lines) {
       if (l.wallType == "elevator") {
         if (l.y1 > 620 && l.elespeed > 0) l.elespeed *= -1;
