@@ -1,4 +1,5 @@
 class Box {
+// omegalul XDDDDDD
   
   PVector location; // boxes location
   PVector speed; // hastigheden
